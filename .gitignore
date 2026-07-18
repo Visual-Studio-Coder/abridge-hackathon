@@ -1,0 +1,8 @@
+.DS_Store
+.env
+.pytest_cache/
+.runtime/
+.venv/
+__pycache__/
+partner-provided-docs/
+*.pyc

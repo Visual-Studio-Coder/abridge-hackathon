@@ -1,0 +1,17 @@
+[project]
+name = "abridge-missing-order-sentinel"
+version = "0.1.0"
+description = "Evidence-linked reconciliation between ambient clinical commitments and FHIR"
+requires-python = ">=3.11"
+dependencies = [
+  "anthropic>=0.75.0",
+  "flask>=3.1.0",
+  "python-dotenv>=1.2.2",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

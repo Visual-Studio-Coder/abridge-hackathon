@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Abridge Missing Order Sentinel — evidence-linked clinical action reconciliation">
+  <title>Sentinel · Abridge Action Layer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div><strong>Sentinel</strong><small>Abridge Action Layer</small></div>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-item active" data-tab="ledger"><span class="nav-icon">✓</span>Action Ledger <span class="nav-count" id="nav-issue-count">—</span></button>
+        <button class="nav-item" data-tab="transcript"><span class="nav-icon">≡</span>Transcript</button>
+        <button class="nav-item" data-tab="note"><span class="nav-icon">▤</span>Clinical Note &amp; AVS</button>
+        <button class="nav-item" data-tab="fhir"><span class="nav-icon">⌘</span>FHIR Record</button>
+        <button class="nav-item" data-tab="audit"><span class="nav-icon">↗</span>Audit Trail</button>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+      <div class="integration-card">
+        <div class="integration-row"><span class="status-dot"></span><strong>Abridge connected</strong></div>
+        <p>Ambient transcript, clinical note, AVS and FHIR R4</p>
+      </div>
+      <button id="reset-demo" class="button button-quiet button-full">Reset demo</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">POST-VISIT RECONCILIATION</div>
+          <h1 id="page-title">Action Ledger</h1>
+        </div>
+        <div class="patient-chip" aria-label="Selected patient">
+          <div class="avatar">JR</div>
+          <div><strong id="patient-name">Loading…</strong><small id="patient-meta">Synthetic patient</small></div>
+        </div>
+      </header>
+
+      <section id="encounter-ribbon" class="encounter-ribbon skeleton-line" aria-live="polite"></section>
+
+      <section class="tab-panel active" id="tab-ledger" data-title="Action Ledger">
+        <div id="analysis-ready" class="analysis-hero hidden">
+          <div class="hero-signal" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <div>
+            <div class="eyebrow">ENCOUNTER READY</div>
+            <h2>Verify that every agreed action reached the EHR</h2>
+            <p>Sentinel will extract commitments, validate every quote, and reconcile them against the final FHIR record.</p>
+          </div>
+          <button id="run-analysis" class="button button-primary">Run reconciliation <span>→</span></button>
+        </div>
+
+        <div id="analysis-results" class="hidden">
+          <div class="ledger-toolbar">
+            <div>
+              <div class="analysis-status"><span id="analysis-dot" class="status-dot"></span><span id="analysis-copy">Analysis ready</span></div>
+              <p id="analysis-detail" class="subtle"></p>
+            </div>
+            <button id="rerun-analysis" class="button button-secondary">Re-run analysis</button>
+          </div>
+
+          <div class="stat-grid" id="summary-stats"></div>
+
+          <div class="section-heading">
+            <div><h2>Commitment ledger</h2><p>Record state is verified automatically. Workflow completion is tracked separately.</p></div>
+            <div class="legend"><span><i class="legend-dot issue"></i>Needs review</span><span><i class="legend-dot verified"></i>Verified</span><span><i class="legend-dot external"></i>External</span></div>
+          </div>
+          <div id="findings-list" class="findings-list"></div>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="tab-transcript" data-title="Transcript">
+        <div class="content-header"><div><h2>Ambient transcript</h2><p>Verbatim clinical conversation with commitment evidence highlighted.</p></div><span class="source-badge">ABRIDGE · AMBIENT</span></div>
+        <div class="document-surface transcript" id="transcript-content"></div>
+      </section>
+
+      <section class="tab-panel" id="tab-note" data-title="Clinical Note & AVS">
+        <div class="subtabs" role="tablist" aria-label="Clinical documents">
+          <button class="subtab active" data-doc="note">Clinical note</button>
+          <button class="subtab" data-doc="avs">After-visit summary</button>
+        </div>
+        <div class="document-surface clinical-document" id="clinical-document"></div>
+      </section>
+
+      <section class="tab-panel" id="tab-fhir" data-title="FHIR Record">
+        <div class="content-header">
+          <div><h2>Final EHR state</h2><p>Resettable FHIR R4 working copy. Source fixtures remain unchanged.</p></div>
+          <button id="toggle-raw" class="button button-secondary">View raw JSON</button>
+        </div>
+        <div id="fhir-summary"></div>
+        <pre id="fhir-raw" class="code-block hidden"><code></code></pre>
+      </section>
+
+      <section class="tab-panel" id="tab-audit" data-title="Audit Trail">
+        <div class="content-header"><div><h2>Immutable action history</h2><p>Evidence, clinician decisions, and FHIR before/after snapshots.</p></div><span class="source-badge">SIMULATED WRITE-BACK</span></div>
+        <div id="audit-list" class="audit-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="repair-dialog" class="repair-dialog">
+    <form method="dialog">
+      <div class="dialog-header">
+        <div><div class="eyebrow">CLINICIAN REVIEW REQUIRED</div><h2 id="dialog-title">Review repair</h2></div>
+        <button class="icon-button" value="cancel" aria-label="Close review">×</button>
+      </div>
+      <div id="dialog-body"></div>
+      <div class="dialog-actions">
+        <button id="reject-repair" type="button" class="button button-danger">Reject</button>
+        <button id="approve-repair" type="button" class="button button-primary">Approve &amp; apply repair</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
