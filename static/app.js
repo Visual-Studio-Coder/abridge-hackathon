@@ -54,8 +54,14 @@ function setBusy(button, busy, label = "Working…") {
 
 function slug(value) { return value.toLowerCase().replaceAll("_", "-"); }
 
+function setPatientContextVisible(visible) {
+  $(".patient-chip").classList.toggle("hidden", !visible);
+  $("#encounter-ribbon").classList.toggle("hidden", !visible);
+}
+
 function renderEncounter() {
   const { patient, metadata, practitioner } = state.encounter;
+  $(".patient-chip .avatar").textContent = patient.initials;
   $("#patient-name").textContent = patient.name;
   $("#patient-meta").textContent = `DOB ${patient.birth_date} · ${patient.location}`;
   $("#encounter-ribbon").innerHTML = `
@@ -142,20 +148,21 @@ async function openPatientReview(encounterId) {
   analyzeButton.textContent = row?.analyzed ? "Re-run analysis" : "Analyze patient";
   $("#queue-view").classList.add("hidden");
   $("#patient-review").classList.remove("hidden");
-  $("#patient-name").textContent = state.encounter.patient.name;
-  $("#patient-meta").textContent = `DOB ${state.encounter.patient.birth_date} · ${state.encounter.patient.location}`;
+  setPatientContextVisible(true);
   const payload = await api(`/api/encounters/${encodeURIComponent(encounterId)}/findings`);
   if (payload.findings?.length) {
     state.findings = payload.findings;
     state.summary = payload.summary;
     state.analysis = payload.analysis;
     state.audit = payload.audit || null;
+    renderEncounter();
     renderLinkedReview();
   } else {
     state.findings = [];
     state.summary = null;
     state.analysis = null;
     state.audit = null;
+    renderEncounter();
     renderUnanalyzedReview();
   }
 }
@@ -690,6 +697,7 @@ async function resetDemo() {
     await loadEvaluation();
     $("#patient-review").classList.add("hidden");
     $("#queue-view").classList.remove("hidden");
+    setPatientContextVisible(false);
     await renderAudit();
     toast(reset.analysis_preserved ? "Approvals cleared · cached analysis preserved" : "Demo restored to the seeded EHR state");
   } catch (error) { toast(error.message); }
@@ -699,7 +707,7 @@ async function resetDemo() {
 async function init() {
   setupNavigation();
   $("#rerun-analysis").addEventListener("click", (event) => runSelectedAnalysis(event.currentTarget));
-  $("#back-to-queue").addEventListener("click", () => { $("#patient-review").classList.add("hidden"); $("#queue-view").classList.remove("hidden"); });
+  $("#back-to-queue").addEventListener("click", () => { $("#patient-review").classList.add("hidden"); $("#queue-view").classList.remove("hidden"); setPatientContextVisible(false); });
   $("#analyze-all").addEventListener("click", (event) => analyzeAll(event.currentTarget));
   $("#approve-repair").addEventListener("click", approveSelected);
   $("#reject-repair").addEventListener("click", rejectSelected);
@@ -722,6 +730,7 @@ async function init() {
     state.evaluation = evaluation;
     renderEncounter();
     renderAnalysisShell();
+    setPatientContextVisible(false);
     renderEvaluation();
     await renderAudit();
   } catch (error) {
