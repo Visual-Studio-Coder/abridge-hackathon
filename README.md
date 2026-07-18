@@ -4,6 +4,8 @@
 
 Sentinel reconciles commitments made in an ambient clinical conversation against the final FHIR record. It links every finding to an exact transcript quote, classifies discrepancies, proposes FHIR-shaped repairs, requires clinician approval, and records an auditable before/after trail.
 
+Before a finding reaches the clinician, a second adversarial Claude pass attempts to reject it. Confirmed findings retain a clinician-readable safety rationale, downgraded findings carry a lower risk, and rejected findings remain inspectable in a collapsed suppression queue. The audit is batched once per encounter, cached with the analysis fingerprint, and fails open so an unavailable reviewer cannot block the demo. Neither analysis pass receives the evaluation manifest.
+
 ## Demo case
 
 The clinician and Julius Renner agree on eight actions. The synthetic post-visit EHR contains:
@@ -20,6 +22,8 @@ We derived a 25-encounter validation set by deterministically seeding the Abridg
 Our derived validation distribution contains 25 encounters: 14 encounters with 18 disclosed discrepancies and 11 unmodified controls. The end-of-day worklist can analyze every encounter and reports expected versus detected results, seeded misses, and additional evidence-linked candidates.
 
 “Unmodified” does not mean clinically gap-free: several original records contain transcript-supported follow-ups or handoffs that are naturally absent from FHIR. Findings outside the manifest are therefore shown as candidates for separate adjudication rather than automatically labeled false positives.
+
+Scoring is resource-based: if the agent identifies the seeded resource as `WRONG`, `INCOMPLETE`, or `MISSING`, the discrepancy counts as caught. Any difference from the manifest's seeded classification is reported explicitly in the evaluation table rather than scored as a miss.
 
 The repository includes and loads every derived `{patient-prefix}-ehr.json` bundle from [`eval/seeded-ehr`](eval/seeded-ehr), so a public clone can reproduce the complete batch evaluation. The original Abridge dataset remains unchanged.
 

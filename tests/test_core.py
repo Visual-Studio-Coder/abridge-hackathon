@@ -32,10 +32,15 @@ def test_expected_answer_key_classifications(service: SentinelService) -> None:
 
     assert result["summary"] == {
         "commitments": 8,
+        "surfaced": 8,
         "needs_action": 3,
         "verified": 4,
         "external": 1,
         "high_risk": 2,
+        "audit_status": "unavailable",
+        "auditor_confirmed": 0,
+        "auditor_downgraded": 0,
+        "auditor_suppressed": 0,
     }
     assert findings["med-lisinopril"]["classification"] == "WRONG"
     assert "40 MG" in findings["med-lisinopril"]["ehr_evidence"]["current_state"]
@@ -141,9 +146,9 @@ def test_disclosed_manifest_scores_detections_without_entering_analysis(service:
         "analysis": {"analyzed_at": "2026-07-18T00:00:00Z", "fingerprint": service._encounter_fingerprint(seeded["encounter_id"])},
         "summary": {"needs_action": 1, "verified": 0, "external": 0, "high_risk": 0, "commitments": 1},
         "findings": [{
-            "classification": plant["kind"],
-            "ehr_evidence": {"resource_type": plant["resource"]},
-            "commitment": {"expected_resource": plant["resource"]},
+            "classification": "WRONG" if plant["kind"] != "WRONG" else "INCOMPLETE",
+            "ehr_evidence": {"resource_type": plant["resource"], "resource_id": plant["id"]},
+            "commitment": {"expected_resource": plant["resource"], "description": plant["evidence"]},
         }],
     }
     service.paths.encounter_cache.mkdir(parents=True)
@@ -156,4 +161,47 @@ def test_disclosed_manifest_scores_detections_without_entering_analysis(service:
     assert evaluation["summary"]["expected_discrepancies"] == 18
     assert evaluation["summary"]["analyzed"] == 1
     assert evaluation["summary"]["caught"] == 1
+    assert evaluation["summary"]["classification_variants"] == 1
     assert evaluation["summary"]["unseeded_control_candidates"] == 0
+    scored_row = next(row for row in evaluation["rows"] if row["encounter_id"] == seeded["encounter_id"])
+    assert scored_row["classification_variants"][0]["seeded_as"] == plant["kind"]
+
+
+def test_auditor_suppresses_rejected_and_passes_confirmed(service: SentinelService) -> None:
+    findings = service.findings()["findings"][:2]
+    audit = {
+        "status": "complete",
+        "message": "Adversarial clinical safety audit complete",
+        "verdicts": [
+            {
+                "finding_id": findings[0]["id"],
+                "verdict": "CONFIRMED",
+                "reasoning": "The dose mismatch is directly supported by the transcript and MedicationRequest.",
+                "checks": {
+                    "quote_is_real_commitment": True,
+                    "classification_supported_by_ehr": True,
+                    "repair_safe_and_minimal": True,
+                },
+                "adjusted_risk": "UNCHANGED",
+            },
+            {
+                "finding_id": findings[1]["id"],
+                "verdict": "REJECTED",
+                "reasoning": "The quoted language is not a defensible clinician commitment.",
+                "checks": {
+                    "quote_is_real_commitment": False,
+                    "classification_supported_by_ehr": True,
+                    "repair_safe_and_minimal": True,
+                },
+                "adjusted_risk": "UNCHANGED",
+            },
+        ],
+    }
+
+    audited = service._apply_audit(findings, audit)
+    visible = [item for item in audited if item["auditor"]["verdict"] != "REJECTED"]
+    suppressed = [item for item in audited if item["auditor"]["verdict"] == "REJECTED"]
+
+    assert [item["id"] for item in visible] == [findings[0]["id"]]
+    assert [item["id"] for item in suppressed] == [findings[1]["id"]]
+    assert visible[0]["auditor"]["reasoning"].startswith("The dose mismatch")

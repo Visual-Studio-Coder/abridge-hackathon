@@ -17,6 +17,7 @@ JULIUS_ENCOUNTER_ID = (
     "6d4fd363-1ddb-74f8-95dd-b53404f1e107"
 )
 PROMPT_VERSION = "commitment-reconciliation-v2"
+AUDITOR_VERSION = "clinical-safety-auditor-v1"
 ALLOWED_TYPES = {
     "medication_change",
     "lab",
@@ -49,6 +50,37 @@ GENERIC_OUTPUT_SCHEMA = {
         },
     },
     "required": ["findings"],
+    "additionalProperties": False,
+}
+AUDITOR_OUTPUT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "verdicts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "finding_id": {"type": "string"},
+                    "verdict": {"type": "string", "enum": ["CONFIRMED", "REJECTED", "DOWNGRADED"]},
+                    "reasoning": {"type": "string"},
+                    "checks": {
+                        "type": "object",
+                        "properties": {
+                            "quote_is_real_commitment": {"type": "boolean"},
+                            "classification_supported_by_ehr": {"type": "boolean"},
+                            "repair_safe_and_minimal": {"type": "boolean"},
+                        },
+                        "required": ["quote_is_real_commitment", "classification_supported_by_ehr", "repair_safe_and_minimal"],
+                        "additionalProperties": False,
+                    },
+                    "adjusted_risk": {"type": "string", "enum": ["HIGH", "ELEVATED", "ROUTINE", "UNCHANGED"]},
+                },
+                "required": ["finding_id", "verdict", "reasoning", "checks", "adjusted_risk"],
+                "additionalProperties": False,
+            },
+        },
+    },
+    "required": ["verdicts"],
     "additionalProperties": False,
 }
 
@@ -377,6 +409,131 @@ class SentinelService:
             (record["transcript"] + json.dumps(seeded_ehr, sort_keys=True) + PROMPT_VERSION).encode()
         ).hexdigest()[:12]
 
+    @staticmethod
+    def _audit_fingerprint(analysis_fingerprint: str) -> str:
+        return hashlib.sha256(f"{analysis_fingerprint}:{AUDITOR_VERSION}".encode()).hexdigest()[:12]
+
+    @staticmethod
+    def _unavailable_audit(analysis_fingerprint: str, message: str = "Audit unavailable") -> dict[str, Any]:
+        return {
+            "status": "unavailable",
+            "version": AUDITOR_VERSION,
+            "fingerprint": SentinelService._audit_fingerprint(analysis_fingerprint),
+            "message": message,
+            "verdicts": [],
+        }
+
+    def _audit_findings(
+        self,
+        record: dict[str, Any],
+        findings: list[dict[str, Any]],
+        analysis_fingerprint: str,
+    ) -> dict[str, Any]:
+        """Adversarially review an entire encounter in one fail-open Claude call."""
+        audit_fingerprint = self._audit_fingerprint(analysis_fingerprint)
+        if not os.getenv("ANTHROPIC_API_KEY"):
+            return self._unavailable_audit(analysis_fingerprint, "Audit unavailable: ANTHROPIC_API_KEY not configured")
+        if not findings:
+            return {
+                "status": "complete", "version": AUDITOR_VERSION, "fingerprint": audit_fingerprint,
+                "message": "No findings required audit", "verdicts": [],
+                "audited_at": datetime.now(timezone.utc).isoformat(),
+            }
+
+        audit_input = [{
+            "finding_id": item["id"],
+            "commitment": item.get("commitment"),
+            "classification": item.get("classification"),
+            "risk": item.get("risk"),
+            "ehr_evidence": item.get("ehr_evidence"),
+            "proposed_repair": item.get("proposed_repair"),
+        } for item in findings]
+        prompt = f"""You are a skeptical clinical safety reviewer. For each finding, try to reject it.
+Is the quote actually an explicit clinician commitment, not musing or patient speech?
+Does the cited EHR state truly support the classification? Is the proposed repair the
+minimal safe correction, with nothing invented? Reject or downgrade anything you cannot
+defend. Do not add new findings. Return exactly one verdict for every supplied finding ID.
+Use DOWNGRADED only when the finding is defensible but its risk is overstated; provide a
+strictly lower adjusted_risk. Otherwise adjusted_risk must be UNCHANGED. Reasoning must be one
+clinician-readable sentence.
+
+Transcript:\n{record['transcript']}
+
+Proposed findings:\n{json.dumps(audit_input, ensure_ascii=False)}"""
+        try:
+            from anthropic import Anthropic
+
+            client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+            response = client.messages.create(
+                model=os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5"),
+                max_tokens=7000,
+                output_config={"format": {"type": "json_schema", "schema": AUDITOR_OUTPUT_SCHEMA}},
+                thinking={"type": "disabled"},
+                messages=[{"role": "user", "content": prompt}],
+            )
+            text = "".join(block.text for block in response.content if getattr(block, "type", None) == "text")
+            verdicts = json.loads(text)["verdicts"]
+            expected_ids = {item["id"] for item in findings}
+            actual_ids = [item.get("finding_id") for item in verdicts]
+            if len(actual_ids) != len(set(actual_ids)) or set(actual_ids) != expected_ids:
+                raise ValueError("Auditor did not return exactly one verdict per finding")
+            return {
+                "status": "complete", "version": AUDITOR_VERSION, "fingerprint": audit_fingerprint,
+                "message": "Adversarial clinical safety audit complete", "verdicts": verdicts,
+                "audited_at": datetime.now(timezone.utc).isoformat(),
+            }
+        except Exception as exc:  # safety review can never break the clinician workflow
+            return self._unavailable_audit(analysis_fingerprint, f"Audit unavailable ({type(exc).__name__})")
+
+    @staticmethod
+    def _apply_audit(findings: list[dict[str, Any]], audit: dict[str, Any]) -> list[dict[str, Any]]:
+        verdicts = {item.get("finding_id"): item for item in audit.get("verdicts", [])} if audit.get("status") == "complete" else {}
+        risk_rank = {"ROUTINE": 0, "ELEVATED": 1, "HIGH": 2}
+        output = copy.deepcopy(findings)
+        for finding in output:
+            finding.pop("auditor", None)
+            if finding.get("original_risk"):
+                finding["risk"] = finding.pop("original_risk")
+            verdict = verdicts.get(finding.get("id"))
+            if verdict:
+                finding["auditor"] = {"status": "complete", **verdict}
+                if verdict["verdict"] == "DOWNGRADED":
+                    adjusted = verdict.get("adjusted_risk")
+                    if adjusted in risk_rank and risk_rank[adjusted] < risk_rank.get(finding.get("risk"), 0):
+                        finding["original_risk"] = finding["risk"]
+                        finding["risk"] = adjusted
+            else:
+                finding["auditor"] = {
+                    "status": "unavailable", "verdict": None,
+                    "reasoning": audit.get("message", "Audit unavailable"), "checks": None,
+                }
+        return output
+
+    @staticmethod
+    def _summary(findings: list[dict[str, Any]], audit: dict[str, Any]) -> dict[str, Any]:
+        visible = [item for item in findings if item.get("auditor", {}).get("verdict") != "REJECTED"]
+        issue_states = {"WRONG", "INCOMPLETE", "MISSING"}
+        return {
+            "commitments": len(findings),
+            "surfaced": len(visible),
+            "needs_action": sum(item.get("classification") in issue_states for item in visible),
+            "verified": sum(item.get("classification") == "OK" for item in visible),
+            "external": sum(item.get("classification") == "NON_EHR_ACTION" for item in visible),
+            "high_risk": sum(item.get("classification") in issue_states and item.get("risk") == "HIGH" for item in visible),
+            "audit_status": audit.get("status", "unavailable"),
+            "auditor_confirmed": sum(item.get("auditor", {}).get("verdict") == "CONFIRMED" for item in findings),
+            "auditor_downgraded": sum(item.get("auditor", {}).get("verdict") == "DOWNGRADED" for item in findings),
+            "auditor_suppressed": sum(item.get("auditor", {}).get("verdict") == "REJECTED" for item in findings),
+        }
+
+    def _cached_audit_is_current(self, result: dict[str, Any], analysis_fingerprint: str) -> bool:
+        audit = result.get("audit", {})
+        return (
+            audit.get("status") == "complete"
+            and audit.get("version") == AUDITOR_VERSION
+            and audit.get("fingerprint") == self._audit_fingerprint(analysis_fingerprint)
+        )
+
     def review_queue(self) -> dict[str, Any]:
         rows = []
         for record in self.repository.review_queue():
@@ -389,6 +546,7 @@ class SentinelService:
                 summary = result["summary"] if analyzed else None
             else:
                 cached = self.generic_findings(encounter_id)
+                result = cached or {}
                 analyzed = cached is not None
                 summary = cached.get("summary") if cached else None
             rows.append({
@@ -398,6 +556,7 @@ class SentinelService:
                 "visit_title": record["metadata"]["visit_title"],
                 "date": record["metadata"]["date"],
                 "analyzed": analyzed,
+                "audit_status": (result.get("audit") or {}).get("status", "unavailable") if analyzed else "pending",
                 "summary": summary,
                 "demo_patient": encounter_id == JULIUS_ENCOUNTER_ID,
             })
@@ -417,7 +576,17 @@ class SentinelService:
         if not path.exists():
             return None
         cached = _read_json(path)
-        return cached if cached.get("analysis", {}).get("fingerprint") == self._encounter_fingerprint(encounter_id) else None
+        if cached.get("analysis", {}).get("fingerprint") != self._encounter_fingerprint(encounter_id):
+            return None
+        audit = cached.get("audit") or self._unavailable_audit(
+            cached["analysis"]["fingerprint"], "Audit has not run for this cached analysis"
+        )
+        cached["audit"] = audit
+        cached["findings"] = self._apply_audit(cached.get("findings", []), audit)
+        cached["summary"] = self._summary(cached["findings"], audit)
+        cached["analysis"]["audit_status"] = audit["status"]
+        cached["analysis"]["audit_message"] = audit["message"]
+        return cached
 
     def seeding_manifest(self) -> list[dict[str, Any]]:
         return _read_json(self.paths.seeding_manifest) if self.paths.seeding_manifest.exists() else []
@@ -432,16 +601,34 @@ class SentinelService:
                 return resource_type
         return str(value)
 
+    @classmethod
+    def _plant_matches_finding(cls, plant: dict[str, Any], finding: dict[str, Any]) -> bool:
+        if cls._finding_resource(finding) != plant.get("resource"):
+            return False
+        planted_id = plant.get("id")
+        observed_id = finding.get("ehr_evidence", {}).get("resource_id")
+        if planted_id and observed_id:
+            return planted_id == observed_id
+        evidence = str(plant.get("evidence") or "").lower()
+        blob = json.dumps(finding, ensure_ascii=False).lower()
+        stopwords = {"administration", "discussed", "transcript", "putting", "referral", "clinic", "want", "weeks", "natural", "gap"}
+        identity_tokens = [token for token in re.findall(r"[a-z0-9]+", evidence) if len(token) >= 4 and token not in stopwords]
+        return not identity_tokens or any(token in blob for token in identity_tokens)
+
     def evaluation(self) -> dict[str, Any]:
         rows = []
         total_expected = total_detected = caught = natural_gaps = control_candidates = 0
-        clean_controls = clean_controls_clear = analyzed_count = 0
+        clean_controls = clean_controls_clear = analyzed_count = classification_variants = 0
         issue_states = {"MISSING", "WRONG", "INCOMPLETE"}
         for expected_row in self.seeding_manifest():
             encounter_id = expected_row["encounter_id"]
             result = self.generic_findings(encounter_id)
             analyzed = bool(result and result.get("analysis", {}).get("analyzed_at"))
-            detections = [item for item in (result or {}).get("findings", []) if item.get("classification") in issue_states] if analyzed else []
+            detections = [
+                item for item in (result or {}).get("findings", [])
+                if item.get("classification") in issue_states
+                and item.get("auditor", {}).get("verdict") != "REJECTED"
+            ] if analyzed else []
             expected = expected_row.get("planted", [])
             used: set[int] = set()
             hits = []
@@ -450,14 +637,18 @@ class SentinelService:
                 match = next((
                     index for index, finding in enumerate(detections)
                     if index not in used
-                    and finding.get("classification") == plant.get("kind")
-                    and self._finding_resource(finding) == plant.get("resource")
+                    and self._plant_matches_finding(plant, finding)
                 ), None)
                 if match is None:
                     misses.append(plant)
                 else:
                     used.add(match)
-                    hits.append(plant)
+                    hits.append({"plant": plant, "finding": detections[match]})
+            variants = [{
+                "resource": hit["plant"].get("resource"),
+                "seeded_as": hit["plant"].get("kind"),
+                "classified_as": hit["finding"].get("classification"),
+            } for hit in hits if hit["plant"].get("kind") != hit["finding"].get("classification")]
             extras = [finding for index, finding in enumerate(detections) if index not in used]
             is_clean = not expected
             if is_clean:
@@ -472,6 +663,7 @@ class SentinelService:
             total_expected += len(expected)
             total_detected += len(detections)
             caught += len(hits)
+            classification_variants += len(variants)
             rows.append({
                 "encounter_id": encounter_id,
                 "patient": expected_row["patient"],
@@ -483,6 +675,7 @@ class SentinelService:
                 "caught": len(hits),
                 "missed": len(misses) if analyzed else None,
                 "additional": len(extras),
+                "classification_variants": variants,
                 "status": "PENDING" if not analyzed else "MISSED" if misses else "ADDITIONAL" if extras else "CLEAR",
             })
         return {
@@ -495,13 +688,14 @@ class SentinelService:
                 "detected_issues": total_detected,
                 "caught": caught,
                 "missed": total_expected - caught if analyzed_count == len(rows) else None,
+                "classification_variants": classification_variants,
                 "natural_gaps": natural_gaps,
                 "additional_candidates": natural_gaps + control_candidates,
                 "unseeded_control_candidates": control_candidates,
                 "clean_controls_clear": clean_controls_clear,
             },
             "rows": rows,
-            "disclosure": "The manifest is a disclosed scoring key and is never included in the model prompt. Unseeded findings are candidates for adjudication, not automatically false positives.",
+            "disclosure": "The manifest is a disclosed scoring key and is never included in the model prompt. A seeded resource counts as caught for any clinically adverse issue state; classification differences are reported explicitly.",
         }
 
     def analyze_encounter(self, encounter_id: str) -> dict[str, Any]:
@@ -512,6 +706,15 @@ class SentinelService:
         fingerprint = self._encounter_fingerprint(encounter_id)
         cached = self.generic_findings(encounter_id)
         if cached and cached.get("analysis", {}).get("fingerprint") == fingerprint:
+            if self._cached_audit_is_current(cached, fingerprint):
+                return cached
+            audit = self._audit_findings(record, cached["findings"], fingerprint)
+            cached["audit"] = audit
+            cached["findings"] = self._apply_audit(cached["findings"], audit)
+            cached["summary"] = self._summary(cached["findings"], audit)
+            cached["analysis"]["audit_status"] = audit["status"]
+            cached["analysis"]["audit_message"] = audit["message"]
+            _write_json(self._generic_cache_path(encounter_id), cached)
             return cached
         if not os.getenv("ANTHROPIC_API_KEY"):
             raise ValueError("ANTHROPIC_API_KEY is required to analyze an uncached encounter")
@@ -601,21 +804,20 @@ FHIR resources:\n{json.dumps(compact_resources, ensure_ascii=False)}"""
                 "apply_supported": False,
                 "last_event": None,
             })
-        summary = {
-            "commitments": len(findings),
-            "needs_action": sum(item["classification"] in {"MISSING", "INCOMPLETE", "WRONG"} for item in findings),
-            "verified": sum(item["classification"] == "OK" for item in findings),
-            "external": sum(item["classification"] == "NON_EHR_ACTION" for item in findings),
-            "high_risk": sum(item["risk"] == "HIGH" and item["classification"] in {"MISSING", "INCOMPLETE", "WRONG"} for item in findings),
-        }
+        audit = self._audit_findings(record, findings, fingerprint)
+        findings = self._apply_audit(findings, audit)
+        summary = self._summary(findings, audit)
         result = {
             "findings": findings,
             "summary": summary,
+            "audit": audit,
             "analysis": {
                 "mode": "live", "message": "Live Claude reconciliation complete",
                 "model": os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5"),
                 "analyzed_at": datetime.now(timezone.utc).isoformat(),
                 "fingerprint": fingerprint,
+                "audit_status": audit["status"],
+                "audit_message": audit["message"],
             },
         }
         _write_json(self._generic_cache_path(encounter_id), result)
@@ -746,8 +948,13 @@ Transcript:\n{record['transcript']}"""
             "commitments": commitments,
         }
         _write_json(self.paths.analysis_meta, meta)
-        findings = self.findings(commitments)
-        return {"analysis": {k: v for k, v in meta.items() if k != "commitments"}, **findings}
+        reconciled = self.findings(commitments)
+        audit = self._audit_findings(record, reconciled["findings"], meta["fingerprint"])
+        meta["audit"] = audit
+        meta["audit_status"] = audit["status"]
+        meta["audit_message"] = audit["message"]
+        _write_json(self.paths.analysis_meta, meta)
+        return self.findings(commitments)
 
     def _analysis_commitments(self) -> list[dict[str, Any]]:
         if self.paths.analysis_meta.exists():
@@ -918,18 +1125,16 @@ Transcript:\n{record['transcript']}"""
 
     def findings(self, commitments: list[dict[str, Any]] | None = None) -> dict[str, Any]:
         ehr = _read_json(self.paths.runtime_ehr)
-        items = [self._reconcile(item, ehr) for item in (commitments or self._analysis_commitments())]
-        issues = sum(item["classification"] in {"WRONG", "INCOMPLETE", "MISSING"} for item in items)
+        raw_items = [self._reconcile(item, ehr) for item in (commitments or self._analysis_commitments())]
+        meta = _read_json(self.paths.analysis_meta)
+        fingerprint = meta.get("fingerprint", "ready")
+        audit = meta.get("audit") or self._unavailable_audit(fingerprint, "Audit has not run for this analysis")
+        items = self._apply_audit(raw_items, audit)
         return {
             "findings": items,
-            "summary": {
-                "commitments": len(items),
-                "needs_action": issues,
-                "verified": sum(item["classification"] == "OK" for item in items),
-                "external": sum(item["classification"] == "NON_EHR_ACTION" for item in items),
-                "high_risk": sum(item["classification"] in {"WRONG", "INCOMPLETE", "MISSING"} and item["risk"] == "HIGH" for item in items),
-            },
-            "analysis": {k: v for k, v in _read_json(self.paths.analysis_meta).items() if k != "commitments"},
+            "summary": self._summary(items, audit),
+            "audit": audit,
+            "analysis": {k: v for k, v in meta.items() if k not in {"commitments", "audit"}},
         }
 
     def _append_event(self, event: dict[str, Any]) -> dict[str, Any]:

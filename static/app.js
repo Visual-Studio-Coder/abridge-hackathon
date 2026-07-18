@@ -3,6 +3,7 @@ const state = {
   findings: [],
   summary: null,
   analysis: null,
+  audit: null,
   selectedFinding: null,
   queue: [],
   queueSummary: null,
@@ -81,14 +82,15 @@ function renderQueue() {
   $("#queue-summary").textContent = `${state.queueSummary.encounters} encounters · ${state.queueSummary.analyzed} analyzed · ${state.queueSummary.needs_action} items need action`;
   $("#review-queue").innerHTML = state.queue.map((row) => {
     const issues = row.summary?.needs_action || 0;
+    const highRisk = row.summary?.high_risk || 0;
     const verified = row.summary?.verified || 0;
     const status = row.analyzed
       ? issues
-        ? `<span class="queue-status issue">${issues} need action${row.summary.high_risk ? ` · ${row.summary.high_risk} high risk` : ""}<b>›</b></span>`
+        ? `<span class="queue-status ${highRisk ? "issue" : "action"}"><span class="queue-count">${issues}</span> need action${highRisk ? ` · ${highRisk} high risk` : ""}<b>›</b></span>`
         : `<span class="queue-status clear">all ${verified} verified ✓</span>`
       : '<span class="queue-status pending">not analyzed <b>· analyze</b></span>';
     const visit = row.visit_title.replace(/—/g, "·");
-    return `<button class="queue-row ${issues ? "has-issue" : ""}" data-encounter-id="${escapeHtml(row.id)}">
+    return `<button class="queue-row ${highRisk ? "has-high-risk" : ""}" data-encounter-id="${escapeHtml(row.id)}">
       <span class="queue-avatar">${escapeHtml(row.initials)}</span>
       <span class="queue-patient"><strong>${escapeHtml(row.name)}</strong><small>${escapeHtml(visit)} · ${new Date(row.date).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</small></span>
       ${status}
@@ -119,7 +121,7 @@ function renderEvaluation() {
     <td><strong>${escapeHtml(row.patient)}</strong><small>${escapeHtml(row.visit_title)}</small></td>
     <td><span class="eval-set ${row.control ? "control" : "seeded"}">${row.control ? "UNMODIFIED" : "SEEDED"}</span></td>
     <td>${row.expected}</td><td>${row.analyzed ? row.detected : "—"}</td><td>${row.analyzed ? row.caught : "—"}</td>
-    <td><span class="eval-status ${slug(row.status)}">${escapeHtml(row.status)}</span></td>
+    <td><span class="eval-status ${slug(row.status)}">${escapeHtml(row.status)}</span>${(row.classification_variants || []).map((variant) => `<small class="eval-classification-note">${escapeHtml(variant.resource)}: classified as ${escapeHtml(variant.classified_as)}, seeded as ${escapeHtml(variant.seeded_as)}</small>`).join("")}</td>
   </tr>`).join("");
 }
 
@@ -145,11 +147,13 @@ async function openPatientReview(encounterId) {
     state.findings = payload.findings;
     state.summary = payload.summary;
     state.analysis = payload.analysis;
+    state.audit = payload.audit || null;
     renderLinkedReview();
   } else {
     state.findings = [];
     state.summary = null;
     state.analysis = null;
+    state.audit = null;
     renderUnanalyzedReview();
   }
 }
@@ -160,16 +164,28 @@ function renderUnanalyzedReview() {
   $("#linked-findings").innerHTML = '<div class="linked-empty"><strong>Ready for background reconciliation</strong><p>The encounter loader is generic. Julius is the validated cached demo patient.</p></div>';
   $("#verified-rollup-label").textContent = "No verified items yet";
   $("#verified-rollup-content").innerHTML = "";
+  $("#suppressed-rollup").classList.add("hidden");
+  $("#suppressed-rollup-content").innerHTML = "";
   $("#compact-audit").textContent = "No analysis or actions recorded for this encounter.";
 }
 
 function renderLinkedReview() {
   renderLinkedTranscript(state.findings);
-  const issues = state.findings.filter((item) => ["WRONG", "INCOMPLETE", "MISSING"].includes(item.classification));
-  const verified = state.findings.filter((item) => item.classification === "OK");
-  const external = state.findings.filter((item) => item.classification === "NON_EHR_ACTION");
-  $("#review-analysis-status").innerHTML = `<span class="status-dot"></span>${state.analysis?.mode === "live" ? "Live Claude analysis" : "Validated cache"} · ${state.findings.length} commitments · every quote verified`;
+  const suppressed = state.findings.filter((item) => item.auditor?.verdict === "REJECTED");
+  const visible = state.findings.filter((item) => item.auditor?.verdict !== "REJECTED");
+  const issues = visible.filter((item) => ["WRONG", "INCOMPLETE", "MISSING"].includes(item.classification));
+  const verified = visible.filter((item) => item.classification === "OK");
+  const external = visible.filter((item) => item.classification === "NON_EHR_ACTION");
+  const confirmed = visible.filter((item) => item.auditor?.verdict === "CONFIRMED").length;
+  const downgraded = visible.filter((item) => item.auditor?.verdict === "DOWNGRADED").length;
+  const auditCopy = state.audit?.status === "complete"
+    ? `${visible.length} findings · ${confirmed} confirmed${downgraded ? ` · ${downgraded} downgraded` : ""} · ${suppressed.length} suppressed`
+    : `${visible.length} findings · audit unavailable`;
+  $("#review-analysis-status").innerHTML = `<span class="status-dot ${state.audit?.status === "complete" ? "" : "pending-dot"}"></span>${state.analysis?.mode === "live" ? "Live Claude analysis" : "Validated cache"} · ${auditCopy}`;
   $("#linked-findings").innerHTML = issues.length ? issues.map(linkedFindingCard).join("") : '<div class="linked-empty success"><strong>All EHR discrepancies resolved</strong><p>Applied repairs remain pending real-world completion.</p></div>';
+  $("#suppressed-rollup").classList.toggle("hidden", !suppressed.length);
+  $("#suppressed-rollup-label").textContent = `Suppressed by auditor (${suppressed.length})`;
+  $("#suppressed-rollup-content").innerHTML = suppressed.map((item) => `<article class="linked-finding suppressed-finding" data-linked-finding="${item.id}"><strong>${escapeHtml(item.classification)} · ${escapeHtml(item.category)}</strong><h3>${escapeHtml(item.commitment.description)}</h3><p>✕ Auditor: ${escapeHtml(item.auditor.reasoning)}</p></article>`).join("");
   $("#verified-rollup-label").textContent = `${verified.length} items verified correct · ${external.length} non-EHR action`;
   $("#verified-rollup-content").innerHTML = [...verified, ...external].map((item) => `<button data-linked-finding="${item.id}"><span>✓</span>${escapeHtml(item.commitment.description)}</button>`).join("");
   $$('[data-linked-finding]').forEach((card) => card.addEventListener('click', (event) => {
@@ -186,11 +202,16 @@ function renderLinkedReview() {
 function linkedFindingCard(finding) {
   const applied = finding.workflow_state === "APPLIED";
   const canApply = finding.proposed_repair && finding.apply_supported !== false;
+  const auditor = finding.auditor || {};
+  const auditorCopy = auditor.status === "complete"
+    ? `${auditor.verdict === "DOWNGRADED" ? "↓" : "✓"} Auditor: ${auditor.verdict.toLowerCase()} — ${auditor.reasoning}`
+    : `○ Auditor: ${auditor.reasoning || "audit unavailable"}`;
   return `<article class="linked-finding ${slug(finding.classification)} ${applied ? "is-applied" : ""}" data-linked-finding="${finding.id}">
-    <div class="linked-finding-top"><strong>${escapeHtml(finding.classification)} · ${escapeHtml(finding.category)}</strong><span>quote verified ✓</span></div>
+    <div class="linked-finding-top"><strong>${escapeHtml(finding.classification)} · ${escapeHtml(finding.category)}</strong><span>${escapeHtml(finding.risk)} RISK · quote verified ✓</span></div>
     <h3>${escapeHtml(finding.commitment.description)}</h3>
     <p>${escapeHtml(finding.ehr_evidence.current_state)}</p>
     ${finding.proposed_repair ? `<p class="repair-copy"><b>Repair:</b> ${escapeHtml(finding.proposed_repair.summary)}</p>` : ""}
+    <p class="auditor-line ${escapeHtml((auditor.verdict || "unavailable").toLowerCase())}">${escapeHtml(auditorCopy)}</p>
     <div class="linked-card-actions">${canApply ? `<button class="button button-primary" data-review="${finding.id}">${applied ? "Review applied repair" : "Review & approve"}</button>` : ""}<span>${finding.proposed_repair && !canApply ? "REPAIR SUGGESTED · " : ""}${escapeHtml(finding.workflow_state.replaceAll("_", " "))}</span></div>
   </article>`;
 }
@@ -241,7 +262,7 @@ function renderFindings() {
 
   const categories = ["Medication", "Referral", "Follow-up", "Immunization", "External"];
   $("#findings-list").innerHTML = categories.map((category) => {
-    const items = state.findings.filter((finding) => finding.category === category);
+    const items = state.findings.filter((finding) => finding.category === category && finding.auditor?.verdict !== "REJECTED");
     if (!items.length) return "";
     return `<section class="finding-group"><h3>${category}<span class="group-count">${items.length}</span></h3>${items.map(findingCard).join("")}</section>`;
   }).join("");
@@ -347,6 +368,7 @@ function updateFindingState(payload) {
   state.findings = payload.findings;
   state.summary = payload.summary;
   state.analysis = payload.analysis;
+  state.audit = payload.audit || null;
   if (!$("#patient-review").classList.contains("hidden")) renderLinkedReview();
   else renderQueue();
 }
@@ -370,6 +392,7 @@ async function runSelectedAnalysis(button) {
     state.findings = payload.findings;
     state.summary = payload.summary;
     state.analysis = payload.analysis;
+    state.audit = payload.audit || null;
     renderLinkedReview();
     await loadQueue();
     await loadEvaluation();
@@ -380,7 +403,7 @@ async function runSelectedAnalysis(button) {
 }
 
 async function analyzeAll(button) {
-  const pending = state.queue.filter((row) => !row.analyzed);
+  const pending = state.queue.filter((row) => !row.analyzed || row.audit_status !== "complete");
   if (!pending.length) {
     toast("Every encounter in today’s worklist is already analyzed");
     return;
@@ -513,6 +536,7 @@ async function resetDemo() {
     state.findings = findings.findings;
     state.summary = findings.summary;
     state.analysis = findings.analysis;
+    state.audit = findings.audit || null;
     renderEncounter();
     await loadQueue();
     await loadEvaluation();
@@ -544,6 +568,7 @@ async function init() {
     state.findings = findings.findings;
     state.summary = findings.summary;
     state.analysis = findings.analysis;
+    state.audit = findings.audit || null;
     state.queue = queue.encounters;
     state.queueSummary = queue.summary;
     state.evaluation = evaluation;
