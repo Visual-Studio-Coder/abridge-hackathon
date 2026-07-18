@@ -112,11 +112,17 @@ def test_only_external_actions_can_be_manually_completed(service: SentinelServic
 
 
 def test_reset_restores_seeded_discrepancies(service: SentinelService) -> None:
+    analyzed = service.analyze()
+    analysis_before = json.loads(service.paths.analysis_meta.read_text())
     service.approve("med-lisinopril")
     assert service.findings()["summary"]["needs_action"] == 2
-    service.reset_demo()
-    assert service.findings()["summary"]["needs_action"] == 3
+    reset = service.reset_demo()
+    result = service.findings()
+    assert result["summary"]["needs_action"] == 3
     assert service.audit_log() == []
+    assert reset["analysis_preserved"] is True
+    assert result["analysis"]["analyzed_at"] == analyzed["analysis"]["analyzed_at"]
+    assert json.loads(service.paths.analysis_meta.read_text()) == analysis_before
 
 
 def test_analysis_uses_validated_fallback_without_credentials(service: SentinelService) -> None:

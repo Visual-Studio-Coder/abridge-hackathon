@@ -48,7 +48,7 @@ ANTHROPIC_API_KEY=... uv run flask --app app run
 uv run pytest
 ```
 
-The app writes only to `.runtime/`. Resetting the demo restores the seeded EHR and clears the runtime audit log; the supplied Abridge dataset and partner fixtures are never modified.
+The app writes only to `.runtime/`. Resetting the demo restores the seeded EHR and clears clinician approvals and the runtime audit log while preserving cached analysis and auditor verdicts; the supplied Abridge dataset and partner fixtures are never modified.
 
 ## Safety boundary
 

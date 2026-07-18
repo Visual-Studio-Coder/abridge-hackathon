@@ -357,13 +357,21 @@ class SentinelService:
     def reset_demo(self) -> dict[str, Any]:
         with self._lock:
             self.paths.runtime.mkdir(parents=True, exist_ok=True)
+            analysis_preserved = self.paths.analysis_meta.exists() and bool(
+                _read_json(self.paths.analysis_meta).get("analyzed_at")
+            )
             _write_json(self.paths.runtime_ehr, self.repository.get_seeded_ehr())
             _write_json(self.paths.audit, [])
-            _write_json(
-                self.paths.analysis_meta,
-                {"mode": "ready", "message": "Ready to analyze encounter", "analyzed_at": None},
-            )
-            return {"ok": True, "message": "Seeded EHR restored"}
+            if not self.paths.analysis_meta.exists():
+                _write_json(
+                    self.paths.analysis_meta,
+                    {"mode": "ready", "message": "Ready to analyze encounter", "analyzed_at": None},
+                )
+            return {
+                "ok": True,
+                "analysis_preserved": analysis_preserved,
+                "message": "Seeded EHR restored; approvals and audit trail cleared",
+            }
 
     def encounter_payload(self, encounter_id: str = JULIUS_ENCOUNTER_ID) -> dict[str, Any]:
         record = self.repository.get(encounter_id)

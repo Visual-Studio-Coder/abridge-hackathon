@@ -526,11 +526,11 @@ function setupNavigation() {
 }
 
 async function resetDemo() {
-  if (!window.confirm("Restore the seeded EHR and clear the audit trail?")) return;
+  if (!window.confirm("Restore the seeded EHR and clear approvals and the audit trail? Cached analysis will be preserved.")) return;
   const button = $("#reset-demo");
   setBusy(button, true, "Resetting…");
   try {
-    await api("/api/demo/reset", { method: "POST", body: "{}" });
+    const reset = await api("/api/demo/reset", { method: "POST", body: "{}" });
     const [encounter, findings] = await Promise.all([api("/api/encounter"), api("/api/findings")]);
     state.encounter = encounter;
     state.findings = findings.findings;
@@ -543,7 +543,7 @@ async function resetDemo() {
     $("#patient-review").classList.add("hidden");
     $("#queue-view").classList.remove("hidden");
     await renderAudit();
-    toast("Demo restored to the seeded EHR state");
+    toast(reset.analysis_preserved ? "Approvals cleared · cached analysis preserved" : "Demo restored to the seeded EHR state");
   } catch (error) { toast(error.message); }
   finally { setBusy(button, false); }
 }
