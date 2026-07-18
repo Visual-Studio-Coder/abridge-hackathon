@@ -1,0 +1,1062 @@
+{
+ "patient": {
+  "resourceType": "Patient",
+  "id": "a3292ec4-64b6-20fc-480e-39e1f7f51e50",
+  "name": [
+   {
+    "use": "official",
+    "family": "Satterfield",
+    "given": [
+     "Melodee",
+     "Bobette"
+    ],
+    "prefix": [
+     "Ms."
+    ]
+   }
+  ],
+  "gender": "female",
+  "birthDate": "2005-10-22",
+  "maritalStatus": {
+   "coding": [
+    {
+     "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+     "code": "S",
+     "display": "Never Married"
+    }
+   ],
+   "text": "Never Married"
+  },
+  "address": [
+   {
+    "city": "Acton",
+    "state": "MA",
+    "country": "US"
+   }
+  ],
+  "communication": [
+   {
+    "language": {
+     "coding": [
+      {
+       "system": "urn:ietf:bcp:47",
+       "code": "en-US",
+       "display": "English (United States)"
+      }
+     ],
+     "text": "English (United States)"
+    }
+   }
+  ]
+ },
+ "encounter": {
+  "resourceType": "Encounter",
+  "id": "a3292ec4-64b6-20fc-55a4-b753a07a1881",
+  "meta": {
+   "profile": [
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter"
+   ]
+  },
+  "identifier": [
+   {
+    "use": "official",
+    "system": "https://github.com/synthetichealth/synthea",
+    "value": "a3292ec4-64b6-20fc-55a4-b753a07a1881"
+   }
+  ],
+  "status": "finished",
+  "class": {
+   "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+   "code": "AMB"
+  },
+  "type": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "424441002",
+      "display": "Prenatal initial visit (regime/therapy)"
+     }
+    ],
+    "text": "Prenatal initial visit (regime/therapy)"
+   }
+  ],
+  "subject": {
+   "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50",
+   "display": "Ms. Melodee943 Bobette685 Satterfield305"
+  },
+  "participant": [
+   {
+    "type": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+        "code": "PPRF",
+        "display": "primary performer"
+       }
+      ],
+      "text": "primary performer"
+     }
+    ],
+    "period": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "individual": {
+     "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999994798",
+     "display": "Dr. Marcus77 Schamberger479"
+    }
+   }
+  ],
+  "period": {
+   "start": "2026-03-21T17:00:11-07:00",
+   "end": "2026-03-21T17:15:11-07:00"
+  },
+  "reasonCode": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "72892002",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   }
+  ],
+  "location": [
+   {
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    }
+   }
+  ],
+  "serviceProvider": {
+   "reference": "Organization?identifier=https://github.com/synthetichealth/synthea|5fcff9db-16e4-3e56-aa78-abbc16338097",
+   "display": "THE LOWELL GENERAL HOSPITAL"
+  }
+ },
+ "resources": {
+  "Condition": [
+   {
+    "resourceType": "Condition",
+    "id": "a3292ec4-64b6-20fc-950f-c0a63feea063",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis"
+     ]
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "active"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+       "code": "confirmed"
+      }
+     ]
+    },
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "code": "encounter-diagnosis",
+        "display": "Encounter Diagnosis"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "72892002",
+       "display": "Normal pregnancy (finding)"
+      }
+     ],
+     "text": "Normal pregnancy (finding)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "onsetDateTime": "2026-03-21T17:00:11-07:00",
+    "recordedDate": "2026-03-21T17:00:11-07:00"
+   }
+  ],
+  "Procedure": [
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-91a0-592d4241841f",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "252160004",
+       "display": "Standard pregnancy test (procedure)"
+      }
+     ],
+     "text": "Standard pregnancy test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-0486-b7a11a83bc54",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "169230002",
+       "display": "Ultrasound scan for fetal viability (procedure)"
+      }
+     ],
+     "text": "Ultrasound scan for fetal viability (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-330c-e9e276af1a40",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "274804006",
+       "display": "Evaluation of uterine fundal height (procedure)"
+      }
+     ],
+     "text": "Evaluation of uterine fundal height (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-18de-79a8267dea45",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "225158009",
+       "display": "Auscultation of the fetal heart (procedure)"
+      }
+     ],
+     "text": "Auscultation of the fetal heart (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-425a-3cda3ada5d17",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "44608003",
+       "display": "Blood group typing (procedure)"
+      }
+     ],
+     "text": "Blood group typing (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-ae84-d83141609dbb",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104091002",
+       "display": "Hemogram, automated, with red blood cells, white blood cells, hemoglobin, hematocrit, indices, platelet count, and manual white blood cell differential (procedure)"
+      }
+     ],
+     "text": "Hemogram, automated, with red blood cells, white blood cells, hemoglobin, hematocrit, indices, platelet count, and manual white blood cell differential (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-5def-8678874e3947",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "47758006",
+       "display": "Hepatitis B surface antigen measurement (procedure)"
+      }
+     ],
+     "text": "Hepatitis B surface antigen measurement (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-f9cf-4554b6762336",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "31676001",
+       "display": "Human immunodeficiency virus antigen test (procedure)"
+      }
+     ],
+     "text": "Human immunodeficiency virus antigen test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-b739-f4fa1acdb055",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "310861008",
+       "display": "Chlamydia antigen test (procedure)"
+      }
+     ],
+     "text": "Chlamydia antigen test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-efd1-86bde738da18",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "165829005",
+       "display": "Gonorrhea infection titer test (procedure)"
+      }
+     ],
+     "text": "Gonorrhea infection titer test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-9687-bca7cdff255a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "269828009",
+       "display": "Syphilis infectious titer test (procedure)"
+      }
+     ],
+     "text": "Syphilis infectious titer test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-fc7f-6c6e6cadd2d5",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "117010004",
+       "display": "Urine culture (procedure)"
+      }
+     ],
+     "text": "Urine culture (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-b48a-c27d9c8e5cd3",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "90226004",
+       "display": "Cytopathology procedure, preparation of smear, genital source (procedure)"
+      }
+     ],
+     "text": "Cytopathology procedure, preparation of smear, genital source (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-216f-360329d504e7",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "395123002",
+       "display": "Urine screening test for diabetes (procedure)"
+      }
+     ],
+     "text": "Urine screening test for diabetes (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-3988-cd0d62ce25b4",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104375008",
+       "display": "Hepatitis C antibody, confirmatory test (procedure)"
+      }
+     ],
+     "text": "Hepatitis C antibody, confirmatory test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-2806-883bdb127005",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "314098000",
+       "display": "Rubella screening test (procedure)"
+      }
+     ],
+     "text": "Rubella screening test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-f4e3-5fa1cea2ffc2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104326007",
+       "display": "Measurement of Varicella-zoster virus antibody (procedure)"
+      }
+     ],
+     "text": "Measurement of Varicella-zoster virus antibody (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-3442-b6ba806b9c93",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "28163009",
+       "display": "Skin test for tuberculosis, Tine test (procedure)"
+      }
+     ],
+     "text": "Skin test for tuberculosis, Tine test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-dd9f-a3a715415322",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "60218003",
+       "display": "Urinalysis, protein, qualitative (procedure)"
+      }
+     ],
+     "text": "Urinalysis, protein, qualitative (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "a3292ec4-64b6-20fc-a115-660c3e382f5b",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "5880005",
+       "display": "Physical examination procedure (procedure)"
+      }
+     ],
+     "text": "Physical examination procedure (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "performedPeriod": {
+     "start": "2026-03-21T17:00:11-07:00",
+     "end": "2026-03-21T17:15:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|2d8335a7-e37a-3004-9254-6f7de59ab66a",
+     "display": "THE LOWELL GENERAL HOSPITAL"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:a3292ec4-64b6-20fc-950f-c0a63feea063",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   }
+  ],
+  "DiagnosticReport": [
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "b4126493-2f53-e72f-d6f9-1b1d0c2e3627",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-note"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "34117-2",
+        "display": "History and physical note"
+       },
+       {
+        "system": "http://loinc.org",
+        "code": "51847-2",
+        "display": "Evaluation + Plan note"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "34117-2",
+       "display": "History and physical note"
+      },
+      {
+       "system": "http://loinc.org",
+       "code": "51847-2",
+       "display": "Evaluation + Plan note"
+      }
+     ]
+    },
+    "subject": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-480e-39e1f7f51e50"
+    },
+    "encounter": {
+     "reference": "urn:uuid:a3292ec4-64b6-20fc-55a4-b753a07a1881"
+    },
+    "effectiveDateTime": "2026-03-21T17:00:11-07:00",
+    "issued": "2026-03-21T17:00:11.961-07:00",
+    "performer": [
+     {
+      "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999994798",
+      "display": "Dr. Marcus77 Schamberger479"
+     }
+    ],
+    "presentedForm": [
+     {
+      "contentType": "text/plain; charset=utf-8",
+      "data": "CjIwMjYtMDMtMjEKCiMgQ2hpZWYgQ29tcGxhaW50Ck5vIGNvbXBsYWludHMuCgojIEhpc3Rvcnkgb2YgUHJlc2VudCBJbGxuZXNzCk1lbG9kZWU5NDMgaXMgYSAyMCB5ZWFyLW9sZCBub25oaXNwYW5pYyB3aGl0ZSBmZW1hbGUuIFBhdGllbnQgaGFzIGEgaGlzdG9yeSBvZiBnaW5naXZhbCBkaXNlYXNlIChkaXNvcmRlciksIHNldmVyZSBhbnhpZXR5IChwYW5pYykgKGZpbmRpbmcpLCBtZWRpY2F0aW9uIHJldmlldyBkdWUgKHNpdHVhdGlvbiksIGxpbWl0ZWQgc29jaWFsIGNvbnRhY3QgKGZpbmRpbmcpLCBwcmltYXJ5IGRlbnRhbCBjYXJpZXMgKGRpc29yZGVyKSwgZnVsbC10aW1lIGVtcGxveW1lbnQgKGZpbmRpbmcpLCBhY3V0ZSBpbmZlY3RpdmUgY3lzdGl0aXMgKGRpc29yZGVyKSwgZ2luZ2l2aXRpcyAoZGlzb3JkZXIpLgoKIyBTb2NpYWwgSGlzdG9yeQogUGF0aWVudCBoYXMgbmV2ZXIgc21va2VkLgogUGF0aWVudCBpZGVudGlmaWVzIGFzIGhldGVyb3NleHVhbC4KClBhdGllbnQgY29tZXMgZnJvbSBhIGhpZ2ggc29jaW9lY29ub21pYyBiYWNrZ3JvdW5kLgogUGF0aWVudCBpcyBhIGNvbGxlZ2UgZ3JhZHVhdGUuClBhdGllbnQgY3VycmVudGx5IGhhcyBVbml0ZWRIZWFsdGhjYXJlLgoKIyBBbGxlcmdpZXMKTm8gS25vd24gQWxsZXJnaWVzLgoKIyBNZWRpY2F0aW9ucwp7NyAoZXRoaW55bCBlc3RyYWRpb2wgMC4wMzUgbWcgLyBub3JnZXN0aW1hdGUgMC4xOCBtZyBvcmFsIHRhYmxldCkgLyA3IChldGhpbnlsIGVzdHJhZGlvbCAwLjAzNSBtZyAvIG5vcmdlc3RpbWF0ZSAwLjIxNSBtZyBvcmFsIHRhYmxldCkgLyA3IChldGhpbnlsIGVzdHJhZGlvbCAwLjAzNSBtZyAvIG5vcmdlc3RpbWF0ZSAwLjI1IG1nIG9yYWwgdGFibGV0KSAvIDcgKGluZXJ0IGluZ3JlZGllbnRzIDEgbWcgb3JhbCB0YWJsZXQpIH0gcGFjayBbdHJpbmVzc2EgMjggZGF5XTsgY2lwcm9mbG94YWNpbiAyNTAgbWcgb3JhbCB0YWJsZXQ7IHs1IChkaWVub2dlc3QgMiBtZyAvIGVzdHJhZGlvbCB2YWxlcmF0ZSAyIG1nIG9yYWwgdGFibGV0KSAvIDE3IChkaWVub2dlc3QgMyBtZyAvIGVzdHJhZGlvbCB2YWxlcmF0ZSAyIG1nIG9yYWwgdGFibGV0KSAvIDIgKGVzdHJhZGlvbCB2YWxlcmF0ZSAxIG1nIG9yYWwgdGFibGV0KSAvIDIgKGVzdHJhZGlvbCB2YWxlcmF0ZSAzIG1nIG9yYWwgdGFibGV0KSAvIDIgKGluZXJ0IGluZ3JlZGllbnRzIDEgbWcgb3JhbCB0YWJsZXQpIH0gcGFjayBbbmF0YXppYSAyOCBkYXldOyB0cmFtYWRvbCBoeWRyb2NobG9yaWRlIDUwIG1nIG9yYWwgdGFibGV0CgojIEFzc2Vzc21lbnQgYW5kIFBsYW4KUGF0aWVudCBpcyBwcmVzZW50aW5nIHdpdGggbm9ybWFsIHByZWduYW5jeSAoZmluZGluZykuIAoKCiMjIFBsYW4KClRoZSBmb2xsb3dpbmcgcHJvY2VkdXJlcyB3ZXJlIGNvbmR1Y3RlZDoKLSBzdGFuZGFyZCBwcmVnbmFuY3kgdGVzdCAocHJvY2VkdXJlKQotIHVsdHJhc291bmQgc2NhbiBmb3IgZmV0YWwgdmlhYmlsaXR5IChwcm9jZWR1cmUpCi0gZXZhbHVhdGlvbiBvZiB1dGVyaW5lIGZ1bmRhbCBoZWlnaHQgKHByb2NlZHVyZSkKLSBhdXNjdWx0YXRpb24gb2YgdGhlIGZldGFsIGhlYXJ0IChwcm9jZWR1cmUpCi0gYmxvb2QgZ3JvdXAgdHlwaW5nIChwcm9jZWR1cmUpCi0gaGVtb2dyYW0sIGF1dG9tYXRlZCwgd2l0aCByZWQgYmxvb2QgY2VsbHMsIHdoaXRlIGJsb29kIGNlbGxzLCBoZW1vZ2xvYmluLCBoZW1hdG9jcml0LCBpbmRpY2VzLCBwbGF0ZWxldCBjb3VudCwgYW5kIG1hbnVhbCB3aGl0ZSBibG9vZCBjZWxsIGRpZmZlcmVudGlhbCAocHJvY2VkdXJlKQotIGhlcGF0aXRpcyBiIHN1cmZhY2UgYW50aWdlbiBtZWFzdXJlbWVudCAocHJvY2VkdXJlKQotIGh1bWFuIGltbXVub2RlZmljaWVuY3kgdmlydXMgYW50aWdlbiB0ZXN0IChwcm9jZWR1cmUpCi0gY2hsYW15ZGlhIGFudGlnZW4gdGVzdCAocHJvY2VkdXJlKQotIGdvbm9ycmhlYSBpbmZlY3Rpb24gdGl0ZXIgdGVzdCAocHJvY2VkdXJlKQotIHN5cGhpbGlzIGluZmVjdGlvdXMgdGl0ZXIgdGVzdCAocHJvY2VkdXJlKQotIHVyaW5lIGN1bHR1cmUgKHByb2NlZHVyZSkKLSBjeXRvcGF0aG9sb2d5IHByb2NlZHVyZSwgcHJlcGFyYXRpb24gb2Ygc21lYXIsIGdlbml0YWwgc291cmNlIChwcm9jZWR1cmUpCi0gdXJpbmUgc2NyZWVuaW5nIHRlc3QgZm9yIGRpYWJldGVzIChwcm9jZWR1cmUpCi0gaGVwYXRpdGlzIGMgYW50aWJvZHksIGNvbmZpcm1hdG9yeSB0ZXN0IChwcm9jZWR1cmUpCi0gcnViZWxsYSBzY3JlZW5pbmcgdGVzdCAocHJvY2VkdXJlKQotIG1lYXN1cmVtZW50IG9mIHZhcmljZWxsYS16b3N0ZXIgdmlydXMgYW50aWJvZHkgKHByb2NlZHVyZSkKLSBza2luIHRlc3QgZm9yIHR1YmVyY3Vsb3NpcywgdGluZSB0ZXN0IChwcm9jZWR1cmUpCi0gdXJpbmFseXNpcywgcHJvdGVpbiwgcXVhbGl0YXRpdmUgKHByb2NlZHVyZSkKLSBwaHlzaWNhbCBleGFtaW5hdGlvbiBwcm9jZWR1cmUgKHByb2NlZHVyZSkKVGhlIHBhdGllbnQgd2FzIHBsYWNlZCBvbiBhIGNhcmVwbGFuOgotIHJvdXRpbmUgYW50ZW5hdGFsIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQo="
+     }
+    ]
+   }
+  ]
+ }
+}

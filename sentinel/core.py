@@ -87,11 +87,11 @@ class Paths:
 
     @property
     def seeded_ehr_dir(self) -> Path:
-        return self.root / "partner-provided-docs" / "seeded-stuff" / "seeded-ehr"
+        return self.root / "eval" / "seeded-ehr"
 
     @property
     def seeding_manifest(self) -> Path:
-        return self.root / "partner-provided-docs" / "seeded-stuff" / "seeding-manifest.json"
+        return self.root / "eval" / "seeding-manifest.json"
 
 
 def _read_json(path: Path) -> Any:
@@ -261,6 +261,11 @@ def _normalized(value: str) -> str:
     return re.sub(r"\s+", " ", value.strip().lower())
 
 
+def _display_name(value: str) -> str:
+    """Remove Synthea's numeric name suffixes from clinician-facing labels."""
+    return re.sub(r"\s+", " ", re.sub(r"\d+", "", value)).strip()
+
+
 def _verify_quote(transcript: str, quote: str) -> tuple[int, int]:
     start = transcript.lower().find(quote.lower())
     if start < 0:
@@ -341,7 +346,7 @@ class SentinelService:
             "id": record["id"],
             "patient": {
                 "id": patient["id"],
-                "name": " ".join(name.get("given", []) + [name.get("family", "")]).strip(),
+                "name": _display_name(" ".join(name.get("given", []) + [name.get("family", "")]).strip()),
                 "initials": initials,
                 "birth_date": patient.get("birthDate"),
                 "gender": patient.get("gender"),
@@ -353,7 +358,7 @@ class SentinelService:
                 ),
             },
             "metadata": record["metadata"],
-            "practitioner": record["encounter_fhir"]["encounter"]["participant"][0]["individual"].get("display"),
+            "practitioner": _display_name(record["encounter_fhir"]["encounter"]["participant"][0]["individual"].get("display", "")),
             "transcript": record["transcript"],
             "note": record["note"],
             "after_visit_summary": record["after_visit_summary"],
@@ -388,7 +393,7 @@ class SentinelService:
                 summary = cached.get("summary") if cached else None
             rows.append({
                 "id": encounter_id,
-                "name": " ".join(name.get("given", []) + [name.get("family", "")]).strip(),
+                "name": _display_name(" ".join(name.get("given", []) + [name.get("family", "")]).strip()),
                 "initials": "".join(part[0] for part in [*(name.get("given") or [""])[:1], name.get("family", "")] if part)[:2].upper(),
                 "visit_title": record["metadata"]["visit_title"],
                 "date": record["metadata"]["date"],
@@ -781,6 +786,8 @@ Transcript:\n{record['transcript']}"""
                 rule = f"Medication exists, but expected dose {expected} does not match EHR"
             if finding_id == "med-lisinopril" and classification != "OK":
                 corrected = copy.deepcopy(resource) if resource else {"resourceType": "MedicationRequest"}
+                if corrected.get("requester", {}).get("display"):
+                    corrected["requester"]["display"] = _display_name(corrected["requester"]["display"])
                 corrected.setdefault("medicationCodeableConcept", {})["coding"] = [{
                     "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
                     "code": "314076",

@@ -1,0 +1,3092 @@
+{
+ "patient": {
+  "resourceType": "Patient",
+  "id": "966e9818-9cf6-8d71-74bc-36aef6643618",
+  "name": [
+   {
+    "use": "official",
+    "family": "Gutkowski",
+    "given": [
+     "Delana",
+     "Jamie"
+    ],
+    "prefix": [
+     "Ms."
+    ]
+   }
+  ],
+  "gender": "female",
+  "birthDate": "2003-03-21",
+  "maritalStatus": {
+   "coding": [
+    {
+     "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+     "code": "S",
+     "display": "Never Married"
+    }
+   ],
+   "text": "Never Married"
+  },
+  "address": [
+   {
+    "city": "Boston",
+    "state": "MA",
+    "country": "US"
+   }
+  ],
+  "communication": [
+   {
+    "language": {
+     "coding": [
+      {
+       "system": "urn:ietf:bcp:47",
+       "code": "en-US",
+       "display": "English (United States)"
+      }
+     ],
+     "text": "English (United States)"
+    }
+   }
+  ]
+ },
+ "encounter": {
+  "resourceType": "Encounter",
+  "id": "966e9818-9cf6-8d71-3eff-a424a6faa0d3",
+  "meta": {
+   "profile": [
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter"
+   ]
+  },
+  "identifier": [
+   {
+    "use": "official",
+    "system": "https://github.com/synthetichealth/synthea",
+    "value": "966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+   }
+  ],
+  "status": "finished",
+  "class": {
+   "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+   "code": "AMB"
+  },
+  "type": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "162673000",
+      "display": "General examination of patient (procedure)"
+     }
+    ],
+    "text": "General examination of patient (procedure)"
+   }
+  ],
+  "subject": {
+   "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618",
+   "display": "Ms. Delana41 Jamie386 Gutkowski940"
+  },
+  "participant": [
+   {
+    "type": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+        "code": "PPRF",
+        "display": "primary performer"
+       }
+      ],
+      "text": "primary performer"
+     }
+    ],
+    "period": {
+     "start": "2025-05-23T09:36:27-07:00",
+     "end": "2025-05-23T10:28:29-07:00"
+    },
+    "individual": {
+     "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999943191",
+     "display": "Dr. Clora637 Pagac496"
+    }
+   }
+  ],
+  "period": {
+   "start": "2025-05-23T09:36:27-07:00",
+   "end": "2025-05-23T10:28:29-07:00"
+  },
+  "location": [
+   {
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   }
+  ],
+  "serviceProvider": {
+   "reference": "Organization?identifier=https://github.com/synthetichealth/synthea|0a689d33-2b0d-3942-8de8-e28812e91c69",
+   "display": "MEASURED WELLNESS LLC"
+  }
+ },
+ "resources": {
+  "Condition": [
+   {
+    "resourceType": "Condition",
+    "id": "966e9818-9cf6-8d71-21ad-bbe8336014d6",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis"
+     ]
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "active"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+       "code": "confirmed"
+      }
+     ]
+    },
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "code": "encounter-diagnosis",
+        "display": "Encounter Diagnosis"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "162864005",
+       "display": "Body mass index 30+ - obesity (finding)"
+      }
+     ],
+     "text": "Body mass index 30+ - obesity (finding)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "onsetDateTime": "2025-05-23T09:36:27-07:00",
+    "recordedDate": "2025-05-23T09:36:27-07:00"
+   },
+   {
+    "resourceType": "Condition",
+    "id": "966e9818-9cf6-8d71-55c7-a7b33b19759d",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis"
+     ]
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "resolved"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+       "code": "confirmed"
+      }
+     ]
+    },
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "code": "encounter-diagnosis",
+        "display": "Encounter Diagnosis"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "160904001",
+       "display": "Part-time employment (finding)"
+      }
+     ],
+     "text": "Part-time employment (finding)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "onsetDateTime": "2025-05-23T10:28:29-07:00",
+    "abatementDateTime": "2025-07-11T10:22:44-07:00",
+    "recordedDate": "2025-05-23T10:28:29-07:00"
+   },
+   {
+    "resourceType": "Condition",
+    "id": "966e9818-9cf6-8d71-6cb1-39d40039d901",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis"
+     ]
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "active"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+       "code": "confirmed"
+      }
+     ]
+    },
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "code": "encounter-diagnosis",
+        "display": "Encounter Diagnosis"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "422650009",
+       "display": "Social isolation (finding)"
+      }
+     ],
+     "text": "Social isolation (finding)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "onsetDateTime": "2025-05-23T10:28:29-07:00",
+    "recordedDate": "2025-05-23T10:28:29-07:00"
+   },
+   {
+    "resourceType": "Condition",
+    "id": "966e9818-9cf6-8d71-013a-a164ddbb0102",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis"
+     ]
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "resolved"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+       "code": "confirmed"
+      }
+     ]
+    },
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "code": "encounter-diagnosis",
+        "display": "Encounter Diagnosis"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "66383009",
+       "display": "Gingivitis (disorder)"
+      }
+     ],
+     "text": "Gingivitis (disorder)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "onsetDateTime": "2025-05-23T12:37:48-07:00",
+    "abatementDateTime": "2025-06-06T12:36:55-07:00",
+    "recordedDate": "2025-05-23T12:37:48-07:00"
+   }
+  ],
+  "Observation": [
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-f8ac-2ea2401464bf",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "4548-4",
+       "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+      }
+     ],
+     "text": "Hemoglobin A1c/Hemoglobin.total in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 6.24,
+     "unit": "%",
+     "system": "http://unitsofmeasure.org",
+     "code": "%"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-8322-0722982aa72d",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-height"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "vital-signs",
+        "display": "Vital signs"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "8302-2",
+       "display": "Body Height"
+      }
+     ],
+     "text": "Body Height"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 173.4,
+     "unit": "cm",
+     "system": "http://unitsofmeasure.org",
+     "code": "cm"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-754a-aeec35f385c3",
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "vital-signs",
+        "display": "Vital signs"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "72514-3",
+       "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+      }
+     ],
+     "text": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 1,
+     "unit": "{score}",
+     "system": "http://unitsofmeasure.org",
+     "code": "{score}"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-8d9c-c5812cbfc5b4",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-weight"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "vital-signs",
+        "display": "Vital signs"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "29463-7",
+       "display": "Body Weight"
+      }
+     ],
+     "text": "Body Weight"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 94.4,
+     "unit": "kg",
+     "system": "http://unitsofmeasure.org",
+     "code": "kg"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-d208-160fef5362b6",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-bmi"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "vital-signs",
+        "display": "Vital signs"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "39156-5",
+       "display": "Body mass index (BMI) [Ratio]"
+      }
+     ],
+     "text": "Body mass index (BMI) [Ratio]"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 31.4,
+     "unit": "kg/m2",
+     "system": "http://unitsofmeasure.org",
+     "code": "kg/m2"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-e7c9-c015016f56bd",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "vital-signs",
+        "display": "Vital signs"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "85354-9",
+       "display": "Blood pressure panel with all children optional"
+      }
+     ],
+     "text": "Blood pressure panel with all children optional"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "component": [
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "8462-4",
+         "display": "Diastolic Blood Pressure"
+        }
+       ],
+       "text": "Diastolic Blood Pressure"
+      },
+      "valueQuantity": {
+       "value": 62,
+       "unit": "mm[Hg]",
+       "system": "http://unitsofmeasure.org",
+       "code": "mm[Hg]"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "8480-6",
+         "display": "Systolic Blood Pressure"
+        }
+       ],
+       "text": "Systolic Blood Pressure"
+      },
+      "valueQuantity": {
+       "value": 121,
+       "unit": "mm[Hg]",
+       "system": "http://unitsofmeasure.org",
+       "code": "mm[Hg]"
+      }
+     }
+    ]
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-96e6-00e0c1bdbad8",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "vital-signs",
+        "display": "Vital signs"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "8867-4",
+       "display": "Heart rate"
+      }
+     ],
+     "text": "Heart rate"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 90,
+     "unit": "/min",
+     "system": "http://unitsofmeasure.org",
+     "code": "/min"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-5b44-f6202a586387",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-respiratory-rate"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "vital-signs",
+        "display": "Vital signs"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "9279-1",
+       "display": "Respiratory rate"
+      }
+     ],
+     "text": "Respiratory rate"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 15,
+     "unit": "/min",
+     "system": "http://unitsofmeasure.org",
+     "code": "/min"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-3499-691cbb140898",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2339-0",
+       "display": "Glucose [Mass/volume] in Blood"
+      }
+     ],
+     "text": "Glucose [Mass/volume] in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 99.36,
+     "unit": "mg/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "mg/dL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-ca0b-55f8bdf32de7",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "6299-2",
+       "display": "Urea nitrogen [Mass/volume] in Blood"
+      }
+     ],
+     "text": "Urea nitrogen [Mass/volume] in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 9.33,
+     "unit": "mg/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "mg/dL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-e7ef-56376debc882",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "38483-4",
+       "display": "Creatinine [Mass/volume] in Blood"
+      }
+     ],
+     "text": "Creatinine [Mass/volume] in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 1.32,
+     "unit": "mg/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "mg/dL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-44dc-f79f7ec289fd",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "49765-1",
+       "display": "Calcium [Mass/volume] in Blood"
+      }
+     ],
+     "text": "Calcium [Mass/volume] in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 9.05,
+     "unit": "mg/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "mg/dL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-c602-1983340c5826",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2947-0",
+       "display": "Sodium [Moles/volume] in Blood"
+      }
+     ],
+     "text": "Sodium [Moles/volume] in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 138.94,
+     "unit": "mmol/L",
+     "system": "http://unitsofmeasure.org",
+     "code": "mmol/L"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-d2b5-05cdc6811bd7",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "6298-4",
+       "display": "Potassium [Moles/volume] in Blood"
+      }
+     ],
+     "text": "Potassium [Moles/volume] in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 3.89,
+     "unit": "mmol/L",
+     "system": "http://unitsofmeasure.org",
+     "code": "mmol/L"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-7877-162f6af31348",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2069-3",
+       "display": "Chloride [Moles/volume] in Blood"
+      }
+     ],
+     "text": "Chloride [Moles/volume] in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 103.36,
+     "unit": "mmol/L",
+     "system": "http://unitsofmeasure.org",
+     "code": "mmol/L"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-d5fa-7024a2c2a158",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "20565-8",
+       "display": "Carbon dioxide, total [Moles/volume] in Blood"
+      }
+     ],
+     "text": "Carbon dioxide, total [Moles/volume] in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 22.65,
+     "unit": "mmol/L",
+     "system": "http://unitsofmeasure.org",
+     "code": "mmol/L"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-3595-fd5a9db3ac16",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "6690-2",
+       "display": "Leukocytes [#/volume] in Blood by Automated count"
+      }
+     ],
+     "text": "Leukocytes [#/volume] in Blood by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 7.1076,
+     "unit": "10*3/uL",
+     "system": "http://unitsofmeasure.org",
+     "code": "10*3/uL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-161d-a9026d28722d",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "789-8",
+       "display": "Erythrocytes [#/volume] in Blood by Automated count"
+      }
+     ],
+     "text": "Erythrocytes [#/volume] in Blood by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 5.1279,
+     "unit": "10*6/uL",
+     "system": "http://unitsofmeasure.org",
+     "code": "10*6/uL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-20f1-a21f75c6f6bc",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "718-7",
+       "display": "Hemoglobin [Mass/volume] in Blood"
+      }
+     ],
+     "text": "Hemoglobin [Mass/volume] in Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 12.656,
+     "unit": "g/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "g/dL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-fb5a-4404f438b4e2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "4544-3",
+       "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+      }
+     ],
+     "text": "Hematocrit [Volume Fraction] of Blood by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 45.636,
+     "unit": "%",
+     "system": "http://unitsofmeasure.org",
+     "code": "%"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-d4c8-d6665d2d463b",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "787-2",
+       "display": "MCV [Entitic mean volume] in Red Blood Cells by Automated count"
+      }
+     ],
+     "text": "MCV [Entitic mean volume] in Red Blood Cells by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 91.153,
+     "unit": "fL",
+     "system": "http://unitsofmeasure.org",
+     "code": "fL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-5769-0b186afb074e",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "785-6",
+       "display": "MCH [Entitic mass] by Automated count"
+      }
+     ],
+     "text": "MCH [Entitic mass] by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 27.071,
+     "unit": "pg",
+     "system": "http://unitsofmeasure.org",
+     "code": "pg"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-5926-141ad2410f4a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "786-4",
+       "display": "MCHC [Entitic Mass/volume] in Red Blood Cells by Automated count"
+      }
+     ],
+     "text": "MCHC [Entitic Mass/volume] in Red Blood Cells by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 33.642,
+     "unit": "g/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "g/dL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-24dc-95da9a846ef2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "788-0",
+       "display": "Erythrocyte [DistWidth] in Blood by Automated count"
+      }
+     ],
+     "text": "Erythrocyte [DistWidth] in Blood by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 44.838,
+     "unit": "fL",
+     "system": "http://unitsofmeasure.org",
+     "code": "fL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-1f42-f9b098edead4",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "777-3",
+       "display": "Platelets [#/volume] in Blood by Automated count"
+      }
+     ],
+     "text": "Platelets [#/volume] in Blood by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 382.17,
+     "unit": "10*3/uL",
+     "system": "http://unitsofmeasure.org",
+     "code": "10*3/uL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-7ba5-e4af2beca4c0",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "32207-3",
+       "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+      }
+     ],
+     "text": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 15.584,
+     "unit": "fL",
+     "system": "http://unitsofmeasure.org",
+     "code": "fL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-b22e-d69c19d56878",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "32623-1",
+       "display": "Platelet [Entitic mean volume] in Blood by Automated count"
+      }
+     ],
+     "text": "Platelet [Entitic mean volume] in Blood by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueQuantity": {
+     "value": 10.848,
+     "unit": "fL",
+     "system": "http://unitsofmeasure.org",
+     "code": "fL"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-c047-353d51dd8fa4",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-smokingstatus",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-simple-observation"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "social-history",
+        "display": "Social history"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "72166-2",
+       "display": "Tobacco smoking status"
+      }
+     ],
+     "text": "Tobacco smoking status"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "valueCodeableConcept": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "266919005",
+       "display": "Never smoked tobacco (finding)"
+      }
+     ],
+     "text": "Never smoked tobacco (finding)"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-4a60-f02c6591edbc",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-screening-assessment",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-screening-assessment"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "survey",
+        "display": "Survey"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "93025-5",
+       "display": "Protocol for Responding to and Assessing Patients' Assets, Risks, and Experiences [PRAPARE]"
+      }
+     ],
+     "text": "Protocol for Responding to and Assessing Patients' Assets, Risks, and Experiences [PRAPARE]"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T10:28:29-07:00",
+    "issued": "2025-05-23T10:28:29.955-07:00",
+    "component": [
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "76501-6",
+         "display": "Within the last year, have you been afraid of your partner or ex-partner"
+        }
+       ],
+       "text": "Within the last year, have you been afraid of your partner or ex-partner"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA32-8",
+         "display": "No"
+        }
+       ],
+       "text": "No"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93026-3",
+         "display": "Do you feel physically and emotionally safe where you currently live [PRAPARE]"
+        }
+       ],
+       "text": "Do you feel physically and emotionally safe where you currently live [PRAPARE]"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA33-6",
+         "display": "Yes"
+        }
+       ],
+       "text": "Yes"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93027-1",
+         "display": "Are you a refugee"
+        }
+       ],
+       "text": "Are you a refugee"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA32-8",
+         "display": "No"
+        }
+       ],
+       "text": "No"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93028-9",
+         "display": "Have you spent more than 2 nights in a row in a jail, prison, detention center, or juvenile correctional facility in past 1 year [PRAPARE]"
+        }
+       ],
+       "text": "Have you spent more than 2 nights in a row in a jail, prison, detention center, or juvenile correctional facility in past 1 year [PRAPARE]"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA32-8",
+         "display": "No"
+        }
+       ],
+       "text": "No"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93038-8",
+         "display": "Stress level"
+        }
+       ],
+       "text": "Stress level"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA6568-5",
+         "display": "Not at all"
+        }
+       ],
+       "text": "Not at all"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93029-7",
+         "display": "How often do you see or talk to people that you care about and feel close to [PRAPARE]"
+        }
+       ],
+       "text": "How often do you see or talk to people that you care about and feel close to [PRAPARE]"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA27722-0",
+         "display": "Less than once a week"
+        }
+       ],
+       "text": "Less than once a week"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93030-5",
+         "display": "Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living"
+        }
+       ],
+       "text": "Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA32-8",
+         "display": "No"
+        }
+       ],
+       "text": "No"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93031-3",
+         "display": "Have you or any family members you live with been unable to get any of the following when it was really needed in past 1 year [PRAPARE]"
+        }
+       ],
+       "text": "Have you or any family members you live with been unable to get any of the following when it was really needed in past 1 year [PRAPARE]"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA30122-8",
+         "display": "I choose not to answer this question"
+        }
+       ],
+       "text": "I choose not to answer this question"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "63586-2",
+         "display": "What was your best estimate of the total income of all family members from all sources, before taxes, in last year [PhenX]"
+        }
+       ],
+       "text": "What was your best estimate of the total income of all family members from all sources, before taxes, in last year [PhenX]"
+      },
+      "valueQuantity": {
+       "value": 18297,
+       "unit": "/a",
+       "system": "http://unitsofmeasure.org",
+       "code": "/a"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "76437-3",
+         "display": "Primary insurance"
+        }
+       ],
+       "text": "Primary insurance"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA17849-3",
+         "display": "Medicaid"
+        }
+       ],
+       "text": "Medicaid"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "67875-5",
+         "display": "Employment status - current"
+        }
+       ],
+       "text": "Employment status - current"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA30138-4",
+         "display": "Part-time or temporary work"
+        }
+       ],
+       "text": "Part-time or temporary work"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "82589-3",
+         "display": "Highest level of education"
+        }
+       ],
+       "text": "Highest level of education"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA30193-9",
+         "display": "More than high school"
+        }
+       ],
+       "text": "More than high school"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "56799-0",
+         "display": "Address"
+        }
+       ],
+       "text": "Address"
+      },
+      "valueString": "973 Konopelski Row Unit 6"
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93033-9",
+         "display": "Are you worried about losing your housing [PRAPARE]"
+        }
+       ],
+       "text": "Are you worried about losing your housing [PRAPARE]"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA32-8",
+         "display": "No"
+        }
+       ],
+       "text": "No"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "71802-3",
+         "display": "Housing status"
+        }
+       ],
+       "text": "Housing status"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA30189-7",
+         "display": "I have housing"
+        }
+       ],
+       "text": "I have housing"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "63512-8",
+         "display": "How many people are living or staying at this address [#]"
+        }
+       ],
+       "text": "How many people are living or staying at this address [#]"
+      },
+      "valueQuantity": {
+       "value": 6,
+       "unit": "{#}",
+       "system": "http://unitsofmeasure.org",
+       "code": "{#}"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "54899-0",
+         "display": "Preferred language"
+        }
+       ],
+       "text": "Preferred language"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA43-5",
+         "display": "English"
+        }
+       ],
+       "text": "English"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93034-7",
+         "display": "Discharged from the U.S. Armed Forces"
+        }
+       ],
+       "text": "Discharged from the U.S. Armed Forces"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA32-8",
+         "display": "No"
+        }
+       ],
+       "text": "No"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "93035-4",
+         "display": "Has season or migrant farm work been your or your family's main source of income at any point in past 2 years [PRAPARE]"
+        }
+       ],
+       "text": "Has season or migrant farm work been your or your family's main source of income at any point in past 2 years [PRAPARE]"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA32-8",
+         "display": "No"
+        }
+       ],
+       "text": "No"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "32624-9",
+         "display": "Race"
+        }
+       ],
+       "text": "Race"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA14042-8",
+         "display": "Black/African American"
+        }
+       ],
+       "text": "Black/African American"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "56051-6",
+         "display": "Hispanic or Latino"
+        }
+       ],
+       "text": "Hispanic or Latino"
+      },
+      "valueCodeableConcept": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "LA32-8",
+         "display": "No"
+        }
+       ],
+       "text": "No"
+      }
+     }
+    ]
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-9007-f82dba607eaa",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-screening-assessment"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "survey",
+        "display": "Survey"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "70274-6",
+       "display": "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]"
+      }
+     ],
+     "text": "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T10:51:30-07:00",
+    "issued": "2025-05-23T10:51:30.955-07:00",
+    "valueQuantity": {
+     "value": 1,
+     "unit": "{score}",
+     "system": "http://unitsofmeasure.org",
+     "code": "{score}"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-05e6-c5759f06cc05",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-screening-assessment",
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-screening-assessment"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "survey",
+        "display": "Survey"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "76504-0",
+       "display": "Total score [HARK]"
+      }
+     ],
+     "text": "Total score [HARK]"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T11:21:41-07:00",
+    "issued": "2025-05-23T11:21:41.955-07:00",
+    "valueQuantity": {
+     "value": 0,
+     "unit": "{score}",
+     "system": "http://unitsofmeasure.org",
+     "code": "{score}"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-0fd7-168c0f303535",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-screening-assessment"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "survey",
+        "display": "Survey"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "55758-7",
+       "display": "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]"
+      }
+     ],
+     "text": "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T11:57:38-07:00",
+    "issued": "2025-05-23T11:57:38.955-07:00",
+    "valueQuantity": {
+     "value": 0,
+     "unit": "{score}",
+     "system": "http://unitsofmeasure.org",
+     "code": "{score}"
+    }
+   },
+   {
+    "resourceType": "Observation",
+    "id": "966e9818-9cf6-8d71-e8bf-2f5557c3f4d2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-screening-assessment"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "survey",
+        "display": "Survey"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "75626-2",
+       "display": "Total score [AUDIT-C]"
+      }
+     ],
+     "text": "Total score [AUDIT-C]"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T12:37:48-07:00",
+    "issued": "2025-05-23T12:37:48.955-07:00",
+    "valueQuantity": {
+     "value": 1,
+     "unit": "{score}",
+     "system": "http://unitsofmeasure.org",
+     "code": "{score}"
+    }
+   }
+  ],
+  "Procedure": [
+   {
+    "resourceType": "Procedure",
+    "id": "966e9818-9cf6-8d71-5b2b-6ea694443e4b",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "430193006",
+       "display": "Medication reconciliation (procedure)"
+      }
+     ],
+     "text": "Medication reconciliation (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "performedPeriod": {
+     "start": "2025-05-23T09:36:27-07:00",
+     "end": "2025-05-23T09:51:27-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "966e9818-9cf6-8d71-54e2-a56640887ef3",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "710824005",
+       "display": "Assessment of health and social care needs (procedure)"
+      }
+     ],
+     "text": "Assessment of health and social care needs (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "performedPeriod": {
+     "start": "2025-05-23T09:36:27-07:00",
+     "end": "2025-05-23T10:28:29-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "966e9818-9cf6-8d71-b54b-0ee779a7e890",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "710841007",
+       "display": "Assessment of anxiety (procedure)"
+      }
+     ],
+     "text": "Assessment of anxiety (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "performedPeriod": {
+     "start": "2025-05-23T10:28:29-07:00",
+     "end": "2025-05-23T10:51:30-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "966e9818-9cf6-8d71-bb58-11ce89fb4262",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "866148006",
+       "display": "Screening for domestic abuse (procedure)"
+      }
+     ],
+     "text": "Screening for domestic abuse (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "performedPeriod": {
+     "start": "2025-05-23T10:51:30-07:00",
+     "end": "2025-05-23T11:21:41-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "966e9818-9cf6-8d71-f203-7d75a645de24",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "171207006",
+       "display": "Depression screening (procedure)"
+      }
+     ],
+     "text": "Depression screening (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "performedPeriod": {
+     "start": "2025-05-23T11:21:41-07:00",
+     "end": "2025-05-23T11:32:11-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "966e9818-9cf6-8d71-4611-3666eaca748f",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "171207006",
+       "display": "Depression screening (procedure)"
+      }
+     ],
+     "text": "Depression screening (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "performedPeriod": {
+     "start": "2025-05-23T11:32:11-07:00",
+     "end": "2025-05-23T11:57:38-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "966e9818-9cf6-8d71-3280-c15fe319aeb5",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "428211000124100",
+       "display": "Assessment of substance use (procedure)"
+      }
+     ],
+     "text": "Assessment of substance use (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "performedPeriod": {
+     "start": "2025-05-23T11:57:38-07:00",
+     "end": "2025-05-23T12:12:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "966e9818-9cf6-8d71-f4f8-745d2975ac16",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "763302001",
+       "display": "Assessment using Alcohol Use Disorders Identification Test - Consumption (procedure)"
+      }
+     ],
+     "text": "Assessment using Alcohol Use Disorders Identification Test - Consumption (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "performedPeriod": {
+     "start": "2025-05-23T12:12:17-07:00",
+     "end": "2025-05-23T12:37:48-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "966e9818-9cf6-8d71-9708-8225b8272b0b",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "103697008",
+       "display": "Patient referral for dental care (procedure)"
+      }
+     ],
+     "text": "Patient referral for dental care (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "performedPeriod": {
+     "start": "2025-05-23T12:37:48-07:00",
+     "end": "2025-05-23T12:42:48-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-76f7-dc8b81d2e921",
+      "display": "Gingivitis (disorder)"
+     }
+    ]
+   }
+  ],
+  "DiagnosticReport": [
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "966e9818-9cf6-8d71-47b0-46b4502342a1",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+        "code": "LAB",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "51990-0",
+       "display": "Basic metabolic panel - Blood"
+      }
+     ],
+     "text": "Basic metabolic panel - Blood"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "performer": [
+     {
+      "reference": "Organization?identifier=https://github.com/synthetichealth/synthea|0a689d33-2b0d-3942-8de8-e28812e91c69",
+      "display": "MEASURED WELLNESS LLC"
+     }
+    ],
+    "result": [
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-3499-691cbb140898",
+      "display": "Glucose [Mass/volume] in Blood"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-ca0b-55f8bdf32de7",
+      "display": "Urea nitrogen [Mass/volume] in Blood"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-e7ef-56376debc882",
+      "display": "Creatinine [Mass/volume] in Blood"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-44dc-f79f7ec289fd",
+      "display": "Calcium [Mass/volume] in Blood"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-c602-1983340c5826",
+      "display": "Sodium [Moles/volume] in Blood"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-d2b5-05cdc6811bd7",
+      "display": "Potassium [Moles/volume] in Blood"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-7877-162f6af31348",
+      "display": "Chloride [Moles/volume] in Blood"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-d5fa-7024a2c2a158",
+      "display": "Carbon dioxide, total [Moles/volume] in Blood"
+     }
+    ]
+   },
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "966e9818-9cf6-8d71-c356-c4939277edbd",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-lab"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+        "code": "LAB",
+        "display": "Laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "58410-2",
+       "display": "CBC panel - Blood by Automated count"
+      }
+     ],
+     "text": "CBC panel - Blood by Automated count"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "performer": [
+     {
+      "reference": "Organization?identifier=https://github.com/synthetichealth/synthea|0a689d33-2b0d-3942-8de8-e28812e91c69",
+      "display": "MEASURED WELLNESS LLC"
+     }
+    ],
+    "result": [
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-3595-fd5a9db3ac16",
+      "display": "Leukocytes [#/volume] in Blood by Automated count"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-161d-a9026d28722d",
+      "display": "Erythrocytes [#/volume] in Blood by Automated count"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-20f1-a21f75c6f6bc",
+      "display": "Hemoglobin [Mass/volume] in Blood"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-fb5a-4404f438b4e2",
+      "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-d4c8-d6665d2d463b",
+      "display": "MCV [Entitic mean volume] in Red Blood Cells by Automated count"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-5769-0b186afb074e",
+      "display": "MCH [Entitic mass] by Automated count"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-5926-141ad2410f4a",
+      "display": "MCHC [Entitic Mass/volume] in Red Blood Cells by Automated count"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-24dc-95da9a846ef2",
+      "display": "Erythrocyte [DistWidth] in Blood by Automated count"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-1f42-f9b098edead4",
+      "display": "Platelets [#/volume] in Blood by Automated count"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-7ba5-e4af2beca4c0",
+      "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+     },
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-b22e-d69c19d56878",
+      "display": "Platelet [Entitic mean volume] in Blood by Automated count"
+     }
+    ]
+   },
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "966e9818-9cf6-8d71-b4a6-0015b2b0b35a",
+    "status": "final",
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "69737-5",
+       "display": "Generalized anxiety disorder 7 item (GAD-7)"
+      }
+     ],
+     "text": "Generalized anxiety disorder 7 item (GAD-7)"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T10:51:30-07:00",
+    "issued": "2025-05-23T10:51:30.955-07:00",
+    "result": [
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-9007-f82dba607eaa",
+      "display": "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]"
+     }
+    ]
+   },
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "966e9818-9cf6-8d71-6a3c-cc9ae5fa9f85",
+    "status": "final",
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "76499-3",
+       "display": "Humiliation, Afraid, Rape, and Kick questionnaire [HARK]"
+      }
+     ],
+     "text": "Humiliation, Afraid, Rape, and Kick questionnaire [HARK]"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T11:21:41-07:00",
+    "issued": "2025-05-23T11:21:41.955-07:00",
+    "result": [
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-05e6-c5759f06cc05",
+      "display": "Total score [HARK]"
+     }
+    ]
+   },
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "966e9818-9cf6-8d71-fe49-90c10eba04c4",
+    "status": "final",
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "55757-9",
+       "display": "Patient Health Questionnaire 2 item (PHQ-2) [Reported]"
+      }
+     ],
+     "text": "Patient Health Questionnaire 2 item (PHQ-2) [Reported]"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T11:57:38-07:00",
+    "issued": "2025-05-23T11:57:38.955-07:00",
+    "result": [
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-0fd7-168c0f303535",
+      "display": "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]"
+     }
+    ]
+   },
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "966e9818-9cf6-8d71-d54e-635d8c67130f",
+    "status": "final",
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "72109-2",
+       "display": "Alcohol Use Disorder Identification Test - Consumption [AUDIT-C]"
+      }
+     ],
+     "text": "Alcohol Use Disorder Identification Test - Consumption [AUDIT-C]"
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T12:37:48-07:00",
+    "issued": "2025-05-23T12:37:48.955-07:00",
+    "result": [
+     {
+      "reference": "urn:uuid:966e9818-9cf6-8d71-e8bf-2f5557c3f4d2",
+      "display": "Total score [AUDIT-C]"
+     }
+    ]
+   },
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "7e0edb64-d986-2390-c9a3-56b164c55ea8",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-note"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "34117-2",
+        "display": "History and physical note"
+       },
+       {
+        "system": "http://loinc.org",
+        "code": "51847-2",
+        "display": "Evaluation + Plan note"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "34117-2",
+       "display": "History and physical note"
+      },
+      {
+       "system": "http://loinc.org",
+       "code": "51847-2",
+       "display": "Evaluation + Plan note"
+      }
+     ]
+    },
+    "subject": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "effectiveDateTime": "2025-05-23T09:36:27-07:00",
+    "issued": "2025-05-23T09:36:27.955-07:00",
+    "performer": [
+     {
+      "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999943191",
+      "display": "Dr. Clora637 Pagac496"
+     }
+    ],
+    "presentedForm": [
+     {
+      "contentType": "text/plain; charset=utf-8",
+      "data": "CjIwMjUtMDUtMjMKCiMgQ2hpZWYgQ29tcGxhaW50Ck5vIGNvbXBsYWludHMuCgojIEhpc3Rvcnkgb2YgUHJlc2VudCBJbGxuZXNzCkRlbGFuYTQxIGlzIGEgMjIgeWVhci1vbGQgbm9uaGlzcGFuaWMgYmxhY2sgZmVtYWxlLiBQYXRpZW50IGhhcyBhIGhpc3Rvcnkgb2YgZ2luZ2l2YWwgZGlzZWFzZSAoZGlzb3JkZXIpLCBzdHJlcHRvY29jY2FsIHNvcmUgdGhyb2F0IChkaXNvcmRlciksIG1lZGljYXRpb24gcmV2aWV3IGR1ZSAoc2l0dWF0aW9uKSwgdmlyYWwgc2ludXNpdGlzIChkaXNvcmRlciksIHZpY3RpbSBvZiBpbnRpbWF0ZSBwYXJ0bmVyIGFidXNlIChmaW5kaW5nKSwgYWN1dGUgYnJvbmNoaXRpcyAoZGlzb3JkZXIpLCByaXNrIGFjdGl2aXR5IGludm9sdmVtZW50IChmaW5kaW5nKSwgY2hpbGRob29kIGFzdGhtYSAoZGlzb3JkZXIpLCBwZXJlbm5pYWwgYWxsZXJnaWMgcmhpbml0aXMgd2l0aCBzZWFzb25hbCB2YXJpYXRpb24gKGRpc29yZGVyKSwgZnVsbC10aW1lIGVtcGxveW1lbnQgKGZpbmRpbmcpLCBhY3V0ZSBpbmZlY3RpdmUgY3lzdGl0aXMgKGRpc29yZGVyKSwgZ2luZ2l2aXRpcyAoZGlzb3JkZXIpLCBzb2NpYWwgaXNvbGF0aW9uIChmaW5kaW5nKSwgc3RyZXNzIChmaW5kaW5nKS4KCiMgU29jaWFsIEhpc3RvcnkKIFBhdGllbnQgaGFzIG5ldmVyIHNtb2tlZC4KIFBhdGllbnQgaWRlbnRpZmllcyBhcyBoZXRlcm9zZXh1YWwuCgpQYXRpZW50IGNvbWVzIGZyb20gYSBtaWRkbGUgc29jaW9lY29ub21pYyBiYWNrZ3JvdW5kLgogUGF0aWVudCBoYXMgY29tcGxldGVkIHNvbWUgY29sbGVnZSBjb3Vyc2VzLgpQYXRpZW50IGN1cnJlbnRseSBoYXMgTWVkaWNhaWQuCgojIEFsbGVyZ2llcwpObyBLbm93biBBbGxlcmdpZXMuCgojIE1lZGljYXRpb25zCm5kYTAyMTQ1NyAyMDAgYWN0dWF0IGFsYnV0ZXJvbCAwLjA5IG1nL2FjdHVhdCBtZXRlcmVkIGRvc2UgaW5oYWxlciBbcHJvYWlyXTsgYWNldGFtaW5vcGhlbiAzMjUgbWcgb3JhbCB0YWJsZXQ7IG5pdHJvZnVyYW50b2luLCBtYWNyb2NyeXN0YWxzIDI1IG1nIC8gbml0cm9mdXJhbnRvaW4sIG1vbm9oeWRyYXRlIDc1IG1nIG9yYWwgY2Fwc3VsZTsgcGVuaWNpbGxpbiB2IHBvdGFzc2l1bSA1MDAgbWcgb3JhbCB0YWJsZXQ7IDEyMCBhY3R1YXQgZmx1dGljYXNvbmUgcHJvcGlvbmF0ZSAwLjA0NCBtZy9hY3R1YXQgbWV0ZXJlZCBkb3NlIGluaGFsZXIgW2Zsb3ZlbnRdOyB7NSAoZGllbm9nZXN0IDIgbWcgLyBlc3RyYWRpb2wgdmFsZXJhdGUgMiBtZyBvcmFsIHRhYmxldCkgLyAxNyAoZGllbm9nZXN0IDMgbWcgLyBlc3RyYWRpb2wgdmFsZXJhdGUgMiBtZyBvcmFsIHRhYmxldCkgLyAyIChlc3RyYWRpb2wgdmFsZXJhdGUgMSBtZyBvcmFsIHRhYmxldCkgLyAyIChlc3RyYWRpb2wgdmFsZXJhdGUgMyBtZyBvcmFsIHRhYmxldCkgLyAyIChpbmVydCBpbmdyZWRpZW50cyAxIG1nIG9yYWwgdGFibGV0KSB9IHBhY2sgW25hdGF6aWEgMjggZGF5XTsgezI4IChub3JldGhpbmRyb25lIDAuMzUgbWcgb3JhbCB0YWJsZXQpIH0gcGFjayBbam9saXZldHRlIDI4IGRheV07IHsyOCAobm9yZXRoaW5kcm9uZSAwLjM1IG1nIG9yYWwgdGFibGV0KSB9IHBhY2sgW2NhbWlsYSAyOCBkYXldOyBzb2RpdW0gZmx1b3JpZGUgMC4wMjcyIG1nL21nIG9yYWwgZ2VsCgojIEFzc2Vzc21lbnQgYW5kIFBsYW4KUGF0aWVudCBpcyBwcmVzZW50aW5nIHdpdGggYm9keSBtYXNzIGluZGV4IDMwKyAtIG9iZXNpdHkgKGZpbmRpbmcpLCBwYXJ0LXRpbWUgZW1wbG95bWVudCAoZmluZGluZyksIHNvY2lhbCBpc29sYXRpb24gKGZpbmRpbmcpLCBnaW5naXZpdGlzIChkaXNvcmRlcikuIAoKCiMjIFBsYW4KUGF0aWVudCB3YXMgZ2l2ZW4gdGhlIGZvbGxvd2luZyBpbW11bml6YXRpb25zOiBpbmZsdWVuemEsIHNwbGl0IHZpcnVzLCB0cml2YWxlbnQsIHBmLCB0ZCAoYWR1bHQpLCA1IGxmIHRldGFudXMgdG94b2lkLCBwcmVzZXJ2YXRpdmUgZnJlZSwgYWRzb3JiZWQsIGhlcCBiLCBhZHVsdCwgbWVuaW5nb2NvY2NhbCBtY3Y0cC4gClRoZSBmb2xsb3dpbmcgcHJvY2VkdXJlcyB3ZXJlIGNvbmR1Y3RlZDoKLSBtZWRpY2F0aW9uIHJlY29uY2lsaWF0aW9uIChwcm9jZWR1cmUpCi0gYXNzZXNzbWVudCBvZiBoZWFsdGggYW5kIHNvY2lhbCBjYXJlIG5lZWRzIChwcm9jZWR1cmUpCi0gYXNzZXNzbWVudCBvZiBhbnhpZXR5IChwcm9jZWR1cmUpCi0gc2NyZWVuaW5nIGZvciBkb21lc3RpYyBhYnVzZSAocHJvY2VkdXJlKQotIGRlcHJlc3Npb24gc2NyZWVuaW5nIChwcm9jZWR1cmUpCi0gZGVwcmVzc2lvbiBzY3JlZW5pbmcgKHByb2NlZHVyZSkKLSBhc3Nlc3NtZW50IG9mIHN1YnN0YW5jZSB1c2UgKHByb2NlZHVyZSkKLSBhc3Nlc3NtZW50IHVzaW5nIGFsY29ob2wgdXNlIGRpc29yZGVycyBpZGVudGlmaWNhdGlvbiB0ZXN0IC0gY29uc3VtcHRpb24gKHByb2NlZHVyZSkKLSBwYXRpZW50IHJlZmVycmFsIGZvciBkZW50YWwgY2FyZSAocHJvY2VkdXJlKQpUaGUgZm9sbG93aW5nIGxhYiByZXBvcnRzIHdlcmUgY29tcGxldGVkOgotIGJhc2ljIG1ldGFib2xpYyBwYW5lbCAtIGJsb29kCi0gY2JjIHBhbmVsIC0gYmxvb2QgYnkgYXV0b21hdGVkIGNvdW50Ci0gZ2VuZXJhbGl6ZWQgYW54aWV0eSBkaXNvcmRlciA3IGl0ZW0gKGdhZC03KQotIGh1bWlsaWF0aW9uLCBhZnJhaWQsIHJhcGUsIGFuZCBraWNrIHF1ZXN0aW9ubmFpcmUgW2hhcmtdCi0gcGF0aWVudCBoZWFsdGggcXVlc3Rpb25uYWlyZSAyIGl0ZW0gKHBocS0yKSBbcmVwb3J0ZWRdCi0gYWxjb2hvbCB1c2UgZGlzb3JkZXIgaWRlbnRpZmljYXRpb24gdGVzdCAtIGNvbnN1bXB0aW9uIFthdWRpdC1jXQo="
+     }
+    ]
+   }
+  ],
+  "Immunization": [
+   {
+    "resourceType": "Immunization",
+    "id": "966e9818-9cf6-8d71-22cd-cabfc50fd875",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-immunization"
+     ]
+    },
+    "status": "completed",
+    "vaccineCode": {
+     "coding": [
+      {
+       "system": "http://hl7.org/fhir/sid/cvx",
+       "code": "113",
+       "display": "Td (adult), 5 Lf tetanus toxoid, preservative free, adsorbed"
+      }
+     ],
+     "text": "Td (adult), 5 Lf tetanus toxoid, preservative free, adsorbed"
+    },
+    "patient": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "occurrenceDateTime": "2025-05-23T09:36:27-07:00",
+    "primarySource": true,
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Immunization",
+    "id": "966e9818-9cf6-8d71-8f67-f0b2643e7cdd",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-immunization"
+     ]
+    },
+    "status": "completed",
+    "vaccineCode": {
+     "coding": [
+      {
+       "system": "http://hl7.org/fhir/sid/cvx",
+       "code": "43",
+       "display": "Hep B, adult"
+      }
+     ],
+     "text": "Hep B, adult"
+    },
+    "patient": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "occurrenceDateTime": "2025-05-23T09:36:27-07:00",
+    "primarySource": true,
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   },
+   {
+    "resourceType": "Immunization",
+    "id": "966e9818-9cf6-8d71-1f6c-b377d4a0d0f5",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-immunization"
+     ]
+    },
+    "status": "completed",
+    "vaccineCode": {
+     "coding": [
+      {
+       "system": "http://hl7.org/fhir/sid/cvx",
+       "code": "114",
+       "display": "meningococcal MCV4P"
+      }
+     ],
+     "text": "meningococcal MCV4P"
+    },
+    "patient": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-74bc-36aef6643618"
+    },
+    "encounter": {
+     "reference": "urn:uuid:966e9818-9cf6-8d71-3eff-a424a6faa0d3"
+    },
+    "occurrenceDateTime": "2025-05-23T09:36:27-07:00",
+    "primarySource": true,
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|479da8cb-9507-3edc-869f-606464faed41",
+     "display": "MEASURED WELLNESS LLC"
+    }
+   }
+  ]
+ }
+}

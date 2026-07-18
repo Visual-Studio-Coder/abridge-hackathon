@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from sentinel.core import SentinelService, _locate_quote
+from sentinel.core import SentinelService, _display_name, _locate_quote
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -59,6 +59,11 @@ def test_quote_locator_tolerates_punctuation_only_differences() -> None:
     transcript = "DR: We agreed: lisinopril ten milligrams, once a day."
     start, end = _locate_quote(transcript, "lisinopril ten milligrams once a day")
     assert transcript[start:end] == "lisinopril ten milligrams, once a day"
+
+
+def test_synthetic_name_suffixes_are_removed_from_display() -> None:
+    assert _display_name("Dr. Amado512 Adams676") == "Dr. Amado Adams"
+    assert _display_name("Jane42   Doe900") == "Jane Doe"
 
 
 def test_approvals_repair_runtime_only_and_create_audit(service: SentinelService) -> None:
@@ -126,7 +131,7 @@ def test_review_queue_uses_all_25_encounters(service: SentinelService) -> None:
 def test_disclosed_manifest_scores_detections_without_entering_analysis(service: SentinelService) -> None:
     service.paths.seeding_manifest.parent.mkdir(parents=True)
     shutil.copy(
-        PROJECT_ROOT / "partner-provided-docs" / "seeded-stuff" / "seeding-manifest.json",
+        PROJECT_ROOT / "eval" / "seeding-manifest.json",
         service.paths.seeding_manifest,
     )
     manifest = service.seeding_manifest()

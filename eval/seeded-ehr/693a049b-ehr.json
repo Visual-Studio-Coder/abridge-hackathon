@@ -1,0 +1,1872 @@
+{
+ "patient": {
+  "resourceType": "Patient",
+  "id": "693a049b-0fd5-c1af-a6ab-e31c329f2891",
+  "name": [
+   {
+    "use": "official",
+    "family": "Macejkovic",
+    "given": [
+     "Solomon",
+     "Maria"
+    ],
+    "prefix": [
+     "Mr."
+    ]
+   }
+  ],
+  "gender": "male",
+  "birthDate": "1945-01-06",
+  "maritalStatus": {
+   "coding": [
+    {
+     "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+     "code": "M",
+     "display": "Married"
+    }
+   ],
+   "text": "Married"
+  },
+  "address": [
+   {
+    "city": "Boston",
+    "state": "MA",
+    "country": "US"
+   }
+  ],
+  "communication": [
+   {
+    "language": {
+     "coding": [
+      {
+       "system": "urn:ietf:bcp:47",
+       "code": "en-US",
+       "display": "English (United States)"
+      }
+     ],
+     "text": "English (United States)"
+    }
+   }
+  ]
+ },
+ "encounter": {
+  "resourceType": "Encounter",
+  "id": "693a049b-0fd5-c1af-8dff-09e595625529",
+  "meta": {
+   "profile": [
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter"
+   ]
+  },
+  "identifier": [
+   {
+    "use": "official",
+    "system": "https://github.com/synthetichealth/synthea",
+    "value": "693a049b-0fd5-c1af-8dff-09e595625529"
+   }
+  ],
+  "status": "finished",
+  "class": {
+   "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+   "code": "HH"
+  },
+  "type": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "305336008",
+      "display": "Admission to hospice (procedure)"
+     }
+    ],
+    "text": "Admission to hospice (procedure)"
+   }
+  ],
+  "subject": {
+   "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891",
+   "display": "Mr. Solomon675 Maria750 Macejkovic424"
+  },
+  "participant": [
+   {
+    "type": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+        "code": "PPRF",
+        "display": "primary performer"
+       }
+      ],
+      "text": "primary performer"
+     }
+    ],
+    "period": {
+     "start": "2020-01-11T09:33:50-08:00",
+     "end": "2020-02-24T09:48:50-08:00"
+    },
+    "individual": {
+     "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999904896",
+     "display": "Dr. Ariel183 Boyer713"
+    }
+   }
+  ],
+  "period": {
+   "start": "2020-01-11T09:33:50-08:00",
+   "end": "2020-02-24T09:48:50-08:00"
+  },
+  "reasonCode": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "93761005",
+      "display": "Primary malignant neoplasm of colon (disorder)"
+     }
+    ]
+   }
+  ],
+  "location": [
+   {
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   }
+  ],
+  "serviceProvider": {
+   "reference": "Organization?identifier=https://github.com/synthetichealth/synthea|b4064f5c-4729-31ef-a5b1-5343474c9520",
+   "display": "WEST RIVER HOSPICE, LLC"
+  }
+ },
+ "resources": {
+  "Procedure": [
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-d2ff-c2132d5c50d2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "310417005",
+       "display": "Certification procedure (procedure)"
+      }
+     ],
+     "text": "Certification procedure (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-11T09:33:50-08:00",
+     "end": "2020-01-11T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-aa4b-086f8e3aebf9",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "185087000",
+       "display": "Notifications (procedure)"
+      }
+     ],
+     "text": "Notifications (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-11T09:33:50-08:00",
+     "end": "2020-01-11T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-6ab4-14906daa5de2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "315639002",
+       "display": "Initial patient assessment (procedure)"
+      }
+     ],
+     "text": "Initial patient assessment (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-11T09:33:50-08:00",
+     "end": "2020-01-11T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-1382-59ccd5202256",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "370789001",
+       "display": "Development of individualized plan of care (procedure)"
+      }
+     ],
+     "text": "Development of individualized plan of care (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-11T09:33:50-08:00",
+     "end": "2020-01-11T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-dd51-1bcb074546f8",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-11T09:33:50-08:00",
+     "end": "2020-01-11T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-fb16-c2c8db8a8a86",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-12T09:33:50-08:00",
+     "end": "2020-01-12T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-5729-d8e6c53c5507",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-13T09:33:50-08:00",
+     "end": "2020-01-13T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-8229-4e3c788f43af",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-14T09:33:50-08:00",
+     "end": "2020-01-14T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-bdbd-b4da079d6836",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-15T09:33:50-08:00",
+     "end": "2020-01-15T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-d620-de64464ab6a3",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-16T09:33:50-08:00",
+     "end": "2020-01-16T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-4cf6-c8d97a157037",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-17T09:33:50-08:00",
+     "end": "2020-01-17T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-d5b2-d6cce57b6666",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-18T09:33:50-08:00",
+     "end": "2020-01-18T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-1c34-3d9c8c2d3910",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-19T09:33:50-08:00",
+     "end": "2020-01-19T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-a52d-91282721504c",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-20T09:33:50-08:00",
+     "end": "2020-01-20T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-8ea1-2b6e4622c670",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-21T09:33:50-08:00",
+     "end": "2020-01-21T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-8255-268cce8d337f",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-22T09:33:50-08:00",
+     "end": "2020-01-22T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-8711-10747d3a0117",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-23T09:33:50-08:00",
+     "end": "2020-01-23T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-f54a-a533dee70822",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-24T09:33:50-08:00",
+     "end": "2020-01-24T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-2e91-6ff475d26d6e",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-25T09:33:50-08:00",
+     "end": "2020-01-25T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-2de8-6d4d91eb3e92",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-26T09:33:50-08:00",
+     "end": "2020-01-26T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-7d16-ef8cbb22719a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-27T09:33:50-08:00",
+     "end": "2020-01-27T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-1df3-1af96d3d944d",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-28T09:33:50-08:00",
+     "end": "2020-01-28T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-173d-c40c8e1fe4a9",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-29T09:33:50-08:00",
+     "end": "2020-01-29T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-3f46-850194e3b567",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-30T09:33:50-08:00",
+     "end": "2020-01-30T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-f645-079d83f38b78",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-01-31T09:33:50-08:00",
+     "end": "2020-01-31T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-ada6-57fe165a5d48",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-01T09:33:50-08:00",
+     "end": "2020-02-01T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-7f72-854c910137a8",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-02T09:33:50-08:00",
+     "end": "2020-02-02T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-69c1-efbe1b134f64",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-03T09:33:50-08:00",
+     "end": "2020-02-03T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-d5ce-119bc4fd09a0",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-04T09:33:50-08:00",
+     "end": "2020-02-04T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-c302-023a2bc49d8a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-05T09:33:50-08:00",
+     "end": "2020-02-05T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-f74f-3b9d650862ea",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-06T09:33:50-08:00",
+     "end": "2020-02-06T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-25c0-2f6b887bac4a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-07T09:33:50-08:00",
+     "end": "2020-02-07T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-c234-a9d7ce7da3d1",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-08T09:33:50-08:00",
+     "end": "2020-02-08T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-b320-b8ad158de7d9",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-09T09:33:50-08:00",
+     "end": "2020-02-09T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-974d-51d042be6303",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-10T09:33:50-08:00",
+     "end": "2020-02-10T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-f5a4-ac3b755b644a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-11T09:33:50-08:00",
+     "end": "2020-02-11T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-25a2-2243f2a2852e",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-12T09:33:50-08:00",
+     "end": "2020-02-12T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-0576-d86f037e9df2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-13T09:33:50-08:00",
+     "end": "2020-02-13T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-fdd9-25209af67535",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-14T09:33:50-08:00",
+     "end": "2020-02-14T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-cd6f-0dec61cab165",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-15T09:33:50-08:00",
+     "end": "2020-02-15T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-7155-63054e10b600",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-16T09:33:50-08:00",
+     "end": "2020-02-16T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-f1bd-f6bd00eabb91",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-17T09:33:50-08:00",
+     "end": "2020-02-17T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-18d6-937219172a75",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-18T09:33:50-08:00",
+     "end": "2020-02-18T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-3825-f80c6c8a9fe2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-19T09:33:50-08:00",
+     "end": "2020-02-19T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-4bec-2a676e36a8f4",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-20T09:33:50-08:00",
+     "end": "2020-02-20T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-4cc4-5341f8aba4a8",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-21T09:33:50-08:00",
+     "end": "2020-02-21T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-4e2b-54fcd0ee5d23",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-22T09:33:50-08:00",
+     "end": "2020-02-22T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-dd2e-8cec78c54bf8",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-23T09:33:50-08:00",
+     "end": "2020-02-23T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "693a049b-0fd5-c1af-62f0-444bb8cb318c",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "58000006",
+       "display": "Patient discharge (procedure)"
+      }
+     ],
+     "text": "Patient discharge (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "performedPeriod": {
+     "start": "2020-02-24T09:33:50-08:00",
+     "end": "2020-02-24T09:48:50-08:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|fcb07739-74c5-3364-9f65-44bf5da1407c",
+     "display": "WEST RIVER HOSPICE, LLC"
+    }
+   }
+  ],
+  "DiagnosticReport": [
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "0c82def0-6eac-02f8-05c5-3a085c3fc3a1",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-note"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "34117-2",
+        "display": "History and physical note"
+       },
+       {
+        "system": "http://loinc.org",
+        "code": "51847-2",
+        "display": "Evaluation + Plan note"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "34117-2",
+       "display": "History and physical note"
+      },
+      {
+       "system": "http://loinc.org",
+       "code": "51847-2",
+       "display": "Evaluation + Plan note"
+      }
+     ]
+    },
+    "subject": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-a6ab-e31c329f2891"
+    },
+    "encounter": {
+     "reference": "urn:uuid:693a049b-0fd5-c1af-8dff-09e595625529"
+    },
+    "effectiveDateTime": "2020-01-11T09:33:50-08:00",
+    "issued": "2020-01-11T09:33:50.062-08:00",
+    "performer": [
+     {
+      "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999904896",
+      "display": "Dr. Ariel183 Boyer713"
+     }
+    ],
+    "presentedForm": [
+     {
+      "contentType": "text/plain; charset=utf-8",
+      "data": "CjIwMjAtMDEtMTEKCiMgQ2hpZWYgQ29tcGxhaW50Ck5vIGNvbXBsYWludHMuCgojIEhpc3Rvcnkgb2YgUHJlc2VudCBJbGxuZXNzClNvbG9tb242NzUgaXMgYSA3NSB5ZWFyLW9sZCBub25oaXNwYW5pYyB3aGl0ZSBtYWxlLiBQYXRpZW50IGhhcyBhIGhpc3Rvcnkgb2YgbWVkaWNhdGlvbiByZXZpZXcgZHVlIChzaXR1YXRpb24pLCBmdWxsLXRpbWUgZW1wbG95bWVudCAoZmluZGluZyksIHNvY2lhbCBpc29sYXRpb24gKGZpbmRpbmcpLCBzdHJlc3MgKGZpbmRpbmcpLgoKIyBTb2NpYWwgSGlzdG9yeQpQYXRpZW50IGlzIG1hcnJpZWQuIFBhdGllbnQgaGFzIG5ldmVyIHNtb2tlZC4KIFBhdGllbnQgaWRlbnRpZmllcyBhcyBoZXRlcm9zZXh1YWwuCgpQYXRpZW50IGNvbWVzIGZyb20gYSBoaWdoIHNvY2lvZWNvbm9taWMgYmFja2dyb3VuZC4KIFBhdGllbnQgaXMgYSBjb2xsZWdlIGdyYWR1YXRlLgpQYXRpZW50IGN1cnJlbnRseSBoYXMgTWVkaWNhcmUuCgojIEFsbGVyZ2llcwpObyBLbm93biBBbGxlcmdpZXMuCgojIE1lZGljYXRpb25zCnNpbXZhc3RhdGluIDEwIG1nIG9yYWwgdGFibGV0CgojIEFzc2Vzc21lbnQgYW5kIFBsYW4KCgoKIyMgUGxhbgoKVGhlIGZvbGxvd2luZyBwcm9jZWR1cmVzIHdlcmUgY29uZHVjdGVkOgotIGNlcnRpZmljYXRpb24gcHJvY2VkdXJlIChwcm9jZWR1cmUpCi0gbm90aWZpY2F0aW9ucyAocHJvY2VkdXJlKQotIGluaXRpYWwgcGF0aWVudCBhc3Nlc3NtZW50IChwcm9jZWR1cmUpCi0gZGV2ZWxvcG1lbnQgb2YgaW5kaXZpZHVhbGl6ZWQgcGxhbiBvZiBjYXJlIChwcm9jZWR1cmUpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIHBhdGllbnQgZGlzY2hhcmdlIChwcm9jZWR1cmUpCg=="
+     }
+    ]
+   }
+  ]
+ }
+}

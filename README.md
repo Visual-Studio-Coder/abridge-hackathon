@@ -13,15 +13,15 @@ The clinician and Julius Renner agree on eight actions. The synthetic post-visit
 - a naturally absent 4–6 week hypertension follow-up;
 - four correctly represented actions and one external front-desk handoff.
 
-The planted discrepancies and synthetic source data are disclosed intentionally. The public [seeding manifest](partner-provided-docs/seeded-stuff/seeding-manifest.json) is used only as a post-analysis scoring key and is never included in Claude's prompt. Other partner planning and QA documents remain local-only.
+We derived a 25-encounter validation set by deterministically seeding the Abridge-provided synthetic dataset. The public [evaluation manifest](eval/seeding-manifest.json) is used only as a post-analysis scoring key and is never included in Claude's prompt. Internal partner planning documents remain local-only.
 
 ## Batch evaluation
 
-The supplied validation distribution contains 25 encounters: 14 encounters with 18 disclosed discrepancies and 11 unmodified controls. The end-of-day worklist can analyze every encounter and reports expected versus detected results, seeded misses, and additional evidence-linked candidates.
+Our derived validation distribution contains 25 encounters: 14 encounters with 18 disclosed discrepancies and 11 unmodified controls. The end-of-day worklist can analyze every encounter and reports expected versus detected results, seeded misses, and additional evidence-linked candidates.
 
 “Unmodified” does not mean clinically gap-free: several original records contain transcript-supported follow-ups or handoffs that are naturally absent from FHIR. Findings outside the manifest are therefore shown as candidates for separate adjudication rather than automatically labeled false positives.
 
-The repository loads the supplied `{patient-prefix}-ehr.json` bundle for each encounter when the local fixture archive is present. Julius retains a deterministic fallback so the core demo remains runnable without the private archive.
+The repository includes and loads every derived `{patient-prefix}-ehr.json` bundle from [`eval/seeded-ehr`](eval/seeded-ehr), so a public clone can reproduce the complete batch evaluation. The original Abridge dataset remains unchanged.
 
 ## Run locally
 

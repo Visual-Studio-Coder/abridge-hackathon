@@ -1,0 +1,1747 @@
+{
+ "patient": {
+  "resourceType": "Patient",
+  "id": "25fb1227-d194-b15e-e099-7cffcd6081ec",
+  "name": [
+   {
+    "use": "official",
+    "family": "Kling",
+    "given": [
+     "Nola",
+     "Robert"
+    ],
+    "prefix": [
+     "Mrs."
+    ]
+   },
+   {
+    "use": "maiden",
+    "family": "Pacocha",
+    "given": [
+     "Nola",
+     "Robert"
+    ],
+    "prefix": [
+     "Mrs."
+    ]
+   }
+  ],
+  "gender": "female",
+  "birthDate": "1947-05-14",
+  "maritalStatus": {
+   "coding": [
+    {
+     "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+     "code": "W",
+     "display": "Widowed"
+    }
+   ],
+   "text": "Widowed"
+  },
+  "address": [
+   {
+    "city": "Weymouth",
+    "state": "MA",
+    "country": "US"
+   }
+  ],
+  "communication": [
+   {
+    "language": {
+     "coding": [
+      {
+       "system": "urn:ietf:bcp:47",
+       "code": "en-US",
+       "display": "English (United States)"
+      }
+     ],
+     "text": "English (United States)"
+    }
+   }
+  ]
+ },
+ "encounter": {
+  "resourceType": "Encounter",
+  "id": "25fb1227-d194-b15e-ecd8-6fcb9efd8141",
+  "meta": {
+   "profile": [
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter"
+   ]
+  },
+  "identifier": [
+   {
+    "use": "official",
+    "system": "https://github.com/synthetichealth/synthea",
+    "value": "25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+   }
+  ],
+  "status": "finished",
+  "class": {
+   "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+   "code": "HH"
+  },
+  "type": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "305336008",
+      "display": "Admission to hospice (procedure)"
+     }
+    ],
+    "text": "Admission to hospice (procedure)"
+   }
+  ],
+  "subject": {
+   "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec",
+   "display": "Mrs. Nola814 Robert854 Kling921"
+  },
+  "participant": [
+   {
+    "type": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+        "code": "PPRF",
+        "display": "primary performer"
+       }
+      ],
+      "text": "primary performer"
+     }
+    ],
+    "period": {
+     "start": "2022-05-18T13:18:31-07:00",
+     "end": "2022-06-27T13:33:31-07:00"
+    },
+    "individual": {
+     "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999910695",
+     "display": "Dr. Eva64 Heredia716"
+    }
+   }
+  ],
+  "period": {
+   "start": "2022-05-18T13:18:31-07:00",
+   "end": "2022-06-27T13:33:31-07:00"
+  },
+  "reasonCode": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "109838007",
+      "display": "Overlapping malignant neoplasm of colon (disorder)"
+     }
+    ]
+   }
+  ],
+  "location": [
+   {
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   }
+  ],
+  "serviceProvider": {
+   "reference": "Organization?identifier=https://github.com/synthetichealth/synthea|b8d40f5c-9e4d-3639-89ef-8bf375cb3184",
+   "display": "NEW ENGLAND HOSPICE II LLC"
+  }
+ },
+ "resources": {
+  "Procedure": [
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-2126-93b7565c7cca",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "310417005",
+       "display": "Certification procedure (procedure)"
+      }
+     ],
+     "text": "Certification procedure (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-18T13:18:31-07:00",
+     "end": "2022-05-18T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-f8b2-9408936afcfd",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "185087000",
+       "display": "Notifications (procedure)"
+      }
+     ],
+     "text": "Notifications (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-18T13:18:31-07:00",
+     "end": "2022-05-18T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-04e0-9821a676ecd6",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "315639002",
+       "display": "Initial patient assessment (procedure)"
+      }
+     ],
+     "text": "Initial patient assessment (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-18T13:18:31-07:00",
+     "end": "2022-05-18T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-1bfc-d811779c07c2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "370789001",
+       "display": "Development of individualized plan of care (procedure)"
+      }
+     ],
+     "text": "Development of individualized plan of care (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-18T13:18:31-07:00",
+     "end": "2022-05-18T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-043a-7f95c2580b8b",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-18T13:18:31-07:00",
+     "end": "2022-05-18T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-0303-5f224f4bf89f",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-19T13:18:31-07:00",
+     "end": "2022-05-19T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-4a11-f89076dfccf3",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-20T13:18:31-07:00",
+     "end": "2022-05-20T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-40e6-976edf949053",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-21T13:18:31-07:00",
+     "end": "2022-05-21T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-a221-69a9db50bd47",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-22T13:18:31-07:00",
+     "end": "2022-05-22T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-13b1-6b33e21c11b6",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-23T13:18:31-07:00",
+     "end": "2022-05-23T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-2a25-d9d25c281b30",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-24T13:18:31-07:00",
+     "end": "2022-05-24T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-f538-bcb5ac38c5d4",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-25T13:18:31-07:00",
+     "end": "2022-05-25T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-8bc7-4dc5937fc553",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-26T13:18:31-07:00",
+     "end": "2022-05-26T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-0052-a8cb497d469c",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-27T13:18:31-07:00",
+     "end": "2022-05-27T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-6fb4-23690de623c5",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-28T13:18:31-07:00",
+     "end": "2022-05-28T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-7946-bcc6719c9897",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-29T13:18:31-07:00",
+     "end": "2022-05-29T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-a2af-f723444fbf6e",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-30T13:18:31-07:00",
+     "end": "2022-05-30T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-7ec9-c6edc53f315a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-05-31T13:18:31-07:00",
+     "end": "2022-05-31T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-4c28-1d2bea44f487",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-01T13:18:31-07:00",
+     "end": "2022-06-01T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-de4d-004cba2deb03",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-02T13:18:31-07:00",
+     "end": "2022-06-02T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-3115-8153335025e1",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-03T13:18:31-07:00",
+     "end": "2022-06-03T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-2f6d-67fa6e756779",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-04T13:18:31-07:00",
+     "end": "2022-06-04T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-c3b0-007b8f60f79c",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-05T13:18:31-07:00",
+     "end": "2022-06-05T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-6dbe-6225132d376c",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-06T13:18:31-07:00",
+     "end": "2022-06-06T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-0ef5-e068848a68d2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-07T13:18:31-07:00",
+     "end": "2022-06-07T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-f82b-cc635b156e7f",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-08T13:18:31-07:00",
+     "end": "2022-06-08T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-8379-8bcb795d0548",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-09T13:18:31-07:00",
+     "end": "2022-06-09T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-3022-b9698673cf7b",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-10T13:18:31-07:00",
+     "end": "2022-06-10T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-17e1-20ab293ff2e0",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-11T13:18:31-07:00",
+     "end": "2022-06-11T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-fbec-48764e2ce0e0",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-12T13:18:31-07:00",
+     "end": "2022-06-12T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-f8b4-0102241dff28",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-13T13:18:31-07:00",
+     "end": "2022-06-13T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-c4c8-c8997a13ea44",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-14T13:18:31-07:00",
+     "end": "2022-06-14T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-3398-b9a8c65af5b8",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-15T13:18:31-07:00",
+     "end": "2022-06-15T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-3664-7b941e1a462e",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-16T13:18:31-07:00",
+     "end": "2022-06-16T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-f5e4-cf356916c05b",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-17T13:18:31-07:00",
+     "end": "2022-06-17T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-c943-dc002918f649",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-18T13:18:31-07:00",
+     "end": "2022-06-18T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-a3eb-7bb728017afc",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-19T13:18:31-07:00",
+     "end": "2022-06-19T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-4d17-7312e253ea55",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-20T13:18:31-07:00",
+     "end": "2022-06-20T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-9024-33540066a98f",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-21T13:18:31-07:00",
+     "end": "2022-06-21T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-0fc7-87197aa9d2aa",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-22T13:18:31-07:00",
+     "end": "2022-06-22T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-1de8-ce89278e1271",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-23T13:18:31-07:00",
+     "end": "2022-06-23T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-7602-72420668f131",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-24T13:18:31-07:00",
+     "end": "2022-06-24T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-408d-d023c46ec7e1",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-25T13:18:31-07:00",
+     "end": "2022-06-25T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-c27e-3f9be3e9e5ce",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "385763009",
+       "display": "Hospice care (regime/therapy)"
+      }
+     ],
+     "text": "Hospice care (regime/therapy)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-26T13:18:31-07:00",
+     "end": "2022-06-26T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "25fb1227-d194-b15e-8428-5d4701bc79a7",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "58000006",
+       "display": "Patient discharge (procedure)"
+      }
+     ],
+     "text": "Patient discharge (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "performedPeriod": {
+     "start": "2022-06-27T13:18:31-07:00",
+     "end": "2022-06-27T13:33:31-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|73c9f567-5ab0-3bf8-b1b8-c813cc57e83c",
+     "display": "NEW ENGLAND HOSPICE II LLC"
+    }
+   }
+  ],
+  "DiagnosticReport": [
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "ff43a7bc-367a-00f4-ba49-75260ab54192",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-note"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "34117-2",
+        "display": "History and physical note"
+       },
+       {
+        "system": "http://loinc.org",
+        "code": "51847-2",
+        "display": "Evaluation + Plan note"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "34117-2",
+       "display": "History and physical note"
+      },
+      {
+       "system": "http://loinc.org",
+       "code": "51847-2",
+       "display": "Evaluation + Plan note"
+      }
+     ]
+    },
+    "subject": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-e099-7cffcd6081ec"
+    },
+    "encounter": {
+     "reference": "urn:uuid:25fb1227-d194-b15e-ecd8-6fcb9efd8141"
+    },
+    "effectiveDateTime": "2022-05-18T13:18:31-07:00",
+    "issued": "2022-05-18T13:18:31.066-07:00",
+    "performer": [
+     {
+      "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999910695",
+      "display": "Dr. Eva64 Heredia716"
+     }
+    ],
+    "presentedForm": [
+     {
+      "contentType": "text/plain; charset=utf-8",
+      "data": "CjIwMjItMDUtMTgKCiMgQ2hpZWYgQ29tcGxhaW50Ck5vIGNvbXBsYWludHMuCgojIEhpc3Rvcnkgb2YgUHJlc2VudCBJbGxuZXNzCk5vbGE4MTQgUm9iZXJ0ODU0IGlzIGEgNzUgeWVhci1vbGQgbm9uaGlzcGFuaWMgd2hpdGUgZmVtYWxlLiBQYXRpZW50IGhhcyBhIGhpc3Rvcnkgb2YgZ2luZ2l2YWwgZGlzZWFzZSAoZGlzb3JkZXIpLCBtZWRpY2F0aW9uIHJldmlldyBkdWUgKHNpdHVhdGlvbiksIGFjdXRlIHZpcmFsIHBoYXJ5bmdpdGlzIChkaXNvcmRlciksIHZpcmFsIHNpbnVzaXRpcyAoZGlzb3JkZXIpLCBvdGl0aXMgbWVkaWEgKGRpc29yZGVyKSwgb3ZlcmxhcHBpbmcgbWFsaWduYW50IG5lb3BsYXNtIG9mIGNvbG9uIChkaXNvcmRlciksIGFjdXRlIGJyb25jaGl0aXMgKGRpc29yZGVyKSwgcGFydC10aW1lIGVtcGxveW1lbnQgKGZpbmRpbmcpLCBmYWNpYWwgbGFjZXJhdGlvbiAoZGlzb3JkZXIpLCBsaW1pdGVkIHNvY2lhbCBjb250YWN0IChmaW5kaW5nKSwgcmVwb3J0cyBvZiB2aW9sZW5jZSBpbiB0aGUgZW52aXJvbm1lbnQgKGZpbmRpbmcpLCBmdWxsLXRpbWUgZW1wbG95bWVudCAoZmluZGluZyksIGxhY2VyYXRpb24gLSBpbmp1cnkgKGRpc29yZGVyKSwgZ2luZ2l2aXRpcyAoZGlzb3JkZXIpLCBzdHJlc3MgKGZpbmRpbmcpLgoKIyBTb2NpYWwgSGlzdG9yeQpQYXRpZW50IGlzIHNpbmdsZS4gUGF0aWVudCBoYXMgbmV2ZXIgc21va2VkLgogUGF0aWVudCBpZGVudGlmaWVzIGFzIGhldGVyb3NleHVhbC4KClBhdGllbnQgY29tZXMgZnJvbSBhIG1pZGRsZSBzb2Npb2Vjb25vbWljIGJhY2tncm91bmQuCiBQYXRpZW50IGhhcyBjb21wbGV0ZWQgc29tZSBjb2xsZWdlIGNvdXJzZXMuClBhdGllbnQgY3VycmVudGx5IGhhcyBEdWFsIEVsaWdpYmxlLgoKIyBBbGxlcmdpZXMKTm8gS25vd24gQWxsZXJnaWVzLgoKIyBNZWRpY2F0aW9ucwphY2V0YW1pbm9waGVuIDMyNSBtZyBvcmFsIHRhYmxldDsgc2ltdmFzdGF0aW4gMTAgbWcgb3JhbCB0YWJsZXQ7IGFidXNlLWRldGVycmVudCAxMiBociBveHljb2RvbmUgaHlkcm9jaGxvcmlkZSAxMCBtZyBleHRlbmRlZCByZWxlYXNlIG9yYWwgdGFibGV0IFtveHljb250aW5dOyBhY2V0YW1pbm9waGVuIDMyNSBtZyAvIG94eWNvZG9uZSBoeWRyb2NobG9yaWRlIDEwIG1nIG9yYWwgdGFibGV0IFtwZXJjb2NldF07IHRyYW1hZG9sIGh5ZHJvY2hsb3JpZGUgNTAgbWcgb3JhbCB0YWJsZXQ7IG5hcHJveGVuIHNvZGl1bSAyMjAgbWcgb3JhbCB0YWJsZXQ7IDEyIGhyIGh5ZHJvY29kb25lIGJpdGFydHJhdGUgMTAgbWcgZXh0ZW5kZWQgcmVsZWFzZSBvcmFsIGNhcHN1bGU7IGFtb3hpY2lsbGluIDI1MCBtZyAvIGNsYXZ1bGFuYXRlIDEyNSBtZyBvcmFsIHRhYmxldDsgc29kaXVtIGZsdW9yaWRlIDAuMDI3MiBtZy9tZyBvcmFsIGdlbAoKIyBBc3Nlc3NtZW50IGFuZCBQbGFuCgoKCiMjIFBsYW4KClRoZSBmb2xsb3dpbmcgcHJvY2VkdXJlcyB3ZXJlIGNvbmR1Y3RlZDoKLSBjZXJ0aWZpY2F0aW9uIHByb2NlZHVyZSAocHJvY2VkdXJlKQotIG5vdGlmaWNhdGlvbnMgKHByb2NlZHVyZSkKLSBpbml0aWFsIHBhdGllbnQgYXNzZXNzbWVudCAocHJvY2VkdXJlKQotIGRldmVsb3BtZW50IG9mIGluZGl2aWR1YWxpemVkIHBsYW4gb2YgY2FyZSAocHJvY2VkdXJlKQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gaG9zcGljZSBjYXJlIChyZWdpbWUvdGhlcmFweSkKLSBob3NwaWNlIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQotIGhvc3BpY2UgY2FyZSAocmVnaW1lL3RoZXJhcHkpCi0gcGF0aWVudCBkaXNjaGFyZ2UgKHByb2NlZHVyZSkK"
+     }
+    ]
+   }
+  ]
+ }
+}

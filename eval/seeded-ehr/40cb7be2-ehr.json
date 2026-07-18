@@ -1,0 +1,1118 @@
+{
+ "patient": {
+  "resourceType": "Patient",
+  "id": "40cb7be2-9c26-6328-3aa0-71db4ed81e06",
+  "name": [
+   {
+    "use": "official",
+    "family": "Thiel",
+    "given": [
+     "Hiedi",
+     "Moira"
+    ],
+    "prefix": [
+     "Ms."
+    ]
+   }
+  ],
+  "gender": "female",
+  "birthDate": "1993-07-26",
+  "maritalStatus": {
+   "coding": [
+    {
+     "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+     "code": "S",
+     "display": "Never Married"
+    }
+   ],
+   "text": "Never Married"
+  },
+  "address": [
+   {
+    "city": "Ludlow",
+    "state": "MA",
+    "country": "US"
+   }
+  ],
+  "communication": [
+   {
+    "language": {
+     "coding": [
+      {
+       "system": "urn:ietf:bcp:47",
+       "code": "en-US",
+       "display": "English (United States)"
+      }
+     ],
+     "text": "English (United States)"
+    }
+   }
+  ]
+ },
+ "encounter": {
+  "resourceType": "Encounter",
+  "id": "40cb7be2-9c26-6328-75bd-838e58c2583e",
+  "meta": {
+   "profile": [
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter"
+   ]
+  },
+  "identifier": [
+   {
+    "use": "official",
+    "system": "https://github.com/synthetichealth/synthea",
+    "value": "40cb7be2-9c26-6328-75bd-838e58c2583e"
+   }
+  ],
+  "status": "finished",
+  "class": {
+   "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+   "code": "AMB"
+  },
+  "type": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "424441002",
+      "display": "Prenatal initial visit (regime/therapy)"
+     }
+    ],
+    "text": "Prenatal initial visit (regime/therapy)"
+   }
+  ],
+  "subject": {
+   "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06",
+   "display": "Ms. Hiedi833 Moira454 Thiel172"
+  },
+  "participant": [
+   {
+    "type": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+        "code": "PPRF",
+        "display": "primary performer"
+       }
+      ],
+      "text": "primary performer"
+     }
+    ],
+    "period": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "individual": {
+     "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999996892",
+     "display": "Dr. Cletus494 Paucek755"
+    }
+   }
+  ],
+  "period": {
+   "start": "2024-07-22T20:20:44-07:00",
+   "end": "2024-07-22T20:35:44-07:00"
+  },
+  "reasonCode": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "72892002",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   }
+  ],
+  "location": [
+   {
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    }
+   }
+  ],
+  "serviceProvider": {
+   "reference": "Organization?identifier=https://github.com/synthetichealth/synthea|0fab3c4e-a028-39a6-b15a-be5a88b6aa2a",
+   "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+  }
+ },
+ "resources": {
+  "Condition": [
+   {
+    "resourceType": "Condition",
+    "id": "40cb7be2-9c26-6328-c541-7e49380d5a38",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis"
+     ]
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "resolved"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+       "code": "confirmed"
+      }
+     ]
+    },
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "code": "encounter-diagnosis",
+        "display": "Encounter Diagnosis"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "72892002",
+       "display": "Normal pregnancy (finding)"
+      }
+     ],
+     "text": "Normal pregnancy (finding)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "onsetDateTime": "2024-07-22T20:20:44-07:00",
+    "abatementDateTime": "2025-02-24T20:33:03-08:00",
+    "recordedDate": "2024-07-22T20:20:44-07:00"
+   },
+   {
+    "resourceType": "Condition",
+    "id": "40cb7be2-9c26-6328-d8a9-3f0cdfda2442",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis"
+     ]
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "resolved"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+       "code": "confirmed"
+      }
+     ]
+    },
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "code": "encounter-diagnosis",
+        "display": "Encounter Diagnosis"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "271737000",
+       "display": "Anemia (disorder)"
+      }
+     ],
+     "text": "Anemia (disorder)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "onsetDateTime": "2024-07-22T20:20:44-07:00",
+    "abatementDateTime": "2025-02-24T20:33:03-08:00",
+    "recordedDate": "2024-07-22T20:20:44-07:00"
+   }
+  ],
+  "Procedure": [
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-2525-69841904f7bd",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "252160004",
+       "display": "Standard pregnancy test (procedure)"
+      }
+     ],
+     "text": "Standard pregnancy test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-cf41-a5ee60b519b3",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "169230002",
+       "display": "Ultrasound scan for fetal viability (procedure)"
+      }
+     ],
+     "text": "Ultrasound scan for fetal viability (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-5e29-aa4b6f309675",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "274804006",
+       "display": "Evaluation of uterine fundal height (procedure)"
+      }
+     ],
+     "text": "Evaluation of uterine fundal height (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-c6ae-5478454973da",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "225158009",
+       "display": "Auscultation of the fetal heart (procedure)"
+      }
+     ],
+     "text": "Auscultation of the fetal heart (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-cb51-c5026c38cdbd",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "44608003",
+       "display": "Blood group typing (procedure)"
+      }
+     ],
+     "text": "Blood group typing (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-af82-466fdf2e1542",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104091002",
+       "display": "Hemogram, automated, with red blood cells, white blood cells, hemoglobin, hematocrit, indices, platelet count, and manual white blood cell differential (procedure)"
+      }
+     ],
+     "text": "Hemogram, automated, with red blood cells, white blood cells, hemoglobin, hematocrit, indices, platelet count, and manual white blood cell differential (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-c1a7-662cea2216f9",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "47758006",
+       "display": "Hepatitis B surface antigen measurement (procedure)"
+      }
+     ],
+     "text": "Hepatitis B surface antigen measurement (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-9091-6d544a4fb50e",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "31676001",
+       "display": "Human immunodeficiency virus antigen test (procedure)"
+      }
+     ],
+     "text": "Human immunodeficiency virus antigen test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-3e36-2425285a7462",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "310861008",
+       "display": "Chlamydia antigen test (procedure)"
+      }
+     ],
+     "text": "Chlamydia antigen test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-3aeb-51d3ca5cfe97",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "165829005",
+       "display": "Gonorrhea infection titer test (procedure)"
+      }
+     ],
+     "text": "Gonorrhea infection titer test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-6f6f-73cf580d2b8c",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "269828009",
+       "display": "Syphilis infectious titer test (procedure)"
+      }
+     ],
+     "text": "Syphilis infectious titer test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-5491-72b37c5eaee8",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "117010004",
+       "display": "Urine culture (procedure)"
+      }
+     ],
+     "text": "Urine culture (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-1ed7-787a4cdfbaa3",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "90226004",
+       "display": "Cytopathology procedure, preparation of smear, genital source (procedure)"
+      }
+     ],
+     "text": "Cytopathology procedure, preparation of smear, genital source (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-6ff6-cabbff4cd5a5",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "395123002",
+       "display": "Urine screening test for diabetes (procedure)"
+      }
+     ],
+     "text": "Urine screening test for diabetes (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-1b0e-7cec1c325df8",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104375008",
+       "display": "Hepatitis C antibody, confirmatory test (procedure)"
+      }
+     ],
+     "text": "Hepatitis C antibody, confirmatory test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-601d-41f62c3cc028",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "314098000",
+       "display": "Rubella screening test (procedure)"
+      }
+     ],
+     "text": "Rubella screening test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-e1d0-69b6f0a4e9bb",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104326007",
+       "display": "Measurement of Varicella-zoster virus antibody (procedure)"
+      }
+     ],
+     "text": "Measurement of Varicella-zoster virus antibody (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-5c7c-7e1581dff2ec",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "28163009",
+       "display": "Skin test for tuberculosis, Tine test (procedure)"
+      }
+     ],
+     "text": "Skin test for tuberculosis, Tine test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-1944-cccfec68fc0a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "60218003",
+       "display": "Urinalysis, protein, qualitative (procedure)"
+      }
+     ],
+     "text": "Urinalysis, protein, qualitative (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "40cb7be2-9c26-6328-caa0-c633bfaed52e",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "5880005",
+       "display": "Physical examination procedure (procedure)"
+      }
+     ],
+     "text": "Physical examination procedure (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "performedPeriod": {
+     "start": "2024-07-22T20:20:44-07:00",
+     "end": "2024-07-22T20:35:44-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|75397554-1bd8-310b-9764-bbff41da2814",
+     "display": "ENCOMPASS HEALTH REHAB HOSPITAL OF WESTERN MASS"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:40cb7be2-9c26-6328-ed09-ef3ef3aa4298",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   }
+  ],
+  "DiagnosticReport": [
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "e4d87b4f-00e7-c266-cb9e-74f321d2e133",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-note"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "34117-2",
+        "display": "History and physical note"
+       },
+       {
+        "system": "http://loinc.org",
+        "code": "51847-2",
+        "display": "Evaluation + Plan note"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "34117-2",
+       "display": "History and physical note"
+      },
+      {
+       "system": "http://loinc.org",
+       "code": "51847-2",
+       "display": "Evaluation + Plan note"
+      }
+     ]
+    },
+    "subject": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-3aa0-71db4ed81e06"
+    },
+    "encounter": {
+     "reference": "urn:uuid:40cb7be2-9c26-6328-75bd-838e58c2583e"
+    },
+    "effectiveDateTime": "2024-07-22T20:20:44-07:00",
+    "issued": "2024-07-22T20:20:44.500-07:00",
+    "performer": [
+     {
+      "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999996892",
+      "display": "Dr. Cletus494 Paucek755"
+     }
+    ],
+    "presentedForm": [
+     {
+      "contentType": "text/plain; charset=utf-8",
+      "data": "CjIwMjQtMDctMjIKCiMgQ2hpZWYgQ29tcGxhaW50Ck5vIGNvbXBsYWludHMuCgojIEhpc3Rvcnkgb2YgUHJlc2VudCBJbGxuZXNzCkhpZWRpODMzIGlzIGEgMzAgeWVhci1vbGQgbm9uaGlzcGFuaWMgd2hpdGUgZmVtYWxlLiBQYXRpZW50IGhhcyBhIGhpc3Rvcnkgb2YgZ2luZ2l2YWwgZGlzZWFzZSAoZGlzb3JkZXIpLCBwYXJ0LXRpbWUgZW1wbG95bWVudCAoZmluZGluZyksIG1lZGljYXRpb24gcmV2aWV3IGR1ZSAoc2l0dWF0aW9uKSwgbGltaXRlZCBzb2NpYWwgY29udGFjdCAoZmluZGluZyksIGZ1bGwtdGltZSBlbXBsb3ltZW50IChmaW5kaW5nKSwgYWN1dGUgdmlyYWwgcGhhcnluZ2l0aXMgKGRpc29yZGVyKSwgdmlyYWwgc2ludXNpdGlzIChkaXNvcmRlciksIGdpbmdpdml0aXMgKGRpc29yZGVyKSwgbm9ybWFsIHByZWduYW5jeSAoZmluZGluZykuCgojIFNvY2lhbCBIaXN0b3J5ClBhdGllbnQgaXMgc2luZ2xlLiBQYXRpZW50IHF1aXQgc21va2luZyBhdCBhZ2UgMjIuCiBQYXRpZW50IGlkZW50aWZpZXMgYXMgaG9tb3NleHVhbC4KClBhdGllbnQgY29tZXMgZnJvbSBhIGhpZ2ggc29jaW9lY29ub21pYyBiYWNrZ3JvdW5kLgogUGF0aWVudCBoYXMgYSBoaWdoIHNjaG9vbCBlZHVjYXRpb24uClBhdGllbnQgY3VycmVudGx5IGhhcyBIdW1hbmEuCgojIEFsbGVyZ2llcwpObyBLbm93biBBbGxlcmdpZXMuCgojIE1lZGljYXRpb25zCns3IChldGhpbnlsIGVzdHJhZGlvbCAwLjAzNSBtZyAvIG5vcmdlc3RpbWF0ZSAwLjE4IG1nIG9yYWwgdGFibGV0KSAvIDcgKGV0aGlueWwgZXN0cmFkaW9sIDAuMDM1IG1nIC8gbm9yZ2VzdGltYXRlIDAuMjE1IG1nIG9yYWwgdGFibGV0KSAvIDcgKGV0aGlueWwgZXN0cmFkaW9sIDAuMDM1IG1nIC8gbm9yZ2VzdGltYXRlIDAuMjUgbWcgb3JhbCB0YWJsZXQpIC8gNyAoaW5lcnQgaW5ncmVkaWVudHMgMSBtZyBvcmFsIHRhYmxldCkgfSBwYWNrIFt0cmluZXNzYSAyOCBkYXldOyAxIG1sIG1lZHJveHlwcm9nZXN0ZXJvbmUgYWNldGF0ZSAxNTAgbWcvbWwgaW5qZWN0aW9uOyBzb2RpdW0gZmx1b3JpZGUgMC4wMjcyIG1nL21nIG9yYWwgZ2VsCgojIEFzc2Vzc21lbnQgYW5kIFBsYW4KUGF0aWVudCBpcyBwcmVzZW50aW5nIHdpdGggbm9ybWFsIHByZWduYW5jeSAoZmluZGluZyksIGFuZW1pYSAoZGlzb3JkZXIpLiAKCgojIyBQbGFuCgpUaGUgZm9sbG93aW5nIHByb2NlZHVyZXMgd2VyZSBjb25kdWN0ZWQ6Ci0gc3RhbmRhcmQgcHJlZ25hbmN5IHRlc3QgKHByb2NlZHVyZSkKLSB1bHRyYXNvdW5kIHNjYW4gZm9yIGZldGFsIHZpYWJpbGl0eSAocHJvY2VkdXJlKQotIGV2YWx1YXRpb24gb2YgdXRlcmluZSBmdW5kYWwgaGVpZ2h0IChwcm9jZWR1cmUpCi0gYXVzY3VsdGF0aW9uIG9mIHRoZSBmZXRhbCBoZWFydCAocHJvY2VkdXJlKQotIGJsb29kIGdyb3VwIHR5cGluZyAocHJvY2VkdXJlKQotIGhlbW9ncmFtLCBhdXRvbWF0ZWQsIHdpdGggcmVkIGJsb29kIGNlbGxzLCB3aGl0ZSBibG9vZCBjZWxscywgaGVtb2dsb2JpbiwgaGVtYXRvY3JpdCwgaW5kaWNlcywgcGxhdGVsZXQgY291bnQsIGFuZCBtYW51YWwgd2hpdGUgYmxvb2QgY2VsbCBkaWZmZXJlbnRpYWwgKHByb2NlZHVyZSkKLSBoZXBhdGl0aXMgYiBzdXJmYWNlIGFudGlnZW4gbWVhc3VyZW1lbnQgKHByb2NlZHVyZSkKLSBodW1hbiBpbW11bm9kZWZpY2llbmN5IHZpcnVzIGFudGlnZW4gdGVzdCAocHJvY2VkdXJlKQotIGNobGFteWRpYSBhbnRpZ2VuIHRlc3QgKHByb2NlZHVyZSkKLSBnb25vcnJoZWEgaW5mZWN0aW9uIHRpdGVyIHRlc3QgKHByb2NlZHVyZSkKLSBzeXBoaWxpcyBpbmZlY3Rpb3VzIHRpdGVyIHRlc3QgKHByb2NlZHVyZSkKLSB1cmluZSBjdWx0dXJlIChwcm9jZWR1cmUpCi0gY3l0b3BhdGhvbG9neSBwcm9jZWR1cmUsIHByZXBhcmF0aW9uIG9mIHNtZWFyLCBnZW5pdGFsIHNvdXJjZSAocHJvY2VkdXJlKQotIHVyaW5lIHNjcmVlbmluZyB0ZXN0IGZvciBkaWFiZXRlcyAocHJvY2VkdXJlKQotIGhlcGF0aXRpcyBjIGFudGlib2R5LCBjb25maXJtYXRvcnkgdGVzdCAocHJvY2VkdXJlKQotIHJ1YmVsbGEgc2NyZWVuaW5nIHRlc3QgKHByb2NlZHVyZSkKLSBtZWFzdXJlbWVudCBvZiB2YXJpY2VsbGEtem9zdGVyIHZpcnVzIGFudGlib2R5IChwcm9jZWR1cmUpCi0gc2tpbiB0ZXN0IGZvciB0dWJlcmN1bG9zaXMsIHRpbmUgdGVzdCAocHJvY2VkdXJlKQotIHVyaW5hbHlzaXMsIHByb3RlaW4sIHF1YWxpdGF0aXZlIChwcm9jZWR1cmUpCi0gcGh5c2ljYWwgZXhhbWluYXRpb24gcHJvY2VkdXJlIChwcm9jZWR1cmUpClRoZSBwYXRpZW50IHdhcyBwbGFjZWQgb24gYSBjYXJlcGxhbjoKLSByb3V0aW5lIGFudGVuYXRhbCBjYXJlIChyZWdpbWUvdGhlcmFweSkK"
+     }
+    ]
+   }
+  ]
+ }
+}

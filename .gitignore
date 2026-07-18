@@ -4,8 +4,5 @@
 .runtime/
 .venv/
 __pycache__/
-partner-provided-docs/*
-!partner-provided-docs/seeded-stuff/
-partner-provided-docs/seeded-stuff/*
-!partner-provided-docs/seeded-stuff/seeding-manifest.json
+partner-provided-docs/
 *.pyc

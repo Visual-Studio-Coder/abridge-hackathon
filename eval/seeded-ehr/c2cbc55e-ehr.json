@@ -1,0 +1,1074 @@
+{
+ "patient": {
+  "resourceType": "Patient",
+  "id": "c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32",
+  "name": [
+   {
+    "use": "official",
+    "family": "Rau",
+    "given": [
+     "Margarita",
+     "Kaylene"
+    ],
+    "prefix": [
+     "Mrs."
+    ]
+   },
+   {
+    "use": "maiden",
+    "family": "Dooley",
+    "given": [
+     "Margarita",
+     "Kaylene"
+    ],
+    "prefix": [
+     "Mrs."
+    ]
+   }
+  ],
+  "gender": "female",
+  "birthDate": "1976-08-20",
+  "maritalStatus": {
+   "coding": [
+    {
+     "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+     "code": "M",
+     "display": "Married"
+    }
+   ],
+   "text": "Married"
+  },
+  "address": [
+   {
+    "city": "Beverly",
+    "state": "MA",
+    "country": "US"
+   }
+  ],
+  "communication": [
+   {
+    "language": {
+     "coding": [
+      {
+       "system": "urn:ietf:bcp:47",
+       "code": "en-US",
+       "display": "English (United States)"
+      }
+     ],
+     "text": "English (United States)"
+    }
+   }
+  ]
+ },
+ "encounter": {
+  "resourceType": "Encounter",
+  "id": "c2cbc55e-34dc-73c6-4d09-7d9c99b11de4",
+  "meta": {
+   "profile": [
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter"
+   ]
+  },
+  "identifier": [
+   {
+    "use": "official",
+    "system": "https://github.com/synthetichealth/synthea",
+    "value": "c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+   }
+  ],
+  "status": "finished",
+  "class": {
+   "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+   "code": "AMB"
+  },
+  "type": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "424441002",
+      "display": "Prenatal initial visit (regime/therapy)"
+     }
+    ],
+    "text": "Prenatal initial visit (regime/therapy)"
+   }
+  ],
+  "subject": {
+   "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32",
+   "display": "Mrs. Margarita164 Kaylene27 Rau926"
+  },
+  "participant": [
+   {
+    "type": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+        "code": "PPRF",
+        "display": "primary performer"
+       }
+      ],
+      "text": "primary performer"
+     }
+    ],
+    "period": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "individual": {
+     "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999996793",
+     "display": "Dr. Joanna347 Abbott774"
+    }
+   }
+  ],
+  "period": {
+   "start": "2019-09-27T18:22:52-07:00",
+   "end": "2019-09-27T18:37:52-07:00"
+  },
+  "reasonCode": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "72892002",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   }
+  ],
+  "location": [
+   {
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    }
+   }
+  ],
+  "serviceProvider": {
+   "reference": "Organization?identifier=https://github.com/synthetichealth/synthea|440fa4b8-c731-3cf5-81d9-aa3f30a37b95",
+   "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+  }
+ },
+ "resources": {
+  "Condition": [
+   {
+    "resourceType": "Condition",
+    "id": "c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis"
+     ]
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "resolved"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+       "code": "confirmed"
+      }
+     ]
+    },
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "code": "encounter-diagnosis",
+        "display": "Encounter Diagnosis"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "72892002",
+       "display": "Normal pregnancy (finding)"
+      }
+     ],
+     "text": "Normal pregnancy (finding)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "onsetDateTime": "2019-09-27T18:22:52-07:00",
+    "abatementDateTime": "2020-05-01T18:22:52-07:00",
+    "recordedDate": "2019-09-27T18:22:52-07:00"
+   }
+  ],
+  "Procedure": [
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-7f53-f978c78c0225",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "252160004",
+       "display": "Standard pregnancy test (procedure)"
+      }
+     ],
+     "text": "Standard pregnancy test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-6ffc-7d5de64265f5",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "169230002",
+       "display": "Ultrasound scan for fetal viability (procedure)"
+      }
+     ],
+     "text": "Ultrasound scan for fetal viability (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-f217-65149c73df72",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "274804006",
+       "display": "Evaluation of uterine fundal height (procedure)"
+      }
+     ],
+     "text": "Evaluation of uterine fundal height (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-03a8-aba5cf645e52",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "225158009",
+       "display": "Auscultation of the fetal heart (procedure)"
+      }
+     ],
+     "text": "Auscultation of the fetal heart (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-676f-fc226c57e8ea",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "44608003",
+       "display": "Blood group typing (procedure)"
+      }
+     ],
+     "text": "Blood group typing (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-420b-d101b370a4d3",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104091002",
+       "display": "Hemogram, automated, with red blood cells, white blood cells, hemoglobin, hematocrit, indices, platelet count, and manual white blood cell differential (procedure)"
+      }
+     ],
+     "text": "Hemogram, automated, with red blood cells, white blood cells, hemoglobin, hematocrit, indices, platelet count, and manual white blood cell differential (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-bf48-dd1897d9f3f3",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "47758006",
+       "display": "Hepatitis B surface antigen measurement (procedure)"
+      }
+     ],
+     "text": "Hepatitis B surface antigen measurement (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-e17b-e7f22b8d594b",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "31676001",
+       "display": "Human immunodeficiency virus antigen test (procedure)"
+      }
+     ],
+     "text": "Human immunodeficiency virus antigen test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-e1c4-dda91fe09809",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "310861008",
+       "display": "Chlamydia antigen test (procedure)"
+      }
+     ],
+     "text": "Chlamydia antigen test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-4eda-df0a9242edf1",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "165829005",
+       "display": "Gonorrhea infection titer test (procedure)"
+      }
+     ],
+     "text": "Gonorrhea infection titer test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-49ec-200867be5298",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "269828009",
+       "display": "Syphilis infectious titer test (procedure)"
+      }
+     ],
+     "text": "Syphilis infectious titer test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-608c-65acfe6e8707",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "117010004",
+       "display": "Urine culture (procedure)"
+      }
+     ],
+     "text": "Urine culture (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-ffbe-ca4a594f0dbf",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "90226004",
+       "display": "Cytopathology procedure, preparation of smear, genital source (procedure)"
+      }
+     ],
+     "text": "Cytopathology procedure, preparation of smear, genital source (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-72cc-65749421e93a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "395123002",
+       "display": "Urine screening test for diabetes (procedure)"
+      }
+     ],
+     "text": "Urine screening test for diabetes (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-b3eb-5ef605a0cf56",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104375008",
+       "display": "Hepatitis C antibody, confirmatory test (procedure)"
+      }
+     ],
+     "text": "Hepatitis C antibody, confirmatory test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-2c6f-1ef572296a4e",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "314098000",
+       "display": "Rubella screening test (procedure)"
+      }
+     ],
+     "text": "Rubella screening test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-4739-8ad5d9c9d432",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104326007",
+       "display": "Measurement of Varicella-zoster virus antibody (procedure)"
+      }
+     ],
+     "text": "Measurement of Varicella-zoster virus antibody (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-7539-dda6c46dc7fa",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "28163009",
+       "display": "Skin test for tuberculosis, Tine test (procedure)"
+      }
+     ],
+     "text": "Skin test for tuberculosis, Tine test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-5773-7c0ee0ee9ba7",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "60218003",
+       "display": "Urinalysis, protein, qualitative (procedure)"
+      }
+     ],
+     "text": "Urinalysis, protein, qualitative (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "c2cbc55e-34dc-73c6-167e-771e36620910",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "5880005",
+       "display": "Physical examination procedure (procedure)"
+      }
+     ],
+     "text": "Physical examination procedure (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "performedPeriod": {
+     "start": "2019-09-27T18:22:52-07:00",
+     "end": "2019-09-27T18:37:52-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|89c228b8-12e8-3436-9c1a-2bed9ee524d2",
+     "display": "LAHEY HOSPITAL & MEDICAL CENTER, BURLINGTON"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:c2cbc55e-34dc-73c6-7cad-b3aec57af7da",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   }
+  ],
+  "DiagnosticReport": [
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "6a79d935-df93-404d-3b64-60626dc42942",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-note"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "34117-2",
+        "display": "History and physical note"
+       },
+       {
+        "system": "http://loinc.org",
+        "code": "51847-2",
+        "display": "Evaluation + Plan note"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "34117-2",
+       "display": "History and physical note"
+      },
+      {
+       "system": "http://loinc.org",
+       "code": "51847-2",
+       "display": "Evaluation + Plan note"
+      }
+     ]
+    },
+    "subject": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32"
+    },
+    "encounter": {
+     "reference": "urn:uuid:c2cbc55e-34dc-73c6-4d09-7d9c99b11de4"
+    },
+    "effectiveDateTime": "2019-09-27T18:22:52-07:00",
+    "issued": "2019-09-27T18:22:52.499-07:00",
+    "performer": [
+     {
+      "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999996793",
+      "display": "Dr. Joanna347 Abbott774"
+     }
+    ],
+    "presentedForm": [
+     {
+      "contentType": "text/plain; charset=utf-8",
+      "data": "CjIwMTktMDktMjcKCiMgQ2hpZWYgQ29tcGxhaW50Ck5vIGNvbXBsYWludHMuCgojIEhpc3Rvcnkgb2YgUHJlc2VudCBJbGxuZXNzCk1hcmdhcml0YTE2NCBLYXlsZW5lMjcgaXMgYSA0MyB5ZWFyLW9sZCBub25oaXNwYW5pYyB3aGl0ZSBmZW1hbGUuIFBhdGllbnQgaGFzIGEgaGlzdG9yeSBvZiBwYXJ0LXRpbWUgZW1wbG95bWVudCAoZmluZGluZyksIG1lZGljYXRpb24gcmV2aWV3IGR1ZSAoc2l0dWF0aW9uKSwgbm90IGluIGxhYm9yIGZvcmNlIChmaW5kaW5nKSwgdW5oZWFsdGh5IGFsY29ob2wgZHJpbmtpbmcgYmVoYXZpb3IgKGZpbmRpbmcpLCBmdWxsLXRpbWUgZW1wbG95bWVudCAoZmluZGluZyksIG1pc3VzZXMgZHJ1Z3MgKGZpbmRpbmcpLCB2aWN0aW0gb2YgaW50aW1hdGUgcGFydG5lciBhYnVzZSAoZmluZGluZyksIGdpbmdpdml0aXMgKGRpc29yZGVyKS4KCiMgU29jaWFsIEhpc3RvcnkKUGF0aWVudCBpcyBtYXJyaWVkLiBQYXRpZW50IHF1aXQgc21va2luZyBhdCBhZ2UgMTkuCiBQYXRpZW50IGlkZW50aWZpZXMgYXMgaGV0ZXJvc2V4dWFsLgoKUGF0aWVudCBjb21lcyBmcm9tIGEgbWlkZGxlIHNvY2lvZWNvbm9taWMgYmFja2dyb3VuZC4KIFBhdGllbnQgaGFzIGEgaGlnaCBzY2hvb2wgZWR1Y2F0aW9uLgpQYXRpZW50IGN1cnJlbnRseSBoYXMgTWVkaWNhaWQuCgojIEFsbGVyZ2llcwpObyBLbm93biBBbGxlcmdpZXMuCgojIE1lZGljYXRpb25zCmxpc2lub3ByaWwgMTAgbWcgb3JhbCB0YWJsZXQ7IGV0b25vZ2VzdHJlbCA2OCBtZyBkcnVnIGltcGxhbnQ7IHNvZGl1bSBmbHVvcmlkZSAwLjAyNzIgbWcvbWcgb3JhbCBnZWwKCiMgQXNzZXNzbWVudCBhbmQgUGxhbgpQYXRpZW50IGlzIHByZXNlbnRpbmcgd2l0aCBub3JtYWwgcHJlZ25hbmN5IChmaW5kaW5nKS4gCgoKIyMgUGxhbgoKVGhlIGZvbGxvd2luZyBwcm9jZWR1cmVzIHdlcmUgY29uZHVjdGVkOgotIHN0YW5kYXJkIHByZWduYW5jeSB0ZXN0IChwcm9jZWR1cmUpCi0gdWx0cmFzb3VuZCBzY2FuIGZvciBmZXRhbCB2aWFiaWxpdHkgKHByb2NlZHVyZSkKLSBldmFsdWF0aW9uIG9mIHV0ZXJpbmUgZnVuZGFsIGhlaWdodCAocHJvY2VkdXJlKQotIGF1c2N1bHRhdGlvbiBvZiB0aGUgZmV0YWwgaGVhcnQgKHByb2NlZHVyZSkKLSBibG9vZCBncm91cCB0eXBpbmcgKHByb2NlZHVyZSkKLSBoZW1vZ3JhbSwgYXV0b21hdGVkLCB3aXRoIHJlZCBibG9vZCBjZWxscywgd2hpdGUgYmxvb2QgY2VsbHMsIGhlbW9nbG9iaW4sIGhlbWF0b2NyaXQsIGluZGljZXMsIHBsYXRlbGV0IGNvdW50LCBhbmQgbWFudWFsIHdoaXRlIGJsb29kIGNlbGwgZGlmZmVyZW50aWFsIChwcm9jZWR1cmUpCi0gaGVwYXRpdGlzIGIgc3VyZmFjZSBhbnRpZ2VuIG1lYXN1cmVtZW50IChwcm9jZWR1cmUpCi0gaHVtYW4gaW1tdW5vZGVmaWNpZW5jeSB2aXJ1cyBhbnRpZ2VuIHRlc3QgKHByb2NlZHVyZSkKLSBjaGxhbXlkaWEgYW50aWdlbiB0ZXN0IChwcm9jZWR1cmUpCi0gZ29ub3JyaGVhIGluZmVjdGlvbiB0aXRlciB0ZXN0IChwcm9jZWR1cmUpCi0gc3lwaGlsaXMgaW5mZWN0aW91cyB0aXRlciB0ZXN0IChwcm9jZWR1cmUpCi0gdXJpbmUgY3VsdHVyZSAocHJvY2VkdXJlKQotIGN5dG9wYXRob2xvZ3kgcHJvY2VkdXJlLCBwcmVwYXJhdGlvbiBvZiBzbWVhciwgZ2VuaXRhbCBzb3VyY2UgKHByb2NlZHVyZSkKLSB1cmluZSBzY3JlZW5pbmcgdGVzdCBmb3IgZGlhYmV0ZXMgKHByb2NlZHVyZSkKLSBoZXBhdGl0aXMgYyBhbnRpYm9keSwgY29uZmlybWF0b3J5IHRlc3QgKHByb2NlZHVyZSkKLSBydWJlbGxhIHNjcmVlbmluZyB0ZXN0IChwcm9jZWR1cmUpCi0gbWVhc3VyZW1lbnQgb2YgdmFyaWNlbGxhLXpvc3RlciB2aXJ1cyBhbnRpYm9keSAocHJvY2VkdXJlKQotIHNraW4gdGVzdCBmb3IgdHViZXJjdWxvc2lzLCB0aW5lIHRlc3QgKHByb2NlZHVyZSkKLSB1cmluYWx5c2lzLCBwcm90ZWluLCBxdWFsaXRhdGl2ZSAocHJvY2VkdXJlKQotIHBoeXNpY2FsIGV4YW1pbmF0aW9uIHByb2NlZHVyZSAocHJvY2VkdXJlKQpUaGUgcGF0aWVudCB3YXMgcGxhY2VkIG9uIGEgY2FyZXBsYW46Ci0gcm91dGluZSBhbnRlbmF0YWwgY2FyZSAocmVnaW1lL3RoZXJhcHkpCg=="
+     }
+    ]
+   }
+  ]
+ }
+}

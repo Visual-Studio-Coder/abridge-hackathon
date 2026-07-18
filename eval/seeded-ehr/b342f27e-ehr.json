@@ -1,0 +1,1072 @@
+{
+ "patient": {
+  "resourceType": "Patient",
+  "id": "b342f27e-56bc-08ac-347c-323279c0d595",
+  "name": [
+   {
+    "use": "official",
+    "family": "Reinger",
+    "given": [
+     "Clarence"
+    ],
+    "prefix": [
+     "Mrs."
+    ]
+   },
+   {
+    "use": "maiden",
+    "family": "Hoppe",
+    "given": [
+     "Clarence"
+    ],
+    "prefix": [
+     "Mrs."
+    ]
+   }
+  ],
+  "gender": "female",
+  "birthDate": "1993-05-09",
+  "maritalStatus": {
+   "coding": [
+    {
+     "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+     "code": "M",
+     "display": "Married"
+    }
+   ],
+   "text": "Married"
+  },
+  "address": [
+   {
+    "city": "Somerville",
+    "state": "MA",
+    "country": "US"
+   }
+  ],
+  "communication": [
+   {
+    "language": {
+     "coding": [
+      {
+       "system": "urn:ietf:bcp:47",
+       "code": "en-US",
+       "display": "English (United States)"
+      }
+     ],
+     "text": "English (United States)"
+    }
+   }
+  ]
+ },
+ "encounter": {
+  "resourceType": "Encounter",
+  "id": "b342f27e-56bc-08ac-24f0-de401f6e3c47",
+  "meta": {
+   "profile": [
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter"
+   ]
+  },
+  "identifier": [
+   {
+    "use": "official",
+    "system": "https://github.com/synthetichealth/synthea",
+    "value": "b342f27e-56bc-08ac-24f0-de401f6e3c47"
+   }
+  ],
+  "status": "finished",
+  "class": {
+   "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+   "code": "AMB"
+  },
+  "type": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "424441002",
+      "display": "Prenatal initial visit (regime/therapy)"
+     }
+    ],
+    "text": "Prenatal initial visit (regime/therapy)"
+   }
+  ],
+  "subject": {
+   "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595",
+   "display": "Mrs. Clarence5 Reinger292"
+  },
+  "participant": [
+   {
+    "type": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+        "code": "PPRF",
+        "display": "primary performer"
+       }
+      ],
+      "text": "primary performer"
+     }
+    ],
+    "period": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "individual": {
+     "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999993196",
+     "display": "Dr. Floy720 Greenfelder433"
+    }
+   }
+  ],
+  "period": {
+   "start": "2025-06-01T09:43:17-07:00",
+   "end": "2025-06-01T09:58:17-07:00"
+  },
+  "reasonCode": [
+   {
+    "coding": [
+     {
+      "system": "http://snomed.info/sct",
+      "code": "72892002",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   }
+  ],
+  "location": [
+   {
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    }
+   }
+  ],
+  "serviceProvider": {
+   "reference": "Organization?identifier=https://github.com/synthetichealth/synthea|bac9dc0c-cb0f-3fa6-aa12-819dd0fb922a",
+   "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+  }
+ },
+ "resources": {
+  "Condition": [
+   {
+    "resourceType": "Condition",
+    "id": "b342f27e-56bc-08ac-2913-b051dda4c455",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis"
+     ]
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "resolved"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+       "code": "confirmed"
+      }
+     ]
+    },
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "code": "encounter-diagnosis",
+        "display": "Encounter Diagnosis"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "72892002",
+       "display": "Normal pregnancy (finding)"
+      }
+     ],
+     "text": "Normal pregnancy (finding)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "onsetDateTime": "2025-06-01T09:43:17-07:00",
+    "abatementDateTime": "2026-01-11T08:43:17-08:00",
+    "recordedDate": "2025-06-01T09:43:17-07:00"
+   }
+  ],
+  "Procedure": [
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-2127-70aa4d07268b",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "252160004",
+       "display": "Standard pregnancy test (procedure)"
+      }
+     ],
+     "text": "Standard pregnancy test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-0058-65475e991270",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "169230002",
+       "display": "Ultrasound scan for fetal viability (procedure)"
+      }
+     ],
+     "text": "Ultrasound scan for fetal viability (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-c974-a60470c91463",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "274804006",
+       "display": "Evaluation of uterine fundal height (procedure)"
+      }
+     ],
+     "text": "Evaluation of uterine fundal height (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-b485-24359052ce73",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "225158009",
+       "display": "Auscultation of the fetal heart (procedure)"
+      }
+     ],
+     "text": "Auscultation of the fetal heart (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-f493-d79edea7421a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "44608003",
+       "display": "Blood group typing (procedure)"
+      }
+     ],
+     "text": "Blood group typing (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-d6ab-23330e55a7d5",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104091002",
+       "display": "Hemogram, automated, with red blood cells, white blood cells, hemoglobin, hematocrit, indices, platelet count, and manual white blood cell differential (procedure)"
+      }
+     ],
+     "text": "Hemogram, automated, with red blood cells, white blood cells, hemoglobin, hematocrit, indices, platelet count, and manual white blood cell differential (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-2183-fbbcbe0f2199",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "47758006",
+       "display": "Hepatitis B surface antigen measurement (procedure)"
+      }
+     ],
+     "text": "Hepatitis B surface antigen measurement (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-95a5-46a81cafef56",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "31676001",
+       "display": "Human immunodeficiency virus antigen test (procedure)"
+      }
+     ],
+     "text": "Human immunodeficiency virus antigen test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-8f91-1dfb367ed988",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "310861008",
+       "display": "Chlamydia antigen test (procedure)"
+      }
+     ],
+     "text": "Chlamydia antigen test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-7bf9-f957d3a59c65",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "165829005",
+       "display": "Gonorrhea infection titer test (procedure)"
+      }
+     ],
+     "text": "Gonorrhea infection titer test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-0e86-27c8bff0b571",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "269828009",
+       "display": "Syphilis infectious titer test (procedure)"
+      }
+     ],
+     "text": "Syphilis infectious titer test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-b97a-ec94f48e7e80",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "117010004",
+       "display": "Urine culture (procedure)"
+      }
+     ],
+     "text": "Urine culture (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-a527-8174196b4c6e",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "90226004",
+       "display": "Cytopathology procedure, preparation of smear, genital source (procedure)"
+      }
+     ],
+     "text": "Cytopathology procedure, preparation of smear, genital source (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-675b-4ae1bff9250d",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "395123002",
+       "display": "Urine screening test for diabetes (procedure)"
+      }
+     ],
+     "text": "Urine screening test for diabetes (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-a9c8-3f5f79e0df23",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104375008",
+       "display": "Hepatitis C antibody, confirmatory test (procedure)"
+      }
+     ],
+     "text": "Hepatitis C antibody, confirmatory test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-3aa3-f0d88673f06a",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "314098000",
+       "display": "Rubella screening test (procedure)"
+      }
+     ],
+     "text": "Rubella screening test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-23ae-5f9344d220ee",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "104326007",
+       "display": "Measurement of Varicella-zoster virus antibody (procedure)"
+      }
+     ],
+     "text": "Measurement of Varicella-zoster virus antibody (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-4237-d04e1eada042",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "28163009",
+       "display": "Skin test for tuberculosis, Tine test (procedure)"
+      }
+     ],
+     "text": "Skin test for tuberculosis, Tine test (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-643e-db7b32b7e05d",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "60218003",
+       "display": "Urinalysis, protein, qualitative (procedure)"
+      }
+     ],
+     "text": "Urinalysis, protein, qualitative (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   },
+   {
+    "resourceType": "Procedure",
+    "id": "b342f27e-56bc-08ac-ec18-e1b554dff322",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+     ]
+    },
+    "status": "completed",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "5880005",
+       "display": "Physical examination procedure (procedure)"
+      }
+     ],
+     "text": "Physical examination procedure (procedure)"
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "performedPeriod": {
+     "start": "2025-06-01T09:43:17-07:00",
+     "end": "2025-06-01T09:58:17-07:00"
+    },
+    "location": {
+     "reference": "Location?identifier=https://github.com/synthetichealth/synthea|580dfad8-45bd-3de0-8636-3140d44a4ba5",
+     "display": "CAMBRIDGE PUBLIC HEALTH COMMISSION"
+    },
+    "reasonReference": [
+     {
+      "reference": "urn:uuid:b342f27e-56bc-08ac-6c0c-95f3a71262c8",
+      "display": "Normal pregnancy (finding)"
+     }
+    ]
+   }
+  ],
+  "DiagnosticReport": [
+   {
+    "resourceType": "DiagnosticReport",
+    "id": "d297dc97-582b-7200-82cd-051642b509a2",
+    "meta": {
+     "profile": [
+      "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-note"
+     ]
+    },
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "34117-2",
+        "display": "History and physical note"
+       },
+       {
+        "system": "http://loinc.org",
+        "code": "51847-2",
+        "display": "Evaluation + Plan note"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "34117-2",
+       "display": "History and physical note"
+      },
+      {
+       "system": "http://loinc.org",
+       "code": "51847-2",
+       "display": "Evaluation + Plan note"
+      }
+     ]
+    },
+    "subject": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-347c-323279c0d595"
+    },
+    "encounter": {
+     "reference": "urn:uuid:b342f27e-56bc-08ac-24f0-de401f6e3c47"
+    },
+    "effectiveDateTime": "2025-06-01T09:43:17-07:00",
+    "issued": "2025-06-01T09:43:17.521-07:00",
+    "performer": [
+     {
+      "reference": "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999993196",
+      "display": "Dr. Floy720 Greenfelder433"
+     }
+    ],
+    "presentedForm": [
+     {
+      "contentType": "text/plain; charset=utf-8",
+      "data": "CjIwMjUtMDYtMDEKCiMgQ2hpZWYgQ29tcGxhaW50Ci0gU2hvcnRuZXNzIG9mIEJyZWF0aAotIE11Y3VzCi0gU29yZSBUaHJvYXQKLSBGYXRpZ3VlCi0gRmV2ZXIKLSBOYXNhbCBDb25nZXN0aW9uCi0gQ291Z2gKCgojIEhpc3Rvcnkgb2YgUHJlc2VudCBJbGxuZXNzCkNsYXJlbmNlNSBpcyBhIDMyIHllYXItb2xkIG5vbmhpc3BhbmljIHdoaXRlIGZlbWFsZS4gUGF0aWVudCBoYXMgYSBoaXN0b3J5IG9mIGVjbGFtcHNpYSBpbiBwcmVnbmFuY3kgKGRpc29yZGVyKSwgdmljdGltIG9mIGludGltYXRlIHBhcnRuZXIgYWJ1c2UgKGZpbmRpbmcpLCBmcmFjdHVyZSBvZiBib25lIChkaXNvcmRlciksIGZyYWN0dXJlIHN1Ymx1eGF0aW9uIG9mIHdyaXN0IChkaXNvcmRlciksIG5vcm1hbCBwcmVnbmFuY3kgKGZpbmRpbmcpLCBwYXJ0LXRpbWUgZW1wbG95bWVudCAoZmluZGluZyksIGZhY2lhbCBsYWNlcmF0aW9uIChkaXNvcmRlciksIHByaW1hcnkgZGVudGFsIGNhcmllcyAoZGlzb3JkZXIpLCBmdWxsLXRpbWUgZW1wbG95bWVudCAoZmluZGluZyksIGxhY2VyYXRpb24gLSBpbmp1cnkgKGRpc29yZGVyKSwgZ2luZ2l2aXRpcyAoZGlzb3JkZXIpLCBzb2NpYWwgaXNvbGF0aW9uIChmaW5kaW5nKSwgc3RyZXNzIChmaW5kaW5nKS4KCiMgU29jaWFsIEhpc3RvcnkKUGF0aWVudCBpcyBtYXJyaWVkLiBQYXRpZW50IGhhcyBuZXZlciBzbW9rZWQuCiBQYXRpZW50IGlkZW50aWZpZXMgYXMgaGV0ZXJvc2V4dWFsLgoKUGF0aWVudCBjb21lcyBmcm9tIGEgbWlkZGxlIHNvY2lvZWNvbm9taWMgYmFja2dyb3VuZC4KIFBhdGllbnQgaXMgYSBjb2xsZWdlIGdyYWR1YXRlLgpQYXRpZW50IGN1cnJlbnRseSBoYXMgTWVkaWNhaWQuCgojIEFsbGVyZ2llcwpObyBLbm93biBBbGxlcmdpZXMuCgojIE1lZGljYXRpb25zCmFjZXRhbWlub3BoZW4gMzI1IG1nIG9yYWwgdGFibGV0OyB7MjQgKGRyb3NwaXJlbm9uZSAzIG1nIC8gZXRoaW55bCBlc3RyYWRpb2wgMC4wMiBtZyBvcmFsIHRhYmxldCkgLyA0IChpbmVydCBpbmdyZWRpZW50cyAxIG1nIG9yYWwgdGFibGV0KSB9IHBhY2sgW3lheiAyOCBkYXldOyBldG9ub2dlc3RyZWwgNjggbWcgZHJ1ZyBpbXBsYW50OyBhY2V0YW1pbm9waGVuIDMyNSBtZyAvIG94eWNvZG9uZSBoeWRyb2NobG9yaWRlIDUgbWcgb3JhbCB0YWJsZXQ7IHs1IChkaWVub2dlc3QgMiBtZyAvIGVzdHJhZGlvbCB2YWxlcmF0ZSAyIG1nIG9yYWwgdGFibGV0KSAvIDE3IChkaWVub2dlc3QgMyBtZyAvIGVzdHJhZGlvbCB2YWxlcmF0ZSAyIG1nIG9yYWwgdGFibGV0KSAvIDIgKGVzdHJhZGlvbCB2YWxlcmF0ZSAxIG1nIG9yYWwgdGFibGV0KSAvIDIgKGVzdHJhZGlvbCB2YWxlcmF0ZSAzIG1nIG9yYWwgdGFibGV0KSAvIDIgKGluZXJ0IGluZ3JlZGllbnRzIDEgbWcgb3JhbCB0YWJsZXQpIH0gcGFjayBbbmF0YXppYSAyOCBkYXldOyB7NyAoZXRoaW55bCBlc3RyYWRpb2wgMC4wMSBtZyBvcmFsIHRhYmxldCkgLyA4NCAoZXRoaW55bCBlc3RyYWRpb2wgMC4wMyBtZyAvIGxldm9ub3JnZXN0cmVsIDAuMTUgbWcgb3JhbCB0YWJsZXQpIH0gcGFjayBbc2Vhc29uaXF1ZV07IGxldm9ub3JnZXN0cmVsIDAuMDAwODEzIG1nL2hyIGludHJhdXRlcmluZSBzeXN0ZW0gW2xpbGV0dGFdOyBzb2RpdW0gZmx1b3JpZGUgMC4wMjcyIG1nL21nIG9yYWwgZ2VsCgojIEFzc2Vzc21lbnQgYW5kIFBsYW4KUGF0aWVudCBpcyBwcmVzZW50aW5nIHdpdGggbm9ybWFsIHByZWduYW5jeSAoZmluZGluZykuIAoKCiMjIFBsYW4KClRoZSBmb2xsb3dpbmcgcHJvY2VkdXJlcyB3ZXJlIGNvbmR1Y3RlZDoKLSBzdGFuZGFyZCBwcmVnbmFuY3kgdGVzdCAocHJvY2VkdXJlKQotIHVsdHJhc291bmQgc2NhbiBmb3IgZmV0YWwgdmlhYmlsaXR5IChwcm9jZWR1cmUpCi0gZXZhbHVhdGlvbiBvZiB1dGVyaW5lIGZ1bmRhbCBoZWlnaHQgKHByb2NlZHVyZSkKLSBhdXNjdWx0YXRpb24gb2YgdGhlIGZldGFsIGhlYXJ0IChwcm9jZWR1cmUpCi0gYmxvb2QgZ3JvdXAgdHlwaW5nIChwcm9jZWR1cmUpCi0gaGVtb2dyYW0sIGF1dG9tYXRlZCwgd2l0aCByZWQgYmxvb2QgY2VsbHMsIHdoaXRlIGJsb29kIGNlbGxzLCBoZW1vZ2xvYmluLCBoZW1hdG9jcml0LCBpbmRpY2VzLCBwbGF0ZWxldCBjb3VudCwgYW5kIG1hbnVhbCB3aGl0ZSBibG9vZCBjZWxsIGRpZmZlcmVudGlhbCAocHJvY2VkdXJlKQotIGhlcGF0aXRpcyBiIHN1cmZhY2UgYW50aWdlbiBtZWFzdXJlbWVudCAocHJvY2VkdXJlKQotIGh1bWFuIGltbXVub2RlZmljaWVuY3kgdmlydXMgYW50aWdlbiB0ZXN0IChwcm9jZWR1cmUpCi0gY2hsYW15ZGlhIGFudGlnZW4gdGVzdCAocHJvY2VkdXJlKQotIGdvbm9ycmhlYSBpbmZlY3Rpb24gdGl0ZXIgdGVzdCAocHJvY2VkdXJlKQotIHN5cGhpbGlzIGluZmVjdGlvdXMgdGl0ZXIgdGVzdCAocHJvY2VkdXJlKQotIHVyaW5lIGN1bHR1cmUgKHByb2NlZHVyZSkKLSBjeXRvcGF0aG9sb2d5IHByb2NlZHVyZSwgcHJlcGFyYXRpb24gb2Ygc21lYXIsIGdlbml0YWwgc291cmNlIChwcm9jZWR1cmUpCi0gdXJpbmUgc2NyZWVuaW5nIHRlc3QgZm9yIGRpYWJldGVzIChwcm9jZWR1cmUpCi0gaGVwYXRpdGlzIGMgYW50aWJvZHksIGNvbmZpcm1hdG9yeSB0ZXN0IChwcm9jZWR1cmUpCi0gcnViZWxsYSBzY3JlZW5pbmcgdGVzdCAocHJvY2VkdXJlKQotIG1lYXN1cmVtZW50IG9mIHZhcmljZWxsYS16b3N0ZXIgdmlydXMgYW50aWJvZHkgKHByb2NlZHVyZSkKLSBza2luIHRlc3QgZm9yIHR1YmVyY3Vsb3NpcywgdGluZSB0ZXN0IChwcm9jZWR1cmUpCi0gdXJpbmFseXNpcywgcHJvdGVpbiwgcXVhbGl0YXRpdmUgKHByb2NlZHVyZSkKLSBwaHlzaWNhbCBleGFtaW5hdGlvbiBwcm9jZWR1cmUgKHByb2NlZHVyZSkKVGhlIHBhdGllbnQgd2FzIHBsYWNlZCBvbiBhIGNhcmVwbGFuOgotIHJvdXRpbmUgYW50ZW5hdGFsIGNhcmUgKHJlZ2ltZS90aGVyYXB5KQo="
+     }
+    ]
+   }
+  ]
+ }
+}
