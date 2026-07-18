@@ -29,6 +29,27 @@ def encounter():
     return jsonify(service.encounter_payload())
 
 
+@app.get("/api/encounters/<path:encounter_id>")
+def encounter_by_id(encounter_id: str):
+    return jsonify(service.encounter_payload(encounter_id))
+
+
+@app.get("/api/review-queue")
+def review_queue():
+    return jsonify(service.review_queue())
+
+
+@app.get("/api/encounters/<path:encounter_id>/findings")
+def encounter_findings(encounter_id: str):
+    result = service.generic_findings(encounter_id)
+    return jsonify(result or {"findings": [], "summary": None, "analysis": None})
+
+
+@app.post("/api/encounters/<path:encounter_id>/analyze")
+def analyze_encounter(encounter_id: str):
+    return jsonify(service.analyze_encounter(encounter_id))
+
+
 @app.post("/api/analyze")
 def analyze():
     return jsonify(service.analyze())

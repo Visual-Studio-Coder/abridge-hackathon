@@ -55,6 +55,10 @@ class Paths:
     def analysis_meta(self) -> Path:
         return self.runtime / "analysis-meta.json"
 
+    @property
+    def encounter_cache(self) -> Path:
+        return self.runtime / "encounters"
+
 
 def _read_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as handle:
@@ -76,8 +80,21 @@ class EncounterRepository:
         self.paths = paths
 
     def get_julius(self) -> dict[str, Any]:
+        return self.get(JULIUS_ENCOUNTER_ID)
+
+    def get(self, encounter_id: str) -> dict[str, Any]:
         records = _read_json(self.paths.dataset)
-        return next(item for item in records if item["id"] == JULIUS_ENCOUNTER_ID)
+        return next(item for item in records if item["id"] == encounter_id)
+
+    def review_queue(self, limit: int = 8) -> list[dict[str, Any]]:
+        records = _read_json(self.paths.dataset)
+        outpatient = [
+            item for item in records
+            if "admission" not in item["metadata"]["visit_title"].lower()
+            and item["id"] != JULIUS_ENCOUNTER_ID
+        ]
+        outpatient.sort(key=lambda item: item["metadata"]["date"], reverse=True)
+        return [self.get_julius(), *outpatient[: max(0, limit - 1)]]
 
     def get_seeded_ehr(self) -> dict[str, Any]:
         """Build the disclosed demo EHR from the public synthetic encounter.
@@ -258,16 +275,21 @@ class SentinelService:
             )
             return {"ok": True, "message": "Seeded EHR restored"}
 
-    def encounter_payload(self) -> dict[str, Any]:
-        record = self.repository.get_julius()
+    def encounter_payload(self, encounter_id: str = JULIUS_ENCOUNTER_ID) -> dict[str, Any]:
+        record = self.repository.get(encounter_id)
         patient = record["patient_context"]["patient"]
         name = patient["name"][0]
+        initials = "".join(
+            part[0]
+            for part in [*(name.get("given") or [""])[:1], name.get("family", "")]
+            if part
+        )[:2].upper()
         return {
             "id": record["id"],
             "patient": {
                 "id": patient["id"],
                 "name": " ".join(name.get("given", []) + [name.get("family", "")]).strip(),
-                "initials": "JR",
+                "initials": initials,
                 "birth_date": patient.get("birthDate"),
                 "gender": patient.get("gender"),
                 "location": ", ".join(
@@ -283,8 +305,162 @@ class SentinelService:
             "note": record["note"],
             "after_visit_summary": record["after_visit_summary"],
             "avs_provenance": record["after_visit_summary_provenance"],
-            "ehr": _read_json(self.paths.runtime_ehr),
+            "ehr": _read_json(self.paths.runtime_ehr) if encounter_id == JULIUS_ENCOUNTER_ID else {
+                "patient": copy.deepcopy(record["patient_context"]["patient"]),
+                "encounter": copy.deepcopy(record["encounter_fhir"]["encounter"]),
+                "resources": copy.deepcopy(record["encounter_fhir"]["related_resources"]),
+            },
         }
+
+    def _generic_cache_path(self, encounter_id: str) -> Path:
+        safe = hashlib.sha256(encounter_id.encode()).hexdigest()[:20]
+        return self.paths.encounter_cache / f"{safe}.json"
+
+    def review_queue(self) -> dict[str, Any]:
+        rows = []
+        for record in self.repository.review_queue():
+            patient = record["patient_context"]["patient"]
+            name = patient["name"][0]
+            encounter_id = record["id"]
+            if encounter_id == JULIUS_ENCOUNTER_ID:
+                result = self.findings()
+                analyzed = bool(result["analysis"].get("analyzed_at"))
+                summary = result["summary"] if analyzed else None
+            else:
+                cache_path = self._generic_cache_path(encounter_id)
+                cached = _read_json(cache_path) if cache_path.exists() else None
+                analyzed = cached is not None
+                summary = cached.get("summary") if cached else None
+            rows.append({
+                "id": encounter_id,
+                "name": " ".join(name.get("given", []) + [name.get("family", "")]).strip(),
+                "initials": "".join(part[0] for part in [*(name.get("given") or [""])[:1], name.get("family", "")] if part)[:2].upper(),
+                "visit_title": record["metadata"]["visit_title"],
+                "date": record["metadata"]["date"],
+                "analyzed": analyzed,
+                "summary": summary,
+                "demo_patient": encounter_id == JULIUS_ENCOUNTER_ID,
+            })
+        return {
+            "encounters": rows,
+            "summary": {
+                "encounters": len(rows),
+                "analyzed": sum(row["analyzed"] for row in rows),
+                "needs_action": sum((row["summary"] or {}).get("needs_action", 0) for row in rows),
+            },
+        }
+
+    def generic_findings(self, encounter_id: str) -> dict[str, Any] | None:
+        if encounter_id == JULIUS_ENCOUNTER_ID:
+            return self.findings()
+        path = self._generic_cache_path(encounter_id)
+        return _read_json(path) if path.exists() else None
+
+    def analyze_encounter(self, encounter_id: str) -> dict[str, Any]:
+        if encounter_id == JULIUS_ENCOUNTER_ID:
+            return self.analyze()
+        cached = self.generic_findings(encounter_id)
+        if cached:
+            return cached
+        if not os.getenv("ANTHROPIC_API_KEY"):
+            raise ValueError("ANTHROPIC_API_KEY is required to analyze an uncached encounter")
+
+        record = self.repository.get(encounter_id)
+        compact_resources = []
+        for resource_type, resources in record["encounter_fhir"]["related_resources"].items():
+            for resource in resources:
+                compact_resources.append({
+                    "resourceType": resource_type,
+                    "id": resource.get("id"),
+                    "status": resource.get("status"),
+                    "code": resource.get("code"),
+                    "medication": resource.get("medicationCodeableConcept"),
+                    "reasonCode": resource.get("reasonCode"),
+                    "vaccineCode": resource.get("vaccineCode"),
+                })
+
+        from anthropic import Anthropic
+        prompt = f"""You audit a synthetic post-visit EHR against its ambient conversation.
+Return ONLY a JSON array of explicit clinician commitments. Each item must have:
+type, description, verbatim_quote, due_window, expected_resource, classification,
+current_ehr_state, repair_summary, risk. Allowed types: {sorted(ALLOWED_TYPES)}.
+Allowed classifications: OK, MISSING, INCOMPLETE, WRONG, NON_EHR_ACTION.
+Risk: HIGH, ELEVATED, or ROUTINE. Quotes must be exact contiguous transcript text.
+Do not invent an issue when the record is adequate.
+
+Transcript:\n{record['transcript']}
+
+Clinical note:\n{record['note']}
+
+FHIR resources:\n{json.dumps(compact_resources, ensure_ascii=False)}"""
+        client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+        response = client.messages.create(
+            model=os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5"),
+            max_tokens=4000,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        text = "".join(block.text for block in response.content if getattr(block, "type", None) == "text")
+        text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip(), flags=re.I)
+        extracted = json.loads(text)
+        if not isinstance(extracted, list):
+            raise ValueError("Claude response must be a JSON array")
+
+        category_map = {
+            "medication_change": "Medication", "lab": "Lab", "referral": "Referral",
+            "follow_up": "Follow-up", "immunization": "Immunization", "non_ehr_action": "External",
+        }
+        findings = []
+        for raw in extracted:
+            kind = raw.get("type")
+            classification = str(raw.get("classification", "")).upper()
+            quote = str(raw.get("verbatim_quote", "")).strip()
+            if kind not in ALLOWED_TYPES or classification not in {"OK", "MISSING", "INCOMPLETE", "WRONG", "NON_EHR_ACTION"}:
+                continue
+            start, end = _verify_quote(record["transcript"], quote)
+            finding_id = "generic-" + hashlib.sha256(f"{encounter_id}:{quote}".encode()).hexdigest()[:12]
+            repair_summary = str(raw.get("repair_summary") or "").strip()
+            findings.append({
+                "id": finding_id,
+                "category": category_map[kind],
+                "commitment": {
+                    "type": kind,
+                    "description": raw.get("description") or quote,
+                    "verbatim_quote": quote,
+                    "quote_start": start,
+                    "quote_end": end,
+                    "quote_verified": True,
+                    "due_window": raw.get("due_window"),
+                    "expected_resource": raw.get("expected_resource"),
+                },
+                "classification": classification,
+                "record_state": classification,
+                "workflow_state": "PROPOSED" if classification in {"MISSING", "INCOMPLETE", "WRONG"} else "VERIFIED",
+                "risk": str(raw.get("risk") or "ROUTINE").upper(),
+                "ehr_evidence": {"resource_type": raw.get("expected_resource"), "resource_id": None, "current_state": raw.get("current_ehr_state") or "No matching structured evidence"},
+                "reconciliation_rule": "Claude comparison verified against supplied encounter FHIR",
+                "proposed_repair": {"summary": repair_summary, "risk_note": "Requires clinician review", "fhir_resource": {}} if repair_summary and classification in {"MISSING", "INCOMPLETE", "WRONG"} else None,
+                "apply_supported": False,
+                "last_event": None,
+            })
+        summary = {
+            "commitments": len(findings),
+            "needs_action": sum(item["classification"] in {"MISSING", "INCOMPLETE", "WRONG"} for item in findings),
+            "verified": sum(item["classification"] == "OK" for item in findings),
+            "external": sum(item["classification"] == "NON_EHR_ACTION" for item in findings),
+            "high_risk": sum(item["risk"] == "HIGH" and item["classification"] in {"MISSING", "INCOMPLETE", "WRONG"} for item in findings),
+        }
+        result = {
+            "findings": findings,
+            "summary": summary,
+            "analysis": {
+                "mode": "live", "message": "Live Claude reconciliation complete",
+                "model": os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5"),
+                "analyzed_at": datetime.now(timezone.utc).isoformat(),
+                "fingerprint": hashlib.sha256((encounter_id + PROMPT_VERSION).encode()).hexdigest()[:12],
+            },
+        }
+        _write_json(self._generic_cache_path(encounter_id), result)
+        return result
 
     def _audits(self) -> list[dict[str, Any]]:
         return _read_json(self.paths.audit) if self.paths.audit.exists() else []
@@ -576,6 +752,7 @@ Transcript:\n{record['transcript']}"""
             "reconciliation_rule": rule,
             "proposed_repair": repair,
             "last_event": event,
+            "apply_supported": True,
         }
 
     def findings(self, commitments: list[dict[str, Any]] | None = None) -> dict[str, Any]:

@@ -4,6 +4,9 @@ const state = {
   summary: null,
   analysis: null,
   selectedFinding: null,
+  queue: [],
+  queueSummary: null,
+  selectedEncounterId: null,
   activeDocument: "note",
 };
 
@@ -68,10 +71,130 @@ function renderEncounter() {
 }
 
 function renderAnalysisShell() {
-  const analyzed = Boolean(state.analysis?.analyzed_at);
-  $("#analysis-ready").classList.toggle("hidden", analyzed);
-  $("#analysis-results").classList.toggle("hidden", !analyzed);
-  if (analyzed) renderFindings();
+  renderQueue();
+}
+
+function renderQueue() {
+  if (!state.queueSummary) return;
+  $("#nav-issue-count").textContent = state.queueSummary.needs_action;
+  $("#queue-summary").textContent = `${state.queueSummary.encounters} encounters · ${state.queueSummary.analyzed} analyzed · ${state.queueSummary.needs_action} items need action`;
+  $("#review-queue").innerHTML = state.queue.map((row) => {
+    const issues = row.summary?.needs_action || 0;
+    const verified = row.summary?.verified || 0;
+    const status = row.analyzed
+      ? issues
+        ? `<span class="queue-status issue">${issues} need action${row.summary.high_risk ? ` · ${row.summary.high_risk} high risk` : ""}<b>›</b></span>`
+        : `<span class="queue-status clear">all ${verified} verified ✓</span>`
+      : '<span class="queue-status pending">not analyzed <b>· analyze</b></span>';
+    const visit = row.visit_title.replace(/—/g, "·");
+    return `<button class="queue-row ${issues ? "has-issue" : ""}" data-encounter-id="${escapeHtml(row.id)}">
+      <span class="queue-avatar">${escapeHtml(row.initials)}</span>
+      <span class="queue-patient"><strong>${escapeHtml(row.name)}</strong><small>${escapeHtml(visit)} · ${new Date(row.date).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</small></span>
+      ${status}
+    </button>`;
+  }).join("");
+  $$("[data-encounter-id]").forEach((row) => row.addEventListener("click", () => openPatientReview(row.dataset.encounterId)));
+}
+
+async function loadQueue() {
+  const payload = await api("/api/review-queue");
+  state.queue = payload.encounters;
+  state.queueSummary = payload.summary;
+  renderQueue();
+}
+
+async function openPatientReview(encounterId) {
+  state.selectedEncounterId = encounterId;
+  const row = state.queue.find((item) => item.id === encounterId);
+  state.encounter = await api(`/api/encounters/${encodeURIComponent(encounterId)}`);
+  $("#review-patient-name").textContent = row?.name || state.encounter.patient.name;
+  const analyzeButton = $("#rerun-analysis");
+  analyzeButton.classList.remove("hidden");
+  analyzeButton.textContent = row?.analyzed ? "Re-run analysis" : "Analyze patient";
+  $("#queue-view").classList.add("hidden");
+  $("#patient-review").classList.remove("hidden");
+  $("#patient-name").textContent = state.encounter.patient.name;
+  $("#patient-meta").textContent = `DOB ${state.encounter.patient.birth_date} · ${state.encounter.patient.location}`;
+  const payload = await api(`/api/encounters/${encodeURIComponent(encounterId)}/findings`);
+  if (payload.findings?.length) {
+    state.findings = payload.findings;
+    state.summary = payload.summary;
+    state.analysis = payload.analysis;
+    renderLinkedReview();
+  } else {
+    state.findings = [];
+    state.summary = null;
+    state.analysis = null;
+    renderUnanalyzedReview();
+  }
+}
+
+function renderUnanalyzedReview() {
+  renderLinkedTranscript([]);
+  $("#review-analysis-status").innerHTML = '<span class="status-dot pending-dot"></span>This encounter has not been analyzed yet.';
+  $("#linked-findings").innerHTML = '<div class="linked-empty"><strong>Ready for background reconciliation</strong><p>The encounter loader is generic. Julius is the validated cached demo patient.</p></div>';
+  $("#verified-rollup-label").textContent = "No verified items yet";
+  $("#verified-rollup-content").innerHTML = "";
+  $("#compact-audit").textContent = "No analysis or actions recorded for this encounter.";
+}
+
+function renderLinkedReview() {
+  renderLinkedTranscript(state.findings);
+  const issues = state.findings.filter((item) => ["WRONG", "INCOMPLETE", "MISSING"].includes(item.classification));
+  const verified = state.findings.filter((item) => item.classification === "OK");
+  const external = state.findings.filter((item) => item.classification === "NON_EHR_ACTION");
+  $("#review-analysis-status").innerHTML = `<span class="status-dot"></span>${state.analysis?.mode === "live" ? "Live Claude analysis" : "Validated cache"} · ${state.findings.length} commitments · every quote verified`;
+  $("#linked-findings").innerHTML = issues.length ? issues.map(linkedFindingCard).join("") : '<div class="linked-empty success"><strong>All EHR discrepancies resolved</strong><p>Applied repairs remain pending real-world completion.</p></div>';
+  $("#verified-rollup-label").textContent = `${verified.length} items verified correct · ${external.length} non-EHR action`;
+  $("#verified-rollup-content").innerHTML = [...verified, ...external].map((item) => `<button data-linked-finding="${item.id}"><span>✓</span>${escapeHtml(item.commitment.description)}</button>`).join("");
+  $$('[data-linked-finding]').forEach((card) => card.addEventListener('click', (event) => {
+    if (event.target.closest('[data-review]')) return;
+    highlightEvidence(card.dataset.linkedFinding);
+  }));
+  $$('[data-review]').forEach((button) => button.addEventListener('click', (event) => {
+    event.stopPropagation();
+    openRepair(button.dataset.review);
+  }));
+  renderCompactAudit();
+}
+
+function linkedFindingCard(finding) {
+  const applied = finding.workflow_state === "APPLIED";
+  const canApply = finding.proposed_repair && finding.apply_supported !== false;
+  return `<article class="linked-finding ${slug(finding.classification)} ${applied ? "is-applied" : ""}" data-linked-finding="${finding.id}">
+    <div class="linked-finding-top"><strong>${escapeHtml(finding.classification)} · ${escapeHtml(finding.category)}</strong><span>quote verified ✓</span></div>
+    <h3>${escapeHtml(finding.commitment.description)}</h3>
+    <p>${escapeHtml(finding.ehr_evidence.current_state)}</p>
+    ${finding.proposed_repair ? `<p class="repair-copy"><b>Repair:</b> ${escapeHtml(finding.proposed_repair.summary)}</p>` : ""}
+    <div class="linked-card-actions">${canApply ? `<button class="button button-primary" data-review="${finding.id}">${applied ? "Review applied repair" : "Review & approve"}</button>` : ""}<span>${finding.proposed_repair && !canApply ? "REPAIR SUGGESTED · " : ""}${escapeHtml(finding.workflow_state.replaceAll("_", " "))}</span></div>
+  </article>`;
+}
+
+function renderLinkedTranscript(findings) {
+  const byQuote = new Map(findings.map((finding) => [finding.commitment.verbatim_quote.toLowerCase(), finding.id]));
+  $("#linked-transcript").innerHTML = state.encounter.transcript.split("\n").filter(Boolean).map((line) => {
+    const match = line.match(/^(DR|PT|NURSE|FAMILY):\s*(.*)$/);
+    const speaker = match ? match[1] : "—";
+    let text = escapeHtml(match ? match[2] : line);
+    byQuote.forEach((id, quote) => {
+      const original = findings.find((item) => item.id === id).commitment.verbatim_quote;
+      const escaped = escapeHtml(original);
+      text = text.replace(escaped, `<mark class="linked-mark" data-evidence-for="${id}">${escaped}</mark>`);
+    });
+    return `<div class="linked-utterance ${speaker === "DR" ? "doctor" : "patient"}"><span>${speaker}</span><p>${text}</p></div>`;
+  }).join("");
+}
+
+function highlightEvidence(findingId) {
+  $$('.linked-finding').forEach((card) => card.classList.toggle('selected', card.dataset.linkedFinding === findingId));
+  $$('.linked-mark').forEach((mark) => mark.classList.toggle('active', mark.dataset.evidenceFor === findingId));
+  const mark = $(`[data-evidence-for="${findingId}"]`);
+  if (mark) mark.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+async function renderCompactAudit() {
+  const payload = await api('/api/audit');
+  $("#compact-audit").innerHTML = payload.events.length ? payload.events.slice(0, 3).map((event) => `<div><time>${new Date(event.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', second:'2-digit'})}</time><b>${escapeHtml(event.action.replaceAll('_', ' '))}</b><span>${escapeHtml(event.finding_ref)} · approved by ${escapeHtml(event.approved_by)}</span></div>`).join('') : 'No actions taken in this review.';
 }
 
 function renderStats() {
@@ -199,7 +322,8 @@ function updateFindingState(payload) {
   state.findings = payload.findings;
   state.summary = payload.summary;
   state.analysis = payload.analysis;
-  renderFindings();
+  if (!$("#patient-review").classList.contains("hidden")) renderLinkedReview();
+  else renderQueue();
 }
 
 async function runAnalysis(button) {
@@ -211,6 +335,45 @@ async function runAnalysis(button) {
     toast(payload.analysis.mode === "live" ? "Live Claude analysis complete" : "Validated fallback analysis loaded");
   } catch (error) { toast(error.message); }
   finally { setBusy(button, false); }
+}
+
+async function runSelectedAnalysis(button) {
+  if (!state.selectedEncounterId) return;
+  setBusy(button, true, "Reconciling…");
+  try {
+    const payload = await api(`/api/encounters/${encodeURIComponent(state.selectedEncounterId)}/analyze`, { method: "POST", body: "{}" });
+    state.findings = payload.findings;
+    state.summary = payload.summary;
+    state.analysis = payload.analysis;
+    renderLinkedReview();
+    await loadQueue();
+    button.dataset.label = "Re-run analysis";
+    toast(payload.analysis.mode === "live" ? "Live Claude reconciliation complete" : "Validated cache loaded");
+  } catch (error) { toast(error.message); }
+  finally { setBusy(button, false); }
+}
+
+async function analyzeAll(button) {
+  const pending = state.queue.filter((row) => !row.analyzed);
+  if (!pending.length) {
+    toast("Every encounter in today’s worklist is already analyzed");
+    return;
+  }
+  setBusy(button, true, `Analyzing 0/${pending.length}…`);
+  let completed = 0;
+  let failed = 0;
+  for (const row of pending) {
+    button.textContent = `Analyzing ${completed + failed + 1}/${pending.length}…`;
+    try {
+      await api(`/api/encounters/${encodeURIComponent(row.id)}/analyze`, { method: "POST", body: "{}" });
+      completed += 1;
+    } catch (_error) {
+      failed += 1;
+    }
+  }
+  await loadQueue();
+  setBusy(button, false);
+  toast(failed ? `${completed} encounters analyzed · ${failed} need retry` : `${completed} encounters analyzed with Claude`);
 }
 
 function renderTranscript() {
@@ -292,7 +455,9 @@ async function renderAudit() {
 async function refreshEncounterAndAudit() {
   state.encounter = await api("/api/encounter");
   renderFhir();
+  if (!$("#patient-review").classList.contains("hidden")) renderLinkedReview();
   await renderAudit();
+  await loadQueue();
 }
 
 function setupNavigation() {
@@ -321,7 +486,9 @@ async function resetDemo() {
     state.summary = findings.summary;
     state.analysis = findings.analysis;
     renderEncounter();
-    renderAnalysisShell();
+    await loadQueue();
+    $("#patient-review").classList.add("hidden");
+    $("#queue-view").classList.remove("hidden");
     await renderAudit();
     toast("Demo restored to the seeded EHR state");
   } catch (error) { toast(error.message); }
@@ -330,8 +497,9 @@ async function resetDemo() {
 
 async function init() {
   setupNavigation();
-  $("#run-analysis").addEventListener("click", (event) => runAnalysis(event.currentTarget));
-  $("#rerun-analysis").addEventListener("click", (event) => runAnalysis(event.currentTarget));
+  $("#rerun-analysis").addEventListener("click", (event) => runSelectedAnalysis(event.currentTarget));
+  $("#back-to-queue").addEventListener("click", () => { $("#patient-review").classList.add("hidden"); $("#queue-view").classList.remove("hidden"); });
+  $("#analyze-all").addEventListener("click", (event) => analyzeAll(event.currentTarget));
   $("#approve-repair").addEventListener("click", approveSelected);
   $("#reject-repair").addEventListener("click", rejectSelected);
   $("#reset-demo").addEventListener("click", resetDemo);
@@ -342,11 +510,13 @@ async function init() {
   });
 
   try {
-    const [encounter, findings] = await Promise.all([api("/api/encounter"), api("/api/findings")]);
+    const [encounter, findings, queue] = await Promise.all([api("/api/encounter"), api("/api/findings"), api("/api/review-queue")]);
     state.encounter = encounter;
     state.findings = findings.findings;
     state.summary = findings.summary;
     state.analysis = findings.analysis;
+    state.queue = queue.encounters;
+    state.queueSummary = queue.summary;
     renderEncounter();
     renderAnalysisShell();
     await renderAudit();

@@ -46,32 +46,35 @@
       <section id="encounter-ribbon" class="encounter-ribbon skeleton-line" aria-live="polite"></section>
 
       <section class="tab-panel active" id="tab-ledger" data-title="Action Ledger">
-        <div id="analysis-ready" class="analysis-hero hidden">
-          <div class="hero-signal" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-          <div>
-            <div class="eyebrow">ENCOUNTER READY</div>
-            <h2>Verify that every agreed action reached the EHR</h2>
-            <p>Sentinel will extract commitments, validate every quote, and reconcile them against the final FHIR record.</p>
+        <div id="queue-view">
+          <div class="queue-heading">
+            <div><div class="eyebrow">CLINICIAN WORKLIST</div><h2>End-of-day review</h2><p id="queue-summary">Loading today’s encounters…</p></div>
+            <button id="analyze-all" class="button button-primary">Analyze all</button>
           </div>
-          <button id="run-analysis" class="button button-primary">Run reconciliation <span>→</span></button>
+          <div id="review-queue" class="review-queue"></div>
         </div>
 
-        <div id="analysis-results" class="hidden">
-          <div class="ledger-toolbar">
-            <div>
-              <div class="analysis-status"><span id="analysis-dot" class="status-dot"></span><span id="analysis-copy">Analysis ready</span></div>
-              <p id="analysis-detail" class="subtle"></p>
-            </div>
+        <div id="patient-review" class="hidden">
+          <div class="review-header">
+            <button id="back-to-queue" class="button button-quiet">← All encounters</button>
+            <div><div class="eyebrow">LINKED EVIDENCE REVIEW</div><h2 id="review-patient-name">Julius Renner</h2></div>
             <button id="rerun-analysis" class="button button-secondary">Re-run analysis</button>
           </div>
-
-          <div class="stat-grid" id="summary-stats"></div>
-
-          <div class="section-heading">
-            <div><h2>Commitment ledger</h2><p>Record state is verified automatically. Workflow completion is tracked separately.</p></div>
-            <div class="legend"><span><i class="legend-dot issue"></i>Needs review</span><span><i class="legend-dot verified"></i>Verified</span><span><i class="legend-dot external"></i>External</span></div>
+          <div id="review-analysis-status" class="analysis-status-line"></div>
+          <div class="linked-review">
+            <section class="linked-transcript-panel">
+              <div class="panel-kicker">TRANSCRIPT</div>
+              <p class="panel-help">Select a finding to jump to its exact evidence.</p>
+              <div id="linked-transcript" class="linked-transcript"></div>
+            </section>
+            <section class="linked-findings-panel">
+              <div class="panel-kicker">DISCREPANCIES</div>
+              <p class="panel-help">Agent findings reconciled against the submitted EHR.</p>
+              <div id="linked-findings" class="linked-findings"></div>
+              <details class="verified-rollup"><summary id="verified-rollup-label">Verified items</summary><div id="verified-rollup-content"></div></details>
+            </section>
           </div>
-          <div id="findings-list" class="findings-list"></div>
+          <section class="compact-action-log"><div class="panel-kicker">ACTION LOG</div><div id="compact-audit">No actions taken in this review.</div></section>
         </div>
       </section>
 
