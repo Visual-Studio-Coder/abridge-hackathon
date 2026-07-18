@@ -836,7 +836,9 @@ FHIR resources:\n{json.dumps(compact_resources, ensure_ascii=False)}"""
 
     def _latest_event(self, finding_id: str) -> dict[str, Any] | None:
         events = [event for event in self._audits() if event.get("finding_ref") == finding_id]
-        return events[-1] if events else None
+        undone = {event.get("undone_event_id") for event in events if event.get("action") == "UNDO"}
+        effective = [event for event in events if event.get("action") != "UNDO" and event.get("id") not in undone]
+        return effective[-1] if effective else None
 
     def _base_commitments(self) -> list[dict[str, Any]]:
         transcript = self.repository.get_julius()["transcript"]
@@ -1156,7 +1158,60 @@ Transcript:\n{record['transcript']}"""
         _write_json(self.paths.audit, audit)
         return event
 
-    def approve(self, finding_id: str, approved_by: str = "Dr. Amado Adams") -> dict[str, Any]:
+    @staticmethod
+    def _edited_repair(finding_id: str, repair: dict[str, Any], edits: dict[str, Any]) -> tuple[dict[str, Any], str]:
+        repaired = copy.deepcopy(repair["fhir_resource"])
+        summary = str(edits.get("repair_summary") or repair["summary"]).strip()[:300]
+        if not summary:
+            raise ValueError("Repair summary cannot be empty")
+
+        if finding_id == "med-lisinopril":
+            medication_text = str(edits.get("medication_text") or repaired["medicationCodeableConcept"]["text"]).strip()[:120]
+            if not medication_text:
+                raise ValueError("Medication order cannot be empty")
+            concept = repaired["medicationCodeableConcept"]
+            original_text = concept["text"]
+            concept["text"] = medication_text
+            if medication_text == original_text:
+                for coding in concept.get("coding", []):
+                    coding["display"] = medication_text
+            else:
+                concept.pop("coding", None)  # avoid retaining a code for a clinician-edited free-text order
+        elif finding_id == "ref-dental":
+            diagnosis = str(edits.get("diagnosis_text") or "Gingivitis").strip()[:120]
+            if not diagnosis:
+                raise ValueError("Referral diagnosis cannot be empty")
+            repaired["reasonCode"] = [{"text": diagnosis}]
+            if diagnosis.lower() == "gingivitis":
+                repaired["reasonCode"][0]["coding"] = [{
+                    "system": "http://snomed.info/sct", "code": "66383009", "display": "Gingivitis (disorder)",
+                }]
+        elif finding_id == "followup-bp":
+            description = str(edits.get("description") or repaired.get("description") or "").strip()[:160]
+            comment = str(edits.get("comment") or repaired.get("comment") or "").strip()[:300]
+            start = str(edits.get("start_date") or repaired["requestedPeriod"][0]["start"][:10])
+            end = str(edits.get("end_date") or repaired["requestedPeriod"][0]["end"][:10])
+            try:
+                start_date = datetime.fromisoformat(start).date()
+                end_date = datetime.fromisoformat(end).date()
+            except ValueError as exc:
+                raise ValueError("Follow-up dates must be valid") from exc
+            if end_date < start_date:
+                raise ValueError("Follow-up window must end after it starts")
+            repaired["description"] = description
+            repaired["comment"] = comment
+            repaired["requestedPeriod"] = [{
+                "start": f"{start_date.isoformat()}T09:00:00-07:00",
+                "end": f"{end_date.isoformat()}T17:00:00-07:00",
+            }]
+        return repaired, summary
+
+    def approve(
+        self,
+        finding_id: str,
+        approved_by: str = "Dr. Amado Adams",
+        edits: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         with self._lock:
             finding = next((item for item in self.findings()["findings"] if item["id"] == finding_id), None)
             if not finding:
@@ -1164,11 +1219,11 @@ Transcript:\n{record['transcript']}"""
             if finding["classification"] not in {"WRONG", "INCOMPLETE", "MISSING"} or not finding["proposed_repair"]:
                 raise ValueError("Finding has no applicable EHR repair")
             ehr = _read_json(self.paths.runtime_ehr)
-            before: Any = finding["ehr_evidence"]
-            repaired = copy.deepcopy(finding["proposed_repair"]["fhir_resource"])
+            repaired, repair_summary = self._edited_repair(finding_id, finding["proposed_repair"], edits or {})
             resource_type = repaired["resourceType"]
             resources = _resources(ehr, resource_type)
             existing_index = next((i for i, resource in enumerate(resources) if resource.get("id") == repaired.get("id")), None)
+            before = copy.deepcopy(resources[existing_index]) if existing_index is not None else None
             if existing_index is None:
                 resources.append(repaired)
             else:
@@ -1181,6 +1236,8 @@ Transcript:\n{record['transcript']}"""
                 "before": before,
                 "after": repaired,
                 "approved_by": approved_by,
+                "repair_summary": repair_summary,
+                "clinician_edited": bool(edits),
             })
             return {"event": event, **self.findings()}
 
@@ -1218,6 +1275,133 @@ Transcript:\n{record['transcript']}"""
                 "approved_by": approved_by,
             })
             return {"event": event, **self.findings()}
+
+    def undo(self, finding_id: str, approved_by: str = "Dr. Amado Adams") -> dict[str, Any]:
+        with self._lock:
+            event = self._latest_event(finding_id)
+            if not event:
+                raise ValueError("There is no completed action to undo")
+            if event["action"] == "REPAIR_APPLIED":
+                ehr = _read_json(self.paths.runtime_ehr)
+                repaired = event["after"]
+                resources = _resources(ehr, repaired["resourceType"])
+                index = next((i for i, resource in enumerate(resources) if resource.get("id") == repaired.get("id")), None)
+                if event.get("before") is None:
+                    if index is not None:
+                        resources.pop(index)
+                elif index is None:
+                    resources.append(copy.deepcopy(event["before"]))
+                else:
+                    resources[index] = copy.deepcopy(event["before"])
+                _write_json(self.paths.runtime_ehr, ehr)
+            elif event["action"] not in {"EXTERNAL_COMPLETED", "REJECTED"}:
+                raise ValueError("This action cannot be undone")
+            undo_event = self._append_event({
+                "finding_ref": finding_id,
+                "action": "UNDO",
+                "undone_event_id": event["id"],
+                "evidence_quote": event.get("evidence_quote"),
+                "before": event.get("after"),
+                "after": event.get("before"),
+                "approved_by": approved_by,
+            })
+            return {"event": undo_event, **self.findings()}
+
+    def accept_generic_suggestion(
+        self,
+        encounter_id: str,
+        finding_id: str,
+        repair_summary: str,
+        approved_by: str = "Dr. Amado Adams",
+    ) -> dict[str, Any]:
+        with self._lock:
+            result = self.generic_findings(encounter_id)
+            if not result:
+                raise KeyError("Encounter analysis not found")
+            finding = next((item for item in result["findings"] if item.get("id") == finding_id), None)
+            if not finding or not finding.get("proposed_repair"):
+                raise KeyError("Suggestion not found")
+            summary = str(repair_summary or finding["proposed_repair"]["summary"]).strip()[:300]
+            if not summary:
+                raise ValueError("Action summary cannot be empty")
+            event = self._append_event({
+                "finding_ref": finding_id,
+                "encounter_id": encounter_id,
+                "action": "SUGGESTION_ACCEPTED",
+                "evidence_quote": finding["commitment"]["verbatim_quote"],
+                "before": {"workflow_state": finding["workflow_state"]},
+                "after": {"workflow_state": "ACCEPTED_FOR_FOLLOWUP", "repair_summary": summary},
+                "approved_by": approved_by,
+                "repair_summary": summary,
+                "clinician_edited": summary != finding["proposed_repair"]["summary"],
+            })
+            finding["workflow_state"] = "ACCEPTED_FOR_FOLLOWUP"
+            finding["last_event"] = event
+            result["summary"] = self._summary(result["findings"], result["audit"])
+            _write_json(self._generic_cache_path(encounter_id), result)
+            return {"event": event, **result}
+
+    def reject_generic_suggestion(
+        self,
+        encounter_id: str,
+        finding_id: str,
+        reason: str,
+        approved_by: str = "Dr. Amado Adams",
+    ) -> dict[str, Any]:
+        with self._lock:
+            result = self.generic_findings(encounter_id)
+            if not result:
+                raise KeyError("Encounter analysis not found")
+            finding = next((item for item in result["findings"] if item.get("id") == finding_id), None)
+            if not finding or not finding.get("proposed_repair"):
+                raise KeyError("Suggestion not found")
+            rejection_reason = str(reason or "Clinician declined the suggested follow-up").strip()[:300]
+            event = self._append_event({
+                "finding_ref": finding_id,
+                "encounter_id": encounter_id,
+                "action": "SUGGESTION_REJECTED",
+                "evidence_quote": finding["commitment"]["verbatim_quote"],
+                "before": {"workflow_state": finding["workflow_state"]},
+                "after": {"workflow_state": "REJECTED"},
+                "approved_by": approved_by,
+                "reason": rejection_reason,
+            })
+            finding["workflow_state"] = "REJECTED"
+            finding["last_event"] = event
+            result["summary"] = self._summary(result["findings"], result["audit"])
+            _write_json(self._generic_cache_path(encounter_id), result)
+            return {"event": event, **result}
+
+    def undo_generic_suggestion(
+        self,
+        encounter_id: str,
+        finding_id: str,
+        approved_by: str = "Dr. Amado Adams",
+    ) -> dict[str, Any]:
+        with self._lock:
+            result = self.generic_findings(encounter_id)
+            if not result:
+                raise KeyError("Encounter analysis not found")
+            finding = next((item for item in result["findings"] if item.get("id") == finding_id), None)
+            if not finding or finding.get("workflow_state") not in {"ACCEPTED_FOR_FOLLOWUP", "REJECTED"}:
+                raise ValueError("There is no reviewed suggestion to undo")
+            accepted_event = finding.get("last_event")
+            previous_state = finding["workflow_state"]
+            event = self._append_event({
+                "finding_ref": finding_id,
+                "encounter_id": encounter_id,
+                "action": "UNDO",
+                "undone_event_id": (accepted_event or {}).get("id"),
+                "evidence_quote": finding["commitment"]["verbatim_quote"],
+                "before": {"workflow_state": previous_state},
+                "after": {"workflow_state": "PROPOSED"},
+                "approved_by": approved_by,
+            })
+            finding["workflow_state"] = "PROPOSED"
+            finding["last_event"] = None
+            result["summary"] = self._summary(result["findings"], result["audit"])
+            _write_json(self._generic_cache_path(encounter_id), result)
+            return {"event": event, **result}
 
     def audit_log(self) -> list[dict[str, Any]]:
         return list(reversed(self._audits()))

@@ -8,6 +8,7 @@ const state = {
   queue: [],
   queueSummary: null,
   selectedEncounterId: null,
+  reviewFilter: "active",
   evaluation: null,
   activeDocument: "note",
 };
@@ -132,6 +133,7 @@ async function loadEvaluation() {
 
 async function openPatientReview(encounterId) {
   state.selectedEncounterId = encounterId;
+  state.reviewFilter = "active";
   const row = state.queue.find((item) => item.id === encounterId);
   state.encounter = await api(`/api/encounters/${encodeURIComponent(encounterId)}`);
   $("#review-patient-name").textContent = row?.name || state.encounter.patient.name;
@@ -173,7 +175,9 @@ function renderLinkedReview() {
   renderLinkedTranscript(state.findings);
   const suppressed = state.findings.filter((item) => item.auditor?.verdict === "REJECTED");
   const visible = state.findings.filter((item) => item.auditor?.verdict !== "REJECTED");
-  const issues = visible.filter((item) => ["WRONG", "INCOMPLETE", "MISSING"].includes(item.classification));
+  const completedStates = ["APPLIED", "COMPLETE", "REJECTED", "ACCEPTED_FOR_FOLLOWUP"];
+  const completed = visible.filter((item) => completedStates.includes(item.workflow_state));
+  const issues = visible.filter((item) => ["WRONG", "INCOMPLETE", "MISSING"].includes(item.classification) && !completedStates.includes(item.workflow_state));
   const verified = visible.filter((item) => item.classification === "OK");
   const external = visible.filter((item) => item.classification === "NON_EHR_ACTION");
   const confirmed = visible.filter((item) => item.auditor?.verdict === "CONFIRMED").length;
@@ -182,7 +186,14 @@ function renderLinkedReview() {
     ? `${visible.length} findings · ${confirmed} confirmed${downgraded ? ` · ${downgraded} downgraded` : ""} · ${suppressed.length} suppressed`
     : `${visible.length} findings · audit unavailable`;
   $("#review-analysis-status").innerHTML = `<span class="status-dot ${state.audit?.status === "complete" ? "" : "pending-dot"}"></span>${state.analysis?.mode === "live" ? "Live Claude analysis" : "Validated cache"} · ${auditCopy}`;
-  $("#linked-findings").innerHTML = issues.length ? issues.map(linkedFindingCard).join("") : '<div class="linked-empty success"><strong>All EHR discrepancies resolved</strong><p>Applied repairs remain pending real-world completion.</p></div>';
+  $("#active-findings-count").textContent = issues.length;
+  $("#completed-findings-count").textContent = completed.length;
+  $$('[data-review-filter]').forEach((button) => button.classList.toggle('active', button.dataset.reviewFilter === state.reviewFilter));
+  if (state.reviewFilter === "completed") {
+    $("#linked-findings").innerHTML = completed.length ? completed.map(completedFindingCard).join("") : '<div class="linked-empty"><strong>No completed reviews yet</strong><p>Approved or rejected actions will remain reversible here.</p></div>';
+  } else {
+    $("#linked-findings").innerHTML = issues.length ? issues.map(linkedFindingCard).join("") : '<div class="linked-empty success"><strong>All EHR discrepancies resolved</strong><p>Completed actions remain available in the Completed tab.</p></div>';
+  }
   $("#suppressed-rollup").classList.toggle("hidden", !suppressed.length);
   $("#suppressed-rollup-label").textContent = `Suppressed by auditor (${suppressed.length})`;
   $("#suppressed-rollup-content").innerHTML = suppressed.map((item) => `<article class="linked-finding suppressed-finding" data-linked-finding="${item.id}"><strong>${escapeHtml(item.classification)} · ${escapeHtml(item.category)}</strong><h3>${escapeHtml(item.commitment.description)}</h3><p>✕ Auditor: ${escapeHtml(item.auditor.reasoning)}</p></article>`).join("");
@@ -196,12 +207,28 @@ function renderLinkedReview() {
     event.stopPropagation();
     openRepair(button.dataset.review);
   }));
+  $$('[data-undo]').forEach((button) => button.addEventListener('click', (event) => {
+    event.stopPropagation();
+    undoFinding(button.dataset.undo);
+  }));
   renderCompactAudit();
+}
+
+function completedFindingCard(finding) {
+  const actionLabel = finding.workflow_state === "REJECTED" ? "Rejected" : finding.workflow_state === "COMPLETE" ? "Completed" : finding.workflow_state === "ACCEPTED_FOR_FOLLOWUP" ? "Accepted for follow-up" : "Repair applied";
+  const detail = finding.last_event?.repair_summary || finding.last_event?.reason || finding.commitment.description;
+  return `<article class="linked-finding completed-finding" data-linked-finding="${finding.id}">
+    <div class="linked-finding-top"><strong>✓ ${escapeHtml(actionLabel)} · ${escapeHtml(finding.category)}</strong><span>${escapeHtml(finding.last_event?.approved_by || "Clinician reviewed")}</span></div>
+    <h3>${escapeHtml(finding.commitment.description)}</h3>
+    <p>${escapeHtml(detail)}</p>
+    <div class="linked-card-actions"><button class="button button-quiet undo-button" data-undo="${finding.id}">Undo</button><span>${escapeHtml(finding.workflow_state.replaceAll("_", " "))}</span></div>
+  </article>`;
 }
 
 function linkedFindingCard(finding) {
   const applied = finding.workflow_state === "APPLIED";
   const canApply = finding.proposed_repair && finding.apply_supported !== false;
+  const canReview = Boolean(finding.proposed_repair);
   const auditor = finding.auditor || {};
   const auditorCopy = auditor.status === "complete"
     ? `${auditor.verdict === "DOWNGRADED" ? "↓" : "✓"} Auditor: ${auditor.verdict.toLowerCase()} — ${auditor.reasoning}`
@@ -212,7 +239,7 @@ function linkedFindingCard(finding) {
     <p>${escapeHtml(finding.ehr_evidence.current_state)}</p>
     ${finding.proposed_repair ? `<p class="repair-copy"><b>Repair:</b> ${escapeHtml(finding.proposed_repair.summary)}</p>` : ""}
     <p class="auditor-line ${escapeHtml((auditor.verdict || "unavailable").toLowerCase())}">${escapeHtml(auditorCopy)}</p>
-    <div class="linked-card-actions">${canApply ? `<button class="button button-primary" data-review="${finding.id}">${applied ? "Review applied repair" : "Review & approve"}</button>` : ""}<span>${finding.proposed_repair && !canApply ? "REPAIR SUGGESTED · " : ""}${escapeHtml(finding.workflow_state.replaceAll("_", " "))}</span></div>
+    <div class="linked-card-actions">${canReview ? `<button class="button ${canApply ? "button-primary" : "button-secondary"}" data-review="${finding.id}">${canApply ? "Review & approve" : "Review suggestion"}</button>` : ""}<span>${finding.proposed_repair && !canApply ? "SUGGESTED ACTION · " : ""}${escapeHtml(finding.workflow_state.replaceAll("_", " "))}</span></div>
   </article>`;
 }
 
@@ -309,22 +336,100 @@ function findingCard(finding) {
     </article>`;
 }
 
+function renderInlineRepairDiff(before, after) {
+  const container = $("#repair-inline-diff");
+  const beforeTokens = String(before || "").match(/\s+|[^\s]+/g) || [];
+  const afterTokens = String(after || "").match(/\s+|[^\s]+/g) || [];
+  let prefix = 0;
+  while (prefix < beforeTokens.length && prefix < afterTokens.length && beforeTokens[prefix] === afterTokens[prefix]) prefix += 1;
+  let suffix = 0;
+  while (
+    suffix < beforeTokens.length - prefix && suffix < afterTokens.length - prefix
+    && beforeTokens[beforeTokens.length - 1 - suffix] === afterTokens[afterTokens.length - 1 - suffix]
+  ) suffix += 1;
+
+  const commonBefore = beforeTokens.slice(0, prefix).join("");
+  const removed = beforeTokens.slice(prefix, beforeTokens.length - suffix).join("");
+  const added = afterTokens.slice(prefix, afterTokens.length - suffix).join("");
+  const commonAfter = suffix ? afterTokens.slice(afterTokens.length - suffix).join("") : "";
+  container.replaceChildren();
+  if (commonBefore) container.append(document.createTextNode(commonBefore));
+  if (removed) {
+    const deleted = document.createElement("del");
+    deleted.textContent = removed;
+    container.append(deleted);
+  }
+  if (removed && added) {
+    const arrow = document.createElement("span");
+    arrow.className = "change-arrow";
+    arrow.textContent = "→";
+    arrow.setAttribute("aria-hidden", "true");
+    container.append(arrow);
+  }
+  if (added) {
+    const inserted = document.createElement("ins");
+    inserted.textContent = added;
+    container.append(inserted);
+  }
+  if (commonAfter) container.append(document.createTextNode(commonAfter));
+}
+
 function openRepair(id) {
   const finding = state.findings.find((item) => item.id === id);
   if (!finding) return;
   state.selectedFinding = finding;
+  const appliesToEhr = finding.apply_supported !== false;
   $("#dialog-title").textContent = finding.proposed_repair.summary;
+  const resource = finding.proposed_repair.fhir_resource;
+  let editableFields = "";
+  let diffLabel = finding.ehr_evidence.resource_type || "Follow-up action";
+  let beforeValue = finding.ehr_evidence.current_state;
+  let diffField = "repair_summary";
+  if (finding.id === "med-lisinopril") {
+    editableFields = `<label class="repair-field"><span>Corrected medication order</span><input name="medication_text" value="${escapeHtml(resource.medicationCodeableConcept?.text || "")}" required></label>`;
+    diffLabel = "Medication order";
+    diffField = "medication_text";
+  } else if (finding.id === "ref-dental") {
+    editableFields = `<label class="repair-field"><span>Referral diagnosis</span><input name="diagnosis_text" value="${escapeHtml(resource.reasonCode?.[0]?.text || "Gingivitis")}" required></label>`;
+    diffLabel = "Referral diagnosis";
+    beforeValue = "No diagnosis attached";
+    diffField = "diagnosis_text";
+  } else if (finding.id === "followup-bp") {
+    editableFields = `<div class="repair-field-row"><label class="repair-field"><span>Window starts</span><input type="date" name="start_date" value="${escapeHtml(resource.requestedPeriod?.[0]?.start?.slice(0, 10) || "")}" required></label><label class="repair-field"><span>Window ends</span><input type="date" name="end_date" value="${escapeHtml(resource.requestedPeriod?.[0]?.end?.slice(0, 10) || "")}" required></label></div><label class="repair-field"><span>Visit reason</span><input name="description" value="${escapeHtml(resource.description || "")}" required></label><label class="repair-field"><span>Scheduling note</span><textarea name="comment" rows="2">${escapeHtml(resource.comment || "")}</textarea></label>`;
+    diffLabel = "Follow-up window";
+    beforeValue = "No appointment represented";
+    diffField = "date_window";
+  }
   $("#dialog-body").innerHTML = `
     <div class="repair-content">
       <div class="repair-alert"><strong>${finding.risk} RISK</strong><span>${escapeHtml(finding.proposed_repair.risk_note)}</span></div>
       <div class="evidence-label">Conversation evidence · verified</div>
       <blockquote class="quote-block">“${escapeHtml(finding.commitment.verbatim_quote)}”</blockquote>
-      <div class="compare-grid">
-        <div class="compare-pane"><label>Current EHR state</label><pre>${escapeHtml(JSON.stringify(finding.ehr_evidence, null, 2))}</pre></div>
-        <div class="compare-pane after"><label>Proposed FHIR repair</label><pre>${escapeHtml(JSON.stringify(finding.proposed_repair.fhir_resource, null, 2))}</pre></div>
-      </div>
-      <p class="subtle" style="margin-top:14px">Approval updates only the simulated working EHR. It does not claim real-world completion.</p>
+      <section class="live-change-preview" aria-live="polite">
+        <span class="change-preview-label">${escapeHtml(diffLabel)}</span>
+        <div class="change-values" id="repair-inline-diff"></div>
+      </section>
+      <section class="repair-form-card"><div class="repair-form-heading"><span>${appliesToEhr ? "Proposed correction" : "Suggested follow-up"}</span><small>Editable before acceptance</small></div>${editableFields}<label class="repair-field"><span>Action summary</span><textarea name="repair_summary" rows="2" required>${escapeHtml(finding.proposed_repair.summary)}</textarea></label></section>
+      <section id="rejection-panel" class="rejection-panel hidden"><label class="repair-field"><span>Reason for rejection</span><textarea name="rejection_reason" rows="2" placeholder="Optional clinical rationale"></textarea></label><small>This decision will move to Completed and can be undone.</small></section>
+      <p class="subtle" style="margin-top:14px">${appliesToEhr ? "Approval updates only the simulated working EHR. It does not claim real-world completion." : "Acceptance adds this suggestion to the reviewed follow-up queue; it does not write to the EHR or claim completion."}</p>
     </div>`;
+  $("#approve-repair").textContent = appliesToEhr ? "Approve & apply repair" : "Accept for follow-up";
+  $("#reject-repair").textContent = "Reject";
+  const repairForm = $("#dialog-body").closest("form");
+  const updateChangePreview = () => {
+    let value = "";
+    if (diffField === "date_window") {
+      const start = repairForm.elements.start_date?.value;
+      const end = repairForm.elements.end_date?.value;
+      const displayDate = (date) => date ? new Date(`${date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "—";
+      value = `${displayDate(start)} – ${displayDate(end)}`;
+    } else {
+      value = repairForm.elements[diffField]?.value || "—";
+    }
+    renderInlineRepairDiff(beforeValue, value);
+  };
+  $$('input, textarea', repairForm).forEach((field) => field.addEventListener('input', updateChangePreview));
+  updateChangePreview();
   $("#repair-dialog").showModal();
 }
 
@@ -333,26 +438,65 @@ async function approveSelected() {
   const button = $("#approve-repair");
   setBusy(button, true, "Applying…");
   try {
-    const payload = await api(`/api/findings/${state.selectedFinding.id}/approve`, { method: "POST", body: "{}" });
+    const fields = new FormData($("#dialog-body").closest("form"));
+    const edits = Object.fromEntries(fields.entries());
+    const isGeneric = state.selectedFinding.apply_supported === false;
+    const endpoint = isGeneric
+      ? `/api/encounters/${encodeURIComponent(state.selectedEncounterId)}/findings/${state.selectedFinding.id}/accept-suggestion`
+      : `/api/findings/${state.selectedFinding.id}/approve`;
+    const payload = await api(endpoint, { method: "POST", body: JSON.stringify({ edits }) });
     updateFindingState(payload);
+    state.reviewFilter = "completed";
+    renderLinkedReview();
     $("#repair-dialog").close();
-    toast("Repair applied to the simulated FHIR record");
+    toast(isGeneric ? "Suggestion accepted for follow-up" : "Repair applied to the simulated FHIR record");
     await refreshEncounterAndAudit();
   } catch (error) { toast(error.message); }
   finally { setBusy(button, false); }
 }
 
+async function undoFinding(id) {
+  if (!window.confirm("Undo this clinician decision and restore the prior chart state?")) return;
+  try {
+    const finding = state.findings.find((item) => item.id === id);
+    const endpoint = finding?.apply_supported === false
+      ? `/api/encounters/${encodeURIComponent(state.selectedEncounterId)}/findings/${id}/undo-suggestion`
+      : `/api/findings/${id}/undo`;
+    const payload = await api(endpoint, { method: "POST", body: "{}" });
+    updateFindingState(payload);
+    state.reviewFilter = "active";
+    renderLinkedReview();
+    toast("Action undone · prior chart state restored");
+    await refreshEncounterAndAudit();
+  } catch (error) { toast(error.message); }
+}
+
 async function rejectSelected() {
   if (!state.selectedFinding) return;
-  const reason = window.prompt("Optional reason for rejecting this repair:", "Clinician review required");
-  if (reason === null) return;
+  const panel = $("#rejection-panel");
+  if (panel.classList.contains("hidden")) {
+    panel.classList.remove("hidden");
+    $("#reject-repair").textContent = "Confirm rejection";
+    panel.querySelector("textarea").focus();
+    return;
+  }
+  const reason = panel.querySelector("textarea").value.trim();
+  const button = $("#reject-repair");
+  setBusy(button, true, "Rejecting…");
   try {
-    const payload = await api(`/api/findings/${state.selectedFinding.id}/reject`, { method: "POST", body: JSON.stringify({ reason }) });
+    const isGeneric = state.selectedFinding.apply_supported === false;
+    const endpoint = isGeneric
+      ? `/api/encounters/${encodeURIComponent(state.selectedEncounterId)}/findings/${state.selectedFinding.id}/reject-suggestion`
+      : `/api/findings/${state.selectedFinding.id}/reject`;
+    const payload = await api(endpoint, { method: "POST", body: JSON.stringify({ reason }) });
     updateFindingState(payload);
+    state.reviewFilter = "completed";
+    renderLinkedReview();
     $("#repair-dialog").close();
-    toast("Repair rejected and audit event recorded");
+    toast(isGeneric ? "Suggestion rejected and moved to Completed" : "Repair rejected and audit event recorded");
     await renderAudit();
   } catch (error) { toast(error.message); }
+  finally { setBusy(button, false); }
 }
 
 async function completeExternal(id) {
@@ -522,6 +666,10 @@ function setupNavigation() {
     $$(".subtab").forEach((item) => item.classList.toggle("active", item === button));
     state.activeDocument = button.dataset.doc;
     renderClinicalDocument();
+  }));
+  $$('[data-review-filter]').forEach((button) => button.addEventListener('click', () => {
+    state.reviewFilter = button.dataset.reviewFilter;
+    renderLinkedReview();
   }));
 }
 

@@ -6,6 +6,8 @@ Sentinel reconciles commitments made in an ambient clinical conversation against
 
 Before a finding reaches the clinician, a second adversarial Claude pass attempts to reject it. Confirmed findings retain a clinician-readable safety rationale, downgraded findings carry a lower risk, and rejected findings remain inspectable in a collapsed suppression queue. The audit is batched once per encounter, cached with the analysis fingerprint, and fails open so an unavailable reviewer cannot block the demo. Neither analysis pass receives the evaluation manifest.
 
+Repair review uses editable, clinician-facing fields rather than raw FHIR. Approved and rejected decisions move into a Completed view, where Undo restores the exact prior runtime resource and records the reversal without deleting audit history. Generic encounters expose suggestions as editable follow-up actions; accepting one records review without pretending that an EHR write-back occurred.
+
 ## Demo case
 
 The clinician and Julius Renner agree on eight actions. The synthetic post-visit EHR contains:

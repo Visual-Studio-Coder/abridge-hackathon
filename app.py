@@ -68,7 +68,7 @@ def findings():
 @app.post("/api/findings/<finding_id>/approve")
 def approve(finding_id: str):
     payload = request.get_json(silent=True) or {}
-    return jsonify(service.approve(finding_id, payload.get("approved_by", "Dr. Amado Adams")))
+    return jsonify(service.approve(finding_id, payload.get("approved_by", "Dr. Amado Adams"), payload.get("edits") or {}))
 
 
 @app.post("/api/findings/<finding_id>/reject")
@@ -81,6 +81,43 @@ def reject(finding_id: str):
 def complete_external(finding_id: str):
     payload = request.get_json(silent=True) or {}
     return jsonify(service.complete_external(finding_id, payload.get("approved_by", "Dr. Amado Adams")))
+
+
+@app.post("/api/findings/<finding_id>/undo")
+def undo(finding_id: str):
+    payload = request.get_json(silent=True) or {}
+    return jsonify(service.undo(finding_id, payload.get("approved_by", "Dr. Amado Adams")))
+
+
+@app.post("/api/encounters/<path:encounter_id>/findings/<finding_id>/accept-suggestion")
+def accept_suggestion(encounter_id: str, finding_id: str):
+    payload = request.get_json(silent=True) or {}
+    edits = payload.get("edits") or {}
+    return jsonify(service.accept_generic_suggestion(
+        encounter_id,
+        finding_id,
+        edits.get("repair_summary", ""),
+        payload.get("approved_by", "Dr. Amado Adams"),
+    ))
+
+
+@app.post("/api/encounters/<path:encounter_id>/findings/<finding_id>/reject-suggestion")
+def reject_suggestion(encounter_id: str, finding_id: str):
+    payload = request.get_json(silent=True) or {}
+    return jsonify(service.reject_generic_suggestion(
+        encounter_id,
+        finding_id,
+        payload.get("reason", ""),
+        payload.get("approved_by", "Dr. Amado Adams"),
+    ))
+
+
+@app.post("/api/encounters/<path:encounter_id>/findings/<finding_id>/undo-suggestion")
+def undo_suggestion(encounter_id: str, finding_id: str):
+    payload = request.get_json(silent=True) or {}
+    return jsonify(service.undo_generic_suggestion(
+        encounter_id, finding_id, payload.get("approved_by", "Dr. Amado Adams")
+    ))
 
 
 @app.get("/api/audit")

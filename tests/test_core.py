@@ -94,6 +94,77 @@ def test_approvals_repair_runtime_only_and_create_audit(service: SentinelService
     assert digest(service.paths.dataset) == source_dataset_hash
 
 
+def test_clinician_can_edit_repair_and_undo_restores_prior_resource(service: SentinelService) -> None:
+    applied = service.approve(
+        "med-lisinopril",
+        edits={
+            "medication_text": "lisinopril 10 MG Oral Tablet",
+            "repair_summary": "Use the clinician-confirmed 10 mg order",
+        },
+    )
+    assert applied["event"]["clinician_edited"] is True
+    assert applied["event"]["repair_summary"] == "Use the clinician-confirmed 10 mg order"
+    assert applied["event"]["before"]["medicationCodeableConcept"]["text"] == "lisinopril 40 MG Oral Tablet"
+    assert applied["event"]["after"]["medicationCodeableConcept"]["text"] == "lisinopril 10 MG Oral Tablet"
+
+    undone = service.undo("med-lisinopril")
+    finding = next(item for item in undone["findings"] if item["id"] == "med-lisinopril")
+    assert undone["event"]["action"] == "UNDO"
+    assert finding["classification"] == "WRONG"
+    assert finding["workflow_state"] == "PROPOSED"
+    assert finding["ehr_evidence"]["current_state"] == "lisinopril 40 MG Oral Tablet"
+    assert [event["action"] for event in service.audit_log()] == ["UNDO", "REPAIR_APPLIED"]
+
+
+def test_undo_removes_new_followup_and_reopens_external_action(service: SentinelService) -> None:
+    service.approve("followup-bp", edits={"start_date": "2025-08-11", "end_date": "2025-08-22"})
+    assert len(json.loads(service.paths.runtime_ehr.read_text())["resources"]["Appointment"]) == 1
+    service.undo("followup-bp")
+    assert json.loads(service.paths.runtime_ehr.read_text())["resources"]["Appointment"] == []
+
+    service.complete_external("external-housing")
+    service.undo("external-housing")
+    external = next(item for item in service.findings()["findings"] if item["id"] == "external-housing")
+    assert external["workflow_state"] == "MANUAL_CONFIRMATION"
+
+
+def test_generic_suggestion_can_be_reviewed_and_undone_without_fhir_writeback(service: SentinelService) -> None:
+    encounter_id = service.repository.review_queue()[1]["id"]
+    fingerprint = service._encounter_fingerprint(encounter_id)
+    finding_id = "generic-review-test"
+    cached = {
+        "analysis": {"analyzed_at": "2026-07-18T00:00:00Z", "fingerprint": fingerprint},
+        "audit": service._unavailable_audit(fingerprint),
+        "findings": [{
+            "id": finding_id,
+            "classification": "MISSING",
+            "risk": "ROUTINE",
+            "workflow_state": "PROPOSED",
+            "apply_supported": False,
+            "commitment": {"verbatim_quote": "follow up next month", "expected_resource": "Appointment"},
+            "ehr_evidence": {"resource_type": "Appointment", "resource_id": None},
+            "proposed_repair": {"summary": "Arrange follow-up", "fhir_resource": {}},
+            "last_event": None,
+        }],
+    }
+    cached["summary"] = service._summary(cached["findings"], cached["audit"])
+    service.paths.encounter_cache.mkdir(parents=True)
+    service._generic_cache_path(encounter_id).write_text(json.dumps(cached))
+    ehr_before = digest(service.repository.paths.dataset)
+
+    accepted = service.accept_generic_suggestion(encounter_id, finding_id, "Call patient to arrange follow-up")
+    assert accepted["findings"][0]["workflow_state"] == "ACCEPTED_FOR_FOLLOWUP"
+    assert accepted["event"]["clinician_edited"] is True
+    undone = service.undo_generic_suggestion(encounter_id, finding_id)
+    assert undone["findings"][0]["workflow_state"] == "PROPOSED"
+    rejected = service.reject_generic_suggestion(encounter_id, finding_id, "Not clinically appropriate")
+    assert rejected["findings"][0]["workflow_state"] == "REJECTED"
+    assert rejected["event"]["reason"] == "Not clinically appropriate"
+    reopened = service.undo_generic_suggestion(encounter_id, finding_id)
+    assert reopened["findings"][0]["workflow_state"] == "PROPOSED"
+    assert digest(service.repository.paths.dataset) == ehr_before
+
+
 def test_rejection_does_not_modify_ehr(service: SentinelService) -> None:
     before = digest(service.paths.runtime_ehr)
     result = service.reject("med-lisinopril", "Need pharmacist confirmation")
