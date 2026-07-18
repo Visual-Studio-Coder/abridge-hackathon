@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from sentinel.core import SentinelService
+from sentinel.core import SentinelService, _locate_quote
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -53,6 +53,12 @@ def test_all_quote_offsets_point_to_exact_transcript(service: SentinelService) -
         commitment = finding["commitment"]
         actual = transcript[commitment["quote_start"]:commitment["quote_end"]]
         assert actual.lower() == commitment["verbatim_quote"].lower()
+
+
+def test_quote_locator_tolerates_punctuation_only_differences() -> None:
+    transcript = "DR: We agreed: lisinopril ten milligrams, once a day."
+    start, end = _locate_quote(transcript, "lisinopril ten milligrams once a day")
+    assert transcript[start:end] == "lisinopril ten milligrams, once a day"
 
 
 def test_approvals_repair_runtime_only_and_create_audit(service: SentinelService) -> None:
@@ -108,3 +114,41 @@ def test_analysis_uses_validated_fallback_without_credentials(service: SentinelS
     assert result["analysis"]["mode"] == "cached"
     assert "not configured" in result["analysis"]["message"]
     assert result["summary"]["commitments"] == 8
+
+
+def test_review_queue_uses_all_25_encounters(service: SentinelService) -> None:
+    queue = service.review_queue()
+    assert queue["summary"]["encounters"] == 25
+    assert len({row["id"] for row in queue["encounters"]}) == 25
+    assert queue["encounters"][0]["demo_patient"] is True
+
+
+def test_disclosed_manifest_scores_detections_without_entering_analysis(service: SentinelService) -> None:
+    service.paths.seeding_manifest.parent.mkdir(parents=True)
+    shutil.copy(
+        PROJECT_ROOT / "partner-provided-docs" / "seeded-stuff" / "seeding-manifest.json",
+        service.paths.seeding_manifest,
+    )
+    manifest = service.seeding_manifest()
+    seeded = next(row for row in manifest if len(row["planted"]) == 1)
+    plant = seeded["planted"][0]
+    fake_result = {
+        "analysis": {"analyzed_at": "2026-07-18T00:00:00Z", "fingerprint": service._encounter_fingerprint(seeded["encounter_id"])},
+        "summary": {"needs_action": 1, "verified": 0, "external": 0, "high_risk": 0, "commitments": 1},
+        "findings": [{
+            "classification": plant["kind"],
+            "ehr_evidence": {"resource_type": plant["resource"]},
+            "commitment": {"expected_resource": plant["resource"]},
+        }],
+    }
+    service.paths.encounter_cache.mkdir(parents=True)
+    service._generic_cache_path(seeded["encounter_id"]).write_text(json.dumps(fake_result))
+
+    evaluation = service.evaluation()
+    assert evaluation["summary"]["encounters"] == 25
+    assert evaluation["summary"]["seeded_encounters"] == 14
+    assert evaluation["summary"]["clean_controls"] == 11
+    assert evaluation["summary"]["expected_discrepancies"] == 18
+    assert evaluation["summary"]["analyzed"] == 1
+    assert evaluation["summary"]["caught"] == 1
+    assert evaluation["summary"]["unseeded_control_candidates"] == 0

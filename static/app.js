@@ -7,6 +7,7 @@ const state = {
   queue: [],
   queueSummary: null,
   selectedEncounterId: null,
+  evaluation: null,
   activeDocument: "note",
 };
 
@@ -101,6 +102,30 @@ async function loadQueue() {
   state.queue = payload.encounters;
   state.queueSummary = payload.summary;
   renderQueue();
+}
+
+function renderEvaluation() {
+  if (!state.evaluation) return;
+  const summary = state.evaluation.summary;
+  const pending = summary.encounters - summary.analyzed;
+  const metrics = [
+    ["Seeded discrepancies", summary.expected_discrepancies, "across 14 encounters"],
+    ["Caught", `${summary.caught}/${summary.expected_discrepancies}`, pending ? `${pending} encounters pending` : `${summary.missed || 0} seeded misses`],
+    ["Unmodified controls", summary.clean_controls, "no deliberate mutation"],
+    ["Additional candidates", summary.additional_candidates, "separate adjudication queue"],
+  ];
+  $("#evaluation-metrics").innerHTML = metrics.map(([label, value, detail]) => `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong><small>${escapeHtml(detail)}</small></div>`).join("");
+  $("#evaluation-rows").innerHTML = state.evaluation.rows.map((row) => `<tr>
+    <td><strong>${escapeHtml(row.patient)}</strong><small>${escapeHtml(row.visit_title)}</small></td>
+    <td><span class="eval-set ${row.control ? "control" : "seeded"}">${row.control ? "UNMODIFIED" : "SEEDED"}</span></td>
+    <td>${row.expected}</td><td>${row.analyzed ? row.detected : "—"}</td><td>${row.analyzed ? row.caught : "—"}</td>
+    <td><span class="eval-status ${slug(row.status)}">${escapeHtml(row.status)}</span></td>
+  </tr>`).join("");
+}
+
+async function loadEvaluation() {
+  state.evaluation = await api("/api/evaluation");
+  renderEvaluation();
 }
 
 async function openPatientReview(encounterId) {
@@ -347,6 +372,7 @@ async function runSelectedAnalysis(button) {
     state.analysis = payload.analysis;
     renderLinkedReview();
     await loadQueue();
+    await loadEvaluation();
     button.dataset.label = "Re-run analysis";
     toast(payload.analysis.mode === "live" ? "Live Claude reconciliation complete" : "Validated cache loaded");
   } catch (error) { toast(error.message); }
@@ -372,6 +398,7 @@ async function analyzeAll(button) {
     }
   }
   await loadQueue();
+  await loadEvaluation();
   setBusy(button, false);
   toast(failed ? `${completed} encounters analyzed · ${failed} need retry` : `${completed} encounters analyzed with Claude`);
 }
@@ -458,6 +485,7 @@ async function refreshEncounterAndAudit() {
   if (!$("#patient-review").classList.contains("hidden")) renderLinkedReview();
   await renderAudit();
   await loadQueue();
+  await loadEvaluation();
 }
 
 function setupNavigation() {
@@ -487,6 +515,7 @@ async function resetDemo() {
     state.analysis = findings.analysis;
     renderEncounter();
     await loadQueue();
+    await loadEvaluation();
     $("#patient-review").classList.add("hidden");
     $("#queue-view").classList.remove("hidden");
     await renderAudit();
@@ -510,15 +539,17 @@ async function init() {
   });
 
   try {
-    const [encounter, findings, queue] = await Promise.all([api("/api/encounter"), api("/api/findings"), api("/api/review-queue")]);
+    const [encounter, findings, queue, evaluation] = await Promise.all([api("/api/encounter"), api("/api/findings"), api("/api/review-queue"), api("/api/evaluation")]);
     state.encounter = encounter;
     state.findings = findings.findings;
     state.summary = findings.summary;
     state.analysis = findings.analysis;
     state.queue = queue.encounters;
     state.queueSummary = queue.summary;
+    state.evaluation = evaluation;
     renderEncounter();
     renderAnalysisShell();
+    renderEvaluation();
     await renderAudit();
   } catch (error) {
     toast(`Unable to load encounter: ${error.message}`);

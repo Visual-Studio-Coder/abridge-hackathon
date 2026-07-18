@@ -1,0 +1,385 @@
+[
+ {
+  "encounter_id": "3a3a1f26-ed23-f65c-a7df-c96fac56f464::3a3a1f26-ed23-f65c-e264-be689558faea",
+  "file": "3a3a1f26-ehr.json",
+  "patient": "Ali Jerry Kuhic",
+  "visit_title": "Annual physical \u2014 preventive screening and migraine check-in",
+  "date": "2022-08-05",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "3a3a1f26-ed23-f65c-8988-a72dc5911afe",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "7bd9e5b0-5d4b-f10d-9579-f4813faf9cdc::7bd9e5b0-5d4b-f10d-cb93-7fcf216727d8",
+  "file": "7bd9e5b0-ehr.json",
+  "patient": "Ariane Jan Runolfsson",
+  "visit_title": "Inpatient admission \u2014 COVID-19 isolation with pneumonia and hypoxemia",
+  "date": "2021-01-03",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "b342f27e-56bc-08ac-347c-323279c0d595::b342f27e-56bc-08ac-24f0-de401f6e3c47",
+  "file": "b342f27e-ehr.json",
+  "patient": "Clarence Reinger",
+  "visit_title": "Prenatal intake visit \u2014 initial obstetric evaluation",
+  "date": "2025-06-01",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "6b716621-5454-68ec-2017-362939ab6f36::6b716621-5454-68ec-7553-080856a4cfa2",
+  "file": "6b716621-ehr.json",
+  "patient": "Corinne Charlesetta Crooks",
+  "visit_title": "Annual wellness examination \u2014 preventive screening and health maintenance",
+  "date": "2017-01-01",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "6b716621-5454-68ec-8428-080f6f621682",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "966e9818-9cf6-8d71-74bc-36aef6643618::966e9818-9cf6-8d71-3eff-a424a6faa0d3",
+  "file": "966e9818-ehr.json",
+  "patient": "Delana Jamie Gutkowski",
+  "visit_title": "Young adult preventive exam \u2014 prediabetes and allergy follow-up",
+  "date": "2025-05-23",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "966e9818-9cf6-8d71-956c-45a9b5eeb60e",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "374e68b2-ee15-0852-cd48-3c7b6fd8e114::374e68b2-ee15-0852-8f80-26e1007e6c00",
+  "file": "374e68b2-ehr.json",
+  "patient": "Dick Larson",
+  "visit_title": "Annual check-up \u2014 post-sepsis recovery and prediabetes",
+  "date": "2024-05-18",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "374e68b2-ee15-0852-45d5-676915a62aa6",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "4b4735a2-ee12-ec86-041f-3ba4d5c81ec9::4b4735a2-ee12-ec86-c1c9-c610cc6ef8ab",
+  "file": "4b4735a2-ehr.json",
+  "patient": "Elias Wisozk",
+  "visit_title": "General adult exam \u2014 new hypertension and metabolic syndrome",
+  "date": "2026-06-18",
+  "planted": [
+   {
+    "kind": "WRONG",
+    "resource": "MedicationRequest",
+    "id": "4b4735a2-ee12-ec86-d642-408f094ead4a",
+    "before": "Hydrochlorothiazide 25 MG Oral Tablet",
+    "after": "Hydrochlorothiazide 100 MG Oral Tablet",
+    "evidence": "hydrochlorothiazide"
+   },
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "4b4735a2-ee12-ec86-27e3-8e468a734fbd",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 2
+ },
+ {
+  "encounter_id": "1ba8eeb9-bc93-7129-4390-0d2ddd560616::1ba8eeb9-bc93-7129-2e7d-8c427e72b964",
+  "file": "1ba8eeb9-ehr.json",
+  "patient": "Emory Britt Kovacek",
+  "visit_title": "General exam \u2014 chronic low back pain and positive depression screen",
+  "date": "2021-04-06",
+  "planted": [
+   {
+    "kind": "WRONG",
+    "resource": "MedicationRequest",
+    "id": "1ba8eeb9-bc93-7129-7358-8f8e398e28cf",
+    "before": "Ibuprofen 400 MG Oral Tablet [Ibu]",
+    "after": "Ibuprofen 200 MG Oral Tablet [Ibu]",
+    "evidence": "ibuprofen"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "73043f9e-3254-a1d3-aa45-b82f0fc6d502::73043f9e-3254-a1d3-ecbd-a0c16f2d8db0",
+  "file": "73043f9e-ehr.json",
+  "patient": "Eva Julia Casas",
+  "visit_title": "Annual general exam \u2014 prediabetes, hyperlipidemia, and knee osteoarthritis",
+  "date": "2016-08-30",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "73043f9e-3254-a1d3-1a65-357c176c3d05",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "40cb7be2-9c26-6328-3aa0-71db4ed81e06::40cb7be2-9c26-6328-75bd-838e58c2583e",
+  "file": "40cb7be2-ehr.json",
+  "patient": "Hiedi Moira Thiel",
+  "visit_title": "Prenatal intake visit \u2014 first trimester, newly identified anemia",
+  "date": "2024-07-22",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "74919836-2db2-2f73-d2cf-5287a180b0ff::74919836-2db2-2f73-ed42-440eccc6591a",
+  "file": "74919836-ehr.json",
+  "patient": "Isreal Delbert Howell",
+  "visit_title": "Annual physical \u2014 geriatric cardiometabolic follow-up",
+  "date": "2024-10-07",
+  "planted": [
+   {
+    "kind": "WRONG",
+    "resource": "MedicationRequest",
+    "id": "74919836-2db2-2f73-7dad-412e5b4e0a70",
+    "before": "Hydrochlorothiazide 25 MG Oral Tablet",
+    "after": "Hydrochlorothiazide 100 MG Oral Tablet",
+    "evidence": "hydrochlorothiazide"
+   },
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "74919836-2db2-2f73-996e-4d876779f473",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 2
+ },
+ {
+  "encounter_id": "be1b73f7-b0f0-0ca3-b24b-28369ce68943::be1b73f7-b0f0-0ca3-5c23-d051118e002b",
+  "file": "be1b73f7-ehr.json",
+  "patient": "Issac Daniel Mayer",
+  "visit_title": "Annual physical \u2014 new adult patient wellness exam",
+  "date": "2019-07-14",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "be1b73f7-b0f0-0ca3-5f7e-bc4e5b59ddde",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "6d4fd363-1ddb-74f8-516f-2fdc861cb736::6d4fd363-1ddb-74f8-95dd-b53404f1e107",
+  "file": "6d4fd363-ehr.json",
+  "patient": "Julius Alphonso Renner",
+  "visit_title": "General exam \u2014 hypertension treatment initiation and chronic low back pain",
+  "date": "2025-07-13",
+  "planted": [
+   {
+    "kind": "WRONG",
+    "resource": "MedicationRequest",
+    "id": "6d4fd363-1ddb-74f8-20cf-226ba750f387",
+    "before": "lisinopril 10 MG Oral Tablet",
+    "after": "lisinopril 40 MG Oral Tablet",
+    "evidence": "lisinopril ten milligrams once a day"
+   },
+   {
+    "kind": "INCOMPLETE",
+    "resource": "ServiceRequest",
+    "id": "planted-dental-referral-001",
+    "before": "(none)",
+    "after": "referral without reasonCode",
+    "evidence": "I am putting in a referral to the dental clinic"
+   },
+   {
+    "kind": "MISSING",
+    "resource": "Appointment",
+    "id": null,
+    "before": "(natural gap)",
+    "after": "no 4-6 wk follow-up appointment",
+    "evidence": "I want you back in four to six weeks"
+   }
+  ],
+  "planted_count": 3
+ },
+ {
+  "encounter_id": "256bea3d-7833-e7f8-74b4-0e4f7e299c73::256bea3d-7833-e7f8-1c5a-743d9ec18b07",
+  "file": "256bea3d-ehr.json",
+  "patient": "Lala Kazuko Casper",
+  "visit_title": "Annual exam \u2014 psychosocial screening with safety disclosure",
+  "date": "2020-06-17",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "256bea3d-7833-e7f8-bfff-8bfa537b0f4e",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "4c893b3e-df6f-a2f0-5d03-98714cbad61a::4c893b3e-df6f-a2f0-3e2d-587d1263ccd4",
+  "file": "4c893b3e-ehr.json",
+  "patient": "Lamont Boyce Ernser",
+  "visit_title": "General adult exam \u2014 preventive screening and sleep review",
+  "date": "2023-05-20",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "4c893b3e-df6f-a2f0-7830-cd86ec70a7c7",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "1be66dc9-cf0b-cb78-e88e-ada9a9a5405b::1be66dc9-cf0b-cb78-ee14-c92f2fe041a4",
+  "file": "1be66dc9-ehr.json",
+  "patient": "Latoyia Willene Wilkinson",
+  "visit_title": "Skilled nursing facility admission after hospitalization",
+  "date": "2019-11-20",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "c2cbc55e-34dc-73c6-5ee4-cabe0c40fc32::c2cbc55e-34dc-73c6-4d09-7d9c99b11de4",
+  "file": "c2cbc55e-ehr.json",
+  "patient": "Margarita Kaylene Rau",
+  "visit_title": "Initial prenatal visit \u2014 new pregnancy at 43",
+  "date": "2019-09-27",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "e1a7c2af-1e7f-300b-44f6-012ae75bbab1::e1a7c2af-1e7f-300b-bc8f-6bb66fcf2ddc",
+  "file": "e1a7c2af-ehr.json",
+  "patient": "Marty Rodrick Toy",
+  "visit_title": "Dental referral visit \u2014 gingival disease treatment",
+  "date": "2025-03-10",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "a3292ec4-64b6-20fc-480e-39e1f7f51e50::a3292ec4-64b6-20fc-55a4-b753a07a1881",
+  "file": "a3292ec4-ehr.json",
+  "patient": "Melodee Bobette Satterfield",
+  "visit_title": "Prenatal intake visit \u2014 first pregnancy with chronic pain",
+  "date": "2026-03-21",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "b504cdf2-e13b-979e-9c4a-95456823e3dd::b504cdf2-e13b-979e-4f0c-523d0948189e",
+  "file": "b504cdf2-ehr.json",
+  "patient": "Monica Harriett Hilpert",
+  "visit_title": "SNF admission \u2014 rehabilitation and pain management",
+  "date": "2023-11-27",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "d57244c4-df7d-9ce7-7878-38361fc0087b::d57244c4-df7d-9ce7-c30b-92c6cf8c0859",
+  "file": "d57244c4-ehr.json",
+  "patient": "Nigel Giovanni Ankunding",
+  "visit_title": "Annual physical \u2014 prediabetes and psychosocial screening",
+  "date": "2019-04-22",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "d57244c4-df7d-9ce7-29a8-c3c89ea89167",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ },
+ {
+  "encounter_id": "25fb1227-d194-b15e-e099-7cffcd6081ec::25fb1227-d194-b15e-ecd8-6fcb9efd8141",
+  "file": "25fb1227-ehr.json",
+  "patient": "Nola Robert Kling",
+  "visit_title": "Hospice admission \u2014 end-stage colon cancer",
+  "date": "2022-05-18",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "693a049b-0fd5-c1af-a6ab-e31c329f2891::693a049b-0fd5-c1af-8dff-09e595625529",
+  "file": "693a049b-ehr.json",
+  "patient": "Solomon Maria Macejkovic",
+  "visit_title": "Hospice admission \u2014 advanced colon cancer with cardiac comorbidity",
+  "date": "2020-01-11",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "5e93dd7e-1639-0886-8d0e-80ac11f2785c::5e93dd7e-1639-0886-70ab-27e7ee37e5a0",
+  "file": "5e93dd7e-ehr.json",
+  "patient": "Traci Saran Wiegand",
+  "visit_title": "Skilled nursing facility admission \u2014 diabetes stabilization and rehabilitation",
+  "date": "2021-10-15",
+  "planted": [],
+  "planted_count": 0
+ },
+ {
+  "encounter_id": "01573895-dbf5-29c6-4ef9-cd09aecc51f6::01573895-dbf5-29c6-f885-ade2bd6537a5",
+  "file": "01573895-ehr.json",
+  "patient": "Van Loren O'Reilly",
+  "visit_title": "Annual physical \u2014 hand osteoarthritis and anxiety screening",
+  "date": "2019-07-25",
+  "planted": [
+   {
+    "kind": "MISSING",
+    "resource": "Immunization",
+    "id": "01573895-dbf5-29c6-d45c-68c65beb9b0e",
+    "before": "Influenza, split virus, trivalent, PF",
+    "after": "(deleted)",
+    "evidence": "vaccine administration discussed in transcript"
+   }
+  ],
+  "planted_count": 1
+ }
+]

@@ -16,7 +16,7 @@ JULIUS_ENCOUNTER_ID = (
     "6d4fd363-1ddb-74f8-516f-2fdc861cb736::"
     "6d4fd363-1ddb-74f8-95dd-b53404f1e107"
 )
-PROMPT_VERSION = "commitment-extraction-v1"
+PROMPT_VERSION = "commitment-reconciliation-v2"
 ALLOWED_TYPES = {
     "medication_change",
     "lab",
@@ -24,6 +24,32 @@ ALLOWED_TYPES = {
     "follow_up",
     "immunization",
     "non_ehr_action",
+}
+GENERIC_OUTPUT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "findings": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {"type": "string", "enum": sorted(ALLOWED_TYPES)},
+                    "description": {"type": "string"},
+                    "verbatim_quote": {"type": "string"},
+                    "due_window": {"type": ["string", "null"]},
+                    "expected_resource": {"type": ["string", "null"]},
+                    "classification": {"type": "string", "enum": ["OK", "MISSING", "INCOMPLETE", "WRONG", "NON_EHR_ACTION"]},
+                    "current_ehr_state": {"type": "string"},
+                    "repair_summary": {"type": "string"},
+                    "risk": {"type": "string", "enum": ["HIGH", "ELEVATED", "ROUTINE"]},
+                },
+                "required": ["type", "description", "verbatim_quote", "due_window", "expected_resource", "classification", "current_ehr_state", "repair_summary", "risk"],
+                "additionalProperties": False,
+            },
+        },
+    },
+    "required": ["findings"],
+    "additionalProperties": False,
 }
 
 
@@ -59,6 +85,14 @@ class Paths:
     def encounter_cache(self) -> Path:
         return self.runtime / "encounters"
 
+    @property
+    def seeded_ehr_dir(self) -> Path:
+        return self.root / "partner-provided-docs" / "seeded-stuff" / "seeded-ehr"
+
+    @property
+    def seeding_manifest(self) -> Path:
+        return self.root / "partner-provided-docs" / "seeded-stuff" / "seeding-manifest.json"
+
 
 def _read_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as handle:
@@ -86,28 +120,32 @@ class EncounterRepository:
         records = _read_json(self.paths.dataset)
         return next(item for item in records if item["id"] == encounter_id)
 
-    def review_queue(self, limit: int = 8) -> list[dict[str, Any]]:
+    def review_queue(self, limit: int = 25) -> list[dict[str, Any]]:
         records = _read_json(self.paths.dataset)
-        outpatient = [
-            item for item in records
-            if "admission" not in item["metadata"]["visit_title"].lower()
-            and item["id"] != JULIUS_ENCOUNTER_ID
-        ]
-        outpatient.sort(key=lambda item: item["metadata"]["date"], reverse=True)
-        return [self.get_julius(), *outpatient[: max(0, limit - 1)]]
+        others = [item for item in records if item["id"] != JULIUS_ENCOUNTER_ID]
+        others.sort(key=lambda item: item["metadata"]["date"], reverse=True)
+        return [self.get_julius(), *others[: max(0, limit - 1)]]
 
-    def get_seeded_ehr(self) -> dict[str, Any]:
-        """Build the disclosed demo EHR from the public synthetic encounter.
+    def get_seeded_ehr(self, encounter_id: str = JULIUS_ENCOUNTER_ID) -> dict[str, Any]:
+        """Load the disclosed post-visit EHR bundle for an encounter.
 
-        Partner planning and QA files remain local-only. The two planted demo
-        discrepancies are reproduced here so a public checkout is runnable.
+        The supplied bundle is preferred. Julius retains a deterministic fallback
+        so a public checkout remains runnable without the private fixture archive.
         """
-        record = self.get_julius()
+        prefix = encounter_id.split("::", 1)[0][:8]
+        supplied = self.paths.seeded_ehr_dir / f"{prefix}-ehr.json"
+        if supplied.exists():
+            return _read_json(supplied)
+
+        record = self.get(encounter_id)
         ehr = {
             "patient": copy.deepcopy(record["patient_context"]["patient"]),
             "encounter": copy.deepcopy(record["encounter_fhir"]["encounter"]),
             "resources": copy.deepcopy(record["encounter_fhir"]["related_resources"]),
         }
+
+        if encounter_id != JULIUS_ENCOUNTER_ID:
+            return ehr
 
         lisinopril = _medication(ehr, "lisinopril")
         if lisinopril:
@@ -230,6 +268,21 @@ def _verify_quote(transcript: str, quote: str) -> tuple[int, int]:
     return start, start + len(quote)
 
 
+def _locate_quote(transcript: str, quote: str) -> tuple[int, int]:
+    """Locate model evidence while tolerating punctuation-only differences."""
+    try:
+        return _verify_quote(transcript, quote)
+    except ValueError:
+        words = re.findall(r"[a-z0-9]+", quote.lower())
+        if len(words) < 3:
+            raise
+        pattern = r"\b" + r"[\W_]+".join(re.escape(word) for word in words) + r"\b"
+        match = re.search(pattern, transcript, flags=re.I)
+        if not match:
+            raise ValueError(f"Unverified transcript quote: {quote}")
+        return match.start(), match.end()
+
+
 def _resources(ehr: dict[str, Any], resource_type: str) -> list[dict[str, Any]]:
     return ehr.setdefault("resources", {}).setdefault(resource_type, [])
 
@@ -305,16 +358,19 @@ class SentinelService:
             "note": record["note"],
             "after_visit_summary": record["after_visit_summary"],
             "avs_provenance": record["after_visit_summary_provenance"],
-            "ehr": _read_json(self.paths.runtime_ehr) if encounter_id == JULIUS_ENCOUNTER_ID else {
-                "patient": copy.deepcopy(record["patient_context"]["patient"]),
-                "encounter": copy.deepcopy(record["encounter_fhir"]["encounter"]),
-                "resources": copy.deepcopy(record["encounter_fhir"]["related_resources"]),
-            },
+            "ehr": _read_json(self.paths.runtime_ehr) if encounter_id == JULIUS_ENCOUNTER_ID else self.repository.get_seeded_ehr(encounter_id),
         }
 
     def _generic_cache_path(self, encounter_id: str) -> Path:
         safe = hashlib.sha256(encounter_id.encode()).hexdigest()[:20]
         return self.paths.encounter_cache / f"{safe}.json"
+
+    def _encounter_fingerprint(self, encounter_id: str) -> str:
+        record = self.repository.get(encounter_id)
+        seeded_ehr = self.repository.get_seeded_ehr(encounter_id)
+        return hashlib.sha256(
+            (record["transcript"] + json.dumps(seeded_ehr, sort_keys=True) + PROMPT_VERSION).encode()
+        ).hexdigest()[:12]
 
     def review_queue(self) -> dict[str, Any]:
         rows = []
@@ -327,8 +383,7 @@ class SentinelService:
                 analyzed = bool(result["analysis"].get("analyzed_at"))
                 summary = result["summary"] if analyzed else None
             else:
-                cache_path = self._generic_cache_path(encounter_id)
-                cached = _read_json(cache_path) if cache_path.exists() else None
+                cached = self.generic_findings(encounter_id)
                 analyzed = cached is not None
                 summary = cached.get("summary") if cached else None
             rows.append({
@@ -354,20 +409,110 @@ class SentinelService:
         if encounter_id == JULIUS_ENCOUNTER_ID:
             return self.findings()
         path = self._generic_cache_path(encounter_id)
-        return _read_json(path) if path.exists() else None
+        if not path.exists():
+            return None
+        cached = _read_json(path)
+        return cached if cached.get("analysis", {}).get("fingerprint") == self._encounter_fingerprint(encounter_id) else None
+
+    def seeding_manifest(self) -> list[dict[str, Any]]:
+        return _read_json(self.paths.seeding_manifest) if self.paths.seeding_manifest.exists() else []
+
+    @staticmethod
+    def _finding_resource(finding: dict[str, Any]) -> str | None:
+        value = finding.get("ehr_evidence", {}).get("resource_type") or finding.get("commitment", {}).get("expected_resource")
+        if not value:
+            return None
+        for resource_type in ["MedicationRequest", "Immunization", "ServiceRequest", "Appointment", "Observation", "CarePlan", "Task"]:
+            if resource_type.lower() in str(value).lower():
+                return resource_type
+        return str(value)
+
+    def evaluation(self) -> dict[str, Any]:
+        rows = []
+        total_expected = total_detected = caught = natural_gaps = control_candidates = 0
+        clean_controls = clean_controls_clear = analyzed_count = 0
+        issue_states = {"MISSING", "WRONG", "INCOMPLETE"}
+        for expected_row in self.seeding_manifest():
+            encounter_id = expected_row["encounter_id"]
+            result = self.generic_findings(encounter_id)
+            analyzed = bool(result and result.get("analysis", {}).get("analyzed_at"))
+            detections = [item for item in (result or {}).get("findings", []) if item.get("classification") in issue_states] if analyzed else []
+            expected = expected_row.get("planted", [])
+            used: set[int] = set()
+            hits = []
+            misses = []
+            for plant in expected:
+                match = next((
+                    index for index, finding in enumerate(detections)
+                    if index not in used
+                    and finding.get("classification") == plant.get("kind")
+                    and self._finding_resource(finding) == plant.get("resource")
+                ), None)
+                if match is None:
+                    misses.append(plant)
+                else:
+                    used.add(match)
+                    hits.append(plant)
+            extras = [finding for index, finding in enumerate(detections) if index not in used]
+            is_clean = not expected
+            if is_clean:
+                clean_controls += 1
+                if analyzed and not extras:
+                    clean_controls_clear += 1
+                control_candidates += len(extras)
+            else:
+                natural_gaps += len(extras)
+            if analyzed:
+                analyzed_count += 1
+            total_expected += len(expected)
+            total_detected += len(detections)
+            caught += len(hits)
+            rows.append({
+                "encounter_id": encounter_id,
+                "patient": expected_row["patient"],
+                "visit_title": expected_row["visit_title"],
+                "control": is_clean,
+                "analyzed": analyzed,
+                "expected": len(expected),
+                "detected": len(detections),
+                "caught": len(hits),
+                "missed": len(misses) if analyzed else None,
+                "additional": len(extras),
+                "status": "PENDING" if not analyzed else "MISSED" if misses else "ADDITIONAL" if extras else "CLEAR",
+            })
+        return {
+            "summary": {
+                "encounters": len(rows),
+                "analyzed": analyzed_count,
+                "seeded_encounters": sum(not row["control"] for row in rows),
+                "clean_controls": clean_controls,
+                "expected_discrepancies": total_expected,
+                "detected_issues": total_detected,
+                "caught": caught,
+                "missed": total_expected - caught if analyzed_count == len(rows) else None,
+                "natural_gaps": natural_gaps,
+                "additional_candidates": natural_gaps + control_candidates,
+                "unseeded_control_candidates": control_candidates,
+                "clean_controls_clear": clean_controls_clear,
+            },
+            "rows": rows,
+            "disclosure": "The manifest is a disclosed scoring key and is never included in the model prompt. Unseeded findings are candidates for adjudication, not automatically false positives.",
+        }
 
     def analyze_encounter(self, encounter_id: str) -> dict[str, Any]:
         if encounter_id == JULIUS_ENCOUNTER_ID:
             return self.analyze()
+        record = self.repository.get(encounter_id)
+        seeded_ehr = self.repository.get_seeded_ehr(encounter_id)
+        fingerprint = self._encounter_fingerprint(encounter_id)
         cached = self.generic_findings(encounter_id)
-        if cached:
+        if cached and cached.get("analysis", {}).get("fingerprint") == fingerprint:
             return cached
         if not os.getenv("ANTHROPIC_API_KEY"):
             raise ValueError("ANTHROPIC_API_KEY is required to analyze an uncached encounter")
 
-        record = self.repository.get(encounter_id)
         compact_resources = []
-        for resource_type, resources in record["encounter_fhir"]["related_resources"].items():
+        for resource_type, resources in seeded_ehr["resources"].items():
             for resource in resources:
                 compact_resources.append({
                     "resourceType": resource_type,
@@ -381,12 +526,13 @@ class SentinelService:
 
         from anthropic import Anthropic
         prompt = f"""You audit a synthetic post-visit EHR against its ambient conversation.
-Return ONLY a JSON array of explicit clinician commitments. Each item must have:
+Return a JSON object with a findings array of explicit clinician commitments. Each item must have:
 type, description, verbatim_quote, due_window, expected_resource, classification,
 current_ehr_state, repair_summary, risk. Allowed types: {sorted(ALLOWED_TYPES)}.
 Allowed classifications: OK, MISSING, INCOMPLETE, WRONG, NON_EHR_ACTION.
 Risk: HIGH, ELEVATED, or ROUTINE. Quotes must be exact contiguous transcript text.
 Do not invent an issue when the record is adequate.
+Keep descriptions, EHR states, and repair summaries concise (25 words or fewer each).
 
 Transcript:\n{record['transcript']}
 
@@ -396,12 +542,16 @@ FHIR resources:\n{json.dumps(compact_resources, ensure_ascii=False)}"""
         client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
         response = client.messages.create(
             model=os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5"),
-            max_tokens=4000,
+            max_tokens=12000,
+            output_config={"format": {"type": "json_schema", "schema": GENERIC_OUTPUT_SCHEMA}},
+            thinking={"type": "disabled"},
             messages=[{"role": "user", "content": prompt}],
         )
         text = "".join(block.text for block in response.content if getattr(block, "type", None) == "text")
-        text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip(), flags=re.I)
-        extracted = json.loads(text)
+        if not text:
+            block_types = ", ".join(str(getattr(block, "type", "unknown")) for block in response.content) or "none"
+            raise ValueError(f"Claude returned no JSON text (stop={response.stop_reason}; blocks={block_types})")
+        extracted = json.loads(text)["findings"]
         if not isinstance(extracted, list):
             raise ValueError("Claude response must be a JSON array")
 
@@ -416,7 +566,11 @@ FHIR resources:\n{json.dumps(compact_resources, ensure_ascii=False)}"""
             quote = str(raw.get("verbatim_quote", "")).strip()
             if kind not in ALLOWED_TYPES or classification not in {"OK", "MISSING", "INCOMPLETE", "WRONG", "NON_EHR_ACTION"}:
                 continue
-            start, end = _verify_quote(record["transcript"], quote)
+            try:
+                start, end = _locate_quote(record["transcript"], quote)
+            except ValueError:
+                continue
+            quote = record["transcript"][start:end]
             finding_id = "generic-" + hashlib.sha256(f"{encounter_id}:{quote}".encode()).hexdigest()[:12]
             repair_summary = str(raw.get("repair_summary") or "").strip()
             findings.append({
@@ -456,7 +610,7 @@ FHIR resources:\n{json.dumps(compact_resources, ensure_ascii=False)}"""
                 "mode": "live", "message": "Live Claude reconciliation complete",
                 "model": os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5"),
                 "analyzed_at": datetime.now(timezone.utc).isoformat(),
-                "fingerprint": hashlib.sha256((encounter_id + PROMPT_VERSION).encode()).hexdigest()[:12],
+                "fingerprint": fingerprint,
             },
         }
         _write_json(self._generic_cache_path(encounter_id), result)

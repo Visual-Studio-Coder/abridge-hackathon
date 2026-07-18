@@ -39,6 +39,11 @@ def review_queue():
     return jsonify(service.review_queue())
 
 
+@app.get("/api/evaluation")
+def evaluation():
+    return jsonify(service.evaluation())
+
+
 @app.get("/api/encounters/<path:encounter_id>/findings")
 def encounter_findings(encounter_id: str):
     result = service.generic_findings(encounter_id)
@@ -91,6 +96,7 @@ def reset():
 @app.errorhandler(KeyError)
 @app.errorhandler(ValueError)
 def handle_bad_request(error):
+    app.logger.warning("Analysis request rejected: %s", error)
     return jsonify({"error": str(error)}), 400
 
 

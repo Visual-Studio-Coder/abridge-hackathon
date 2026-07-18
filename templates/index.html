@@ -51,6 +51,14 @@
             <div><div class="eyebrow">CLINICIAN WORKLIST</div><h2>End-of-day review</h2><p id="queue-summary">Loading today’s encounters…</p></div>
             <button id="analyze-all" class="button button-primary">Analyze all</button>
           </div>
+          <section class="evaluation-card" aria-labelledby="evaluation-title">
+            <div class="evaluation-heading">
+              <div><div class="eyebrow">DISCLOSED BATCH EVALUATION</div><h3 id="evaluation-title">25-encounter validation set</h3></div>
+              <span class="source-badge">MANIFEST-BASED · NOT IN PROMPT</span>
+            </div>
+            <div id="evaluation-metrics" class="evaluation-metrics"></div>
+            <details class="evaluation-details"><summary>View expected vs detected table</summary><div class="evaluation-table-wrap"><table class="evaluation-table"><thead><tr><th>Encounter</th><th>Set</th><th>Expected</th><th>Detected</th><th>Caught</th><th>Status</th></tr></thead><tbody id="evaluation-rows"></tbody></table></div></details>
+          </section>
           <div id="review-queue" class="review-queue"></div>
         </div>
 
